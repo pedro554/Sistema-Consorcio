@@ -2,19 +2,20 @@ program SistemaConsorcio;
 
 uses
   Vcl.Forms,
-  F_MenuPrincipal in '..\Menu Principal\F_MenuPrincipal.pas' {Form1},
+  F_MenuPrincipal in '..\Menu Principal\F_MenuPrincipal.pas' {FMenuPrincipal},
   Vcl.Themes,
   Vcl.Styles,
-  Funcoes in '..\Comum\Funcoes.pas',
   Variaveis_Sistema in '..\Comum\Variaveis_Sistema.pas',
-  FormularioBase in '..\Comum\FormularioBase.pas' {Form2};
+  FormularioBase in '..\Comum\FormularioBase.pas' {Formulario},
+  DM_Banco in '..\Banco\DM_Banco.pas' {DMBanco: TDataModule},
+  Funcoes in '..\Comum\Funcoes.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Smokey Quartz Kamri');
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFMenuPrincipal, FMenuPrincipal);
+  Application.CreateForm(TDMBanco, DMBanco);
   Application.Run;
 end.

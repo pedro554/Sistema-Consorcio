@@ -13,8 +13,20 @@ procedure ValidarCNPJ(const CNPJ: string);
 procedure SelecionaRegistroGrid(ADataset: TDataSet);
 procedure FiltraMarcado(ADataset: TDataSet);
 procedure RemoveFiltroTabela(ADataset: TDataSet);
+function DiretorioSistema: String;
+procedure CriaForm(AClasse: TFormClass; AVarForm: TObject);
 
 implementation
+
+procedure CriaForm(AClasse: TFormClass; AVarForm: TObject);
+begin
+  AVarForm := AClasse.Create(Application);
+end;
+
+function DiretorioSistema: String;
+begin
+  Result := ExtractFileDir(Application.ExeName);
+end;
 
 procedure RemoveFiltroTabela(ADataset: TDataSet);
 begin
@@ -31,6 +43,9 @@ end;
 
 procedure SelecionaRegistroGrid(ADataset: TDataSet);
 begin
+  if ADataset.IsEmpty then
+    Exit;
+
   if not (ADataset.State in [dsEdit, dsInsert]) then
     ADataset.Edit;
   ADataset.FieldByName('ST_MARCADO').AsBoolean := not ADataset.FieldByName('ST_MARCADO').AsBoolean;
@@ -186,7 +201,9 @@ begin
     ADestino.Open;
 
   if AAppend then
-    ADestino.Append;
+    ADestino.Append
+  else
+    ADestino.Edit;
 
   for I := 0 to ADestino.FieldCount - 1 do
   begin

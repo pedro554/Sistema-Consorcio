@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A515683C-D77E-453A-AFF2-110B7D56A465}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\Comum\Comum.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\P_Funcionario\Funcionario.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SistemaConsorcio.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Comum">
+        <MSBuild Projects="..\Comum\Comum.dproj"/>
+    </Target>
+    <Target Name="Comum:Clean">
+        <MSBuild Projects="..\Comum\Comum.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Comum:Make">
+        <MSBuild Projects="..\Comum\Comum.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Funcionario">
+        <MSBuild Projects="..\P_Funcionario\Funcionario.dproj"/>
+    </Target>
+    <Target Name="Funcionario:Clean">
+        <MSBuild Projects="..\P_Funcionario\Funcionario.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Funcionario:Make">
+        <MSBuild Projects="..\P_Funcionario\Funcionario.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SistemaConsorcio">
+        <MSBuild Projects="SistemaConsorcio.dproj"/>
+    </Target>
+    <Target Name="SistemaConsorcio:Clean">
+        <MSBuild Projects="SistemaConsorcio.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SistemaConsorcio:Make">
+        <MSBuild Projects="SistemaConsorcio.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Comum;Funcionario;SistemaConsorcio"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Comum:Clean;Funcionario:Clean;SistemaConsorcio:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Comum:Make;Funcionario:Make;SistemaConsorcio:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -26,20 +26,18 @@ object FMenuPrincipal: TFMenuPrincipal
         Text = 'Vers'#227'o'
         Width = 200
       end>
-    ExplicitLeft = 324
-    ExplicitTop = 160
-    ExplicitWidth = 0
   end
   object mm: TMainMenu
     Left = 184
     Top = 116
     object MGeral: TMenuItem
       Caption = 'Geral'
-      object CadastrodeVendedores1: TMenuItem
-        Caption = 'Cadastro Vendedor/Funcion'#225'rio'
+      object MVendedorFuncionario: TMenuItem
+        Caption = 'Vendedor/Funcion'#225'rio'
+        OnClick = MVendedorFuncionarioClick
       end
-      object CadastroFaixadeComisso1: TMenuItem
-        Caption = 'Cadastro Faixa de Comiss'#227'o'
+      object MFaixaComissao: TMenuItem
+        Caption = 'Faixa de Comiss'#227'o'
       end
     end
   end
