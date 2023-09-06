@@ -191,12 +191,5 @@ begin
   TFuncionarioST_MARCADO.AsBoolean := False;
 end;
 
-initialization
-  RegisterClass(TFFuncionario);
-
-
-finalization
-  UnRegisterClass(TFFuncionario);
-
 end.
 

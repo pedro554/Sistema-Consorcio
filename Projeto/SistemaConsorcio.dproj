@@ -67,7 +67,6 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <UsePackages>true</UsePackages>
         <DCC_DcpOutput>D:\Projetos\Sistema-Consorcio\Projeto\dcp\</DCC_DcpOutput>
         <DCC_BplOutput>D:\Projetos\Sistema-Consorcio\Projeto\Win32\Debug\</DCC_BplOutput>
         <DCC_DcuOutput>D:\Projetos\Sistema-Consorcio\Projeto\dcu\</DCC_DcuOutput>
@@ -91,7 +90,6 @@
         <DCC_DcuOutput>D:\Projetos\Sistema-Consorcio\Projeto\dcu\</DCC_DcuOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <UsePackages>true</UsePackages>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
