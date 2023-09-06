@@ -14,13 +14,18 @@ procedure SelecionaRegistroGrid(ADataset: TDataSet);
 procedure FiltraMarcado(ADataset: TDataSet);
 procedure RemoveFiltroTabela(ADataset: TDataSet);
 function DiretorioSistema: String;
-procedure CriaForm(AClasse: TFormClass; AVarForm: TObject);
+procedure AbreForm(AClasse: TFormClass; AVarForm: TObject);
 
 implementation
 
-procedure CriaForm(AClasse: TFormClass; AVarForm: TObject);
+procedure AbreForm(AClasse: TFormClass; AVarForm: TObject);
 begin
   AVarForm := AClasse.Create(Application);
+  try
+    TForm(AVarForm).ShowModal;
+  finally
+    FreeAndNil(AVarForm);
+  end;
 end;
 
 function DiretorioSistema: String;

@@ -5,10 +5,13 @@ uses
   F_MenuPrincipal in '..\Menu Principal\F_MenuPrincipal.pas' {FMenuPrincipal},
   Vcl.Themes,
   Vcl.Styles,
-  Variaveis_Sistema in '..\Comum\Variaveis_Sistema.pas',
-  FormularioBase in '..\Comum\FormularioBase.pas' {Formulario},
   DM_Banco in '..\Banco\DM_Banco.pas' {DMBanco: TDataModule},
-  Funcoes in '..\Comum\Funcoes.pas';
+  Funcoes.FormPrincipal in '..\Comum\Funcoes.FormPrincipal.pas',
+  Funcoes in '..\Comum\Funcoes.pas',
+  Variaveis_Sistema in '..\Comum\Variaveis_Sistema.pas',
+  Cad_Funcionario in '..\P_Funcionario\Cad_Funcionario.pas' {FCad_Funcionario},
+  F_Funcionario in '..\P_Funcionario\F_Funcionario.pas' {FFuncionario},
+  FormularioBase in '..\Comum\FormularioBase.pas' {Formulario};
 
 {$R *.res}
 
@@ -19,3 +22,4 @@ begin
   Application.CreateForm(TDMBanco, DMBanco);
   Application.Run;
 end.
+

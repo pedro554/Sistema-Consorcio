@@ -23,16 +23,9 @@ type
     mm: TMainMenu;
     MGeral: TMenuItem;
     MVendedorFuncionario: TMenuItem;
-    MFaixaComissao: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure MVendedorFuncionarioClick(Sender: TObject);
   private
-    Pacote: HModule;
-    FormClasse: TFormClass;
-    Form: TForm;
-
-    procedure CarregaClasse(APacote, AClasse: string);
-    procedure CarregaPacote(APacote, AClasse: string);
     { Private declarations }
   public
     { Public declarations }
@@ -42,36 +35,9 @@ var
   FMenuPrincipal: TFMenuPrincipal;
 
 implementation
+uses Funcoes, F_Funcionario;
 
 {$R *.dfm}
-
-procedure TFMenuPrincipal.CarregaClasse(APacote, AClasse: string);
-begin
-  FormClasse := TFormClass(GetClass(AClasse));
-  if FormClasse = nil then
-  begin
-    UnloadPackage(Pacote);
-    raise Exception.Create('Classe ' + AClasse + ' não encontrado no pacote ' + APacote);
-  end;
-end;
-
-procedure TFMenuPrincipal.CarregaPacote(APacote, AClasse: string);
-begin
-  Pacote := LoadPackage(GetCurrentDir + '\' + APacote + '.bpl');
-  if Pacote = 0 then
-    raise Exception.Create('Pacote ' + APacote + ' não encontrado!');
-
-  CarregaClasse(APacote, AClasse);
-
-  Form := TFormClass(FormClasse).Create(nil);
-  try
-    Form.ShowModal;
-  finally
-    Form.Free;
-  end;
-
-  UnloadPackage(Pacote);
-end;
 
 procedure TFMenuPrincipal.FormCreate(Sender: TObject);
 begin
@@ -79,8 +45,10 @@ begin
 end;
 
 procedure TFMenuPrincipal.MVendedorFuncionarioClick(Sender: TObject);
+var
+  AForm: TFFuncionario;
 begin
-  CarregaPacote('Funcionario', 'TFFuncionario');
+  AbreForm(TFFuncionario, TObject(AForm));
 end;
 
 end.

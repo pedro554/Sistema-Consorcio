@@ -3,7 +3,6 @@ unit FormularioBase;
 interface
 
 uses
-  Variaveis_Sistema,
   Winapi.Windows,
   Winapi.Messages,
   System.SysUtils,
@@ -12,12 +11,16 @@ uses
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
-  Vcl.Dialogs, JvComponentBase, JvEnterTab, System.Actions, Vcl.ActnList;
+  Vcl.Dialogs,
+  System.Actions,
+  Vcl.ActnList,
+  JvComponentBase,
+  JvEnterTab;
 
 type
   TFormulario = class(TForm)
-    EnterAsTab: TJvEnterAsTab;
-    actlstBase: TActionList;
+    JvEnterAsTab1: TJvEnterAsTab;
+    actlstpadrao: TActionList;
     ACT_ESC: TAction;
     procedure FormCreate(Sender: TObject);
     procedure ACT_ESCExecute(Sender: TObject);
@@ -31,6 +34,7 @@ var
   Formulario: TFormulario;
 
 implementation
+uses  Variaveis_Sistema;
 
 {$R *.dfm}
 

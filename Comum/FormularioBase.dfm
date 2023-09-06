@@ -11,17 +11,16 @@ object Formulario: TFormulario
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object EnterAsTab: TJvEnterAsTab
+  object JvEnterAsTab1: TJvEnterAsTab
     Left = 312
     Top = 156
   end
-  object actlstBase: TActionList
-    Left = 268
-    Top = 156
+  object actlstpadrao: TActionList
+    Left = 360
+    Top = 168
     object ACT_ESC: TAction
       Caption = 'ACT_ESC'
       ShortCut = 27

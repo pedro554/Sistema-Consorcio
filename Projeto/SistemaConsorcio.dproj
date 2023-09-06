@@ -111,17 +111,26 @@
             <Form>FMenuPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Comum\Variaveis_Sistema.pas"/>
-        <DCCReference Include="..\Comum\FormularioBase.pas">
-            <Form>Formulario</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\Banco\DM_Banco.pas">
             <Form>DMBanco</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\Comum\Funcoes.FormPrincipal.pas"/>
         <DCCReference Include="..\Comum\Funcoes.pas"/>
+        <DCCReference Include="..\Comum\Variaveis_Sistema.pas"/>
+        <DCCReference Include="..\P_Funcionario\Cad_Funcionario.pas">
+            <Form>FCad_Funcionario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\P_Funcionario\F_Funcionario.pas">
+            <Form>FFuncionario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Comum\FormularioBase.pas">
+            <Form>Formulario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

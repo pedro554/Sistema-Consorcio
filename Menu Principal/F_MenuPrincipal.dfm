@@ -36,9 +36,6 @@ object FMenuPrincipal: TFMenuPrincipal
         Caption = 'Vendedor/Funcion'#225'rio'
         OnClick = MVendedorFuncionarioClick
       end
-      object MFaixaComissao: TMenuItem
-        Caption = 'Faixa de Comiss'#227'o'
-      end
     end
   end
 end
