@@ -11,7 +11,8 @@ uses
   Variaveis_Sistema in '..\Comum\Variaveis_Sistema.pas',
   Cad_Funcionario in '..\P_Funcionario\Cad_Funcionario.pas' {FCad_Funcionario},
   F_Funcionario in '..\P_Funcionario\F_Funcionario.pas' {FFuncionario},
-  FormularioBase in '..\Comum\FormularioBase.pas' {Formulario};
+  FormularioBase in '..\Comum\FormularioBase.pas' {Formulario},
+  F_Cliente in '..\Cliente\F_Cliente.pas' {FCliente};
 
 {$R *.res}
 

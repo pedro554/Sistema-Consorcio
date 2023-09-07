@@ -129,6 +129,10 @@
             <Form>Formulario</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Cliente\F_Cliente.pas">
+            <Form>FCliente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

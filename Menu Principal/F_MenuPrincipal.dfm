@@ -36,6 +36,10 @@ object FMenuPrincipal: TFMenuPrincipal
         Caption = 'Vendedor/Funcion'#225'rio'
         OnClick = MVendedorFuncionarioClick
       end
+      object Clientes1: TMenuItem
+        Caption = 'Cliente'
+        OnClick = Clientes1Click
+      end
     end
   end
 end

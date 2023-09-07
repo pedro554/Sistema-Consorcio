@@ -23,8 +23,10 @@ type
     mm: TMainMenu;
     MGeral: TMenuItem;
     MVendedorFuncionario: TMenuItem;
+    Clientes1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure MVendedorFuncionarioClick(Sender: TObject);
+    procedure Clientes1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,9 +37,16 @@ var
   FMenuPrincipal: TFMenuPrincipal;
 
 implementation
-uses Funcoes, F_Funcionario;
+uses Funcoes, F_Funcionario, F_Cliente;
 
 {$R *.dfm}
+
+procedure TFMenuPrincipal.Clientes1Click(Sender: TObject);
+var
+  AForm: TFCliente;
+begin
+  AbreForm(TFCliente, TObject(AForm));
+end;
 
 procedure TFMenuPrincipal.FormCreate(Sender: TObject);
 begin
