@@ -50,7 +50,6 @@ object FCad_Cliente: TFCad_Cliente
     Height = 41
     Align = alBottom
     TabOrder = 3
-    ExplicitTop = 118
     object btnGravar: TSpeedButton
       Left = 195
       Top = 10
@@ -122,6 +121,7 @@ object FCad_Cliente: TFCad_Cliente
       FieldName = 'CD_CLIENTE'
       Origin = 'CD_CLIENTE'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object QClienteNM_CLIENTE: TStringField
       FieldName = 'NM_CLIENTE'
@@ -177,10 +177,12 @@ object FCad_Cliente: TFCad_Cliente
     object ACT_F8: TAction
       Caption = 'ACT_F8'
       ShortCut = 119
+      OnExecute = btnGravarClick
     end
     object ACT_F6: TAction
       Caption = 'ACT_F6'
       ShortCut = 117
+      OnExecute = btnCancelarClick
     end
   end
   object Transacao: TFDTransaction

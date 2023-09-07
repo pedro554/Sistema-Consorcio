@@ -13,12 +13,31 @@ uses
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
-  Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client, System.Actions,
-  Vcl.ActnList, Data.DB, JvMemoryDataset, FireDAC.Comp.DataSet,
-  Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.Buttons, Vcl.ExtCtrls, JvExMask,
-  JvToolEdit, JvMaskEdit, JvDBControls;
+  Vcl.Dialogs,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Stan.Async,
+  FireDAC.DApt,
+  FireDAC.Comp.Client,
+  System.Actions,
+  Vcl.ActnList,
+  Data.DB,
+  JvMemoryDataset,
+  FireDAC.Comp.DataSet,
+  Vcl.StdCtrls,
+  Vcl.Mask,
+  Vcl.DBCtrls,
+  Vcl.Buttons,
+  Vcl.ExtCtrls,
+  JvExMask,
+  JvToolEdit,
+  JvMaskEdit,
+  JvDBControls;
 
 type
   TFCad_Cliente = class(TFormulario)
@@ -60,7 +79,9 @@ var
   FCad_Cliente: TFCad_Cliente;
 
 implementation
-uses Funcoes;
+
+uses
+  Funcoes;
 
 {$R *.dfm}
 

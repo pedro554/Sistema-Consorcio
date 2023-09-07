@@ -12,7 +12,8 @@ uses
   Cad_Funcionario in '..\P_Funcionario\Cad_Funcionario.pas' {FCad_Funcionario},
   F_Funcionario in '..\P_Funcionario\F_Funcionario.pas' {FFuncionario},
   FormularioBase in '..\Comum\FormularioBase.pas' {Formulario},
-  F_Cliente in '..\Cliente\F_Cliente.pas' {FCliente};
+  F_Cliente in '..\Cliente\F_Cliente.pas' {FCliente},
+  Cad_Cliente in '..\Cliente\Cad_Cliente.pas' {FCad_Cliente};
 
 {$R *.res}
 
