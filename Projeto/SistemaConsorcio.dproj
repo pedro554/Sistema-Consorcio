@@ -141,6 +141,10 @@
             <Form>FFaixaComissao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Faixa Comissao\Cad_FaixaComissao.pas">
+            <Form>FCad_FaixaComissao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

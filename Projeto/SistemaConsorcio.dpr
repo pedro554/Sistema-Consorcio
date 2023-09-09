@@ -14,7 +14,8 @@ uses
   FormularioBase in '..\Comum\FormularioBase.pas' {Formulario},
   F_Cliente in '..\Cliente\F_Cliente.pas' {FCliente},
   Cad_Cliente in '..\Cliente\Cad_Cliente.pas' {FCad_Cliente},
-  F_FaixaComissao in '..\Faixa Comissao\F_FaixaComissao.pas' {FFaixaComissao};
+  F_FaixaComissao in '..\Faixa Comissao\F_FaixaComissao.pas' {FFaixaComissao},
+  Cad_FaixaComissao in '..\Faixa Comissao\Cad_FaixaComissao.pas' {FCad_FaixaComissao};
 
 {$R *.res}
 
