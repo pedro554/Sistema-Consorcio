@@ -24,9 +24,11 @@ type
     MGeral: TMenuItem;
     MVendedorFuncionario: TMenuItem;
     Clientes1: TMenuItem;
+    MFaixaComissao: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure MVendedorFuncionarioClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
+    procedure MFaixaComissaoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,7 +39,7 @@ var
   FMenuPrincipal: TFMenuPrincipal;
 
 implementation
-uses Funcoes, F_Funcionario, F_Cliente;
+uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao;
 
 {$R *.dfm}
 
@@ -51,6 +53,13 @@ end;
 procedure TFMenuPrincipal.FormCreate(Sender: TObject);
 begin
   stat.Panels.Items[0].Text := 'Versão: ' + IntToStr(VAR_VERSAO);
+end;
+
+procedure TFMenuPrincipal.MFaixaComissaoClick(Sender: TObject);
+var
+  AForm: TFFaixaComissao;
+begin
+  AbreForm(TFFaixaComissao, TObject(AForm));
 end;
 
 procedure TFMenuPrincipal.MVendedorFuncionarioClick(Sender: TObject);

@@ -24,9 +24,37 @@ procedure CarregaComboPesquisa(ACombo: TComboBox; AGrid: TJvDBGrid);
 function PegaNomeCampoCombo(ACombo: TComboBox; AGrid: TDBGrid): String;
 procedure PesquisaGenerica(ADataset: TDataSet; AColuna, AValor: String);
 procedure CarregaDadosQueryMemoria(AQuery, AMemoria: TDataset);
+procedure ExcluirRegistroSelecionadoGenerico(ADataset, AQueryDelete: TDataSet; ACampoChave: String; ACodigo: Integer);
 
 implementation
 uses Funcoes;
+
+procedure ExcluirRegistroSelecionadoGenerico(ADataset, AQueryDelete: TDataSet; ACampoChave: String; ACodigo: Integer);
+begin
+  ADataset.DisableControls;
+  FiltraMarcado(ADataset);
+  try
+    if ADataset.IsEmpty then
+    begin
+      MyMessage('Nenhum registro selecionado!');
+      Abort;
+    end;
+
+    if MyMessage('Deseja excluir os registros selecionados?', 4) = 6 then
+    begin
+      ADataset.First;
+      while not ADataset.Eof do
+      begin
+        if AQueryDelete.Locate(ACampoChave, ACodigo, []) then
+          AQueryDelete.Delete;
+        ADataset.Delete;
+      end;
+    end;
+  finally
+    RemoveFiltroTabela(ADataset);
+    ADataset.EnableControls;
+  end;
+end;
 
 procedure CarregaDadosQueryMemoria(AQuery, AMemoria: TDataset);
 begin

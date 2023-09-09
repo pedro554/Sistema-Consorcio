@@ -40,6 +40,10 @@ object FMenuPrincipal: TFMenuPrincipal
         Caption = 'Cliente'
         OnClick = Clientes1Click
       end
+      object MFaixaComissao: TMenuItem
+        Caption = 'Faixa de Comiss'#227'o'
+        OnClick = MFaixaComissaoClick
+      end
     end
   end
 end
