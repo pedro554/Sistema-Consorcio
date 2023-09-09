@@ -13,7 +13,8 @@ uses
   F_Funcionario in '..\P_Funcionario\F_Funcionario.pas' {FFuncionario},
   FormularioBase in '..\Comum\FormularioBase.pas' {Formulario},
   F_Cliente in '..\Cliente\F_Cliente.pas' {FCliente},
-  Cad_Cliente in '..\Cliente\Cad_Cliente.pas' {FCad_Cliente};
+  Cad_Cliente in '..\Cliente\Cad_Cliente.pas' {FCad_Cliente},
+  F_FaixaComissao in '..\Faixa Comissao\F_FaixaComissao.pas' {FFaixaComissao};
 
 {$R *.res}
 
