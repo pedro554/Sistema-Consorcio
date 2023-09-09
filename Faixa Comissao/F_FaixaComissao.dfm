@@ -163,12 +163,37 @@ object FFaixaComissao: TFFaixaComissao
       FieldName = 'CD_FAIXACOMISSAO'
       Origin = 'CD_FAIXACOMISSAO'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object QFaixaComissaoDS_FAIXACOMISSAO: TStringField
       FieldName = 'DS_FAIXACOMISSAO'
       Origin = 'DS_FAIXACOMISSAO'
       Required = True
       Size = 50
+    end
+    object QFaixaComissaoNR_PARCELAS: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'NR_PARCELAS'
+      Origin = 'NR_PARCELAS'
+    end
+    object QFaixaComissaoVL_MINIMO: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VL_MINIMO'
+      Origin = 'VL_MINIMO'
+      Precision = 20
+      Size = 6
+    end
+    object QFaixaComissaoVL_MAXIMO: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VL_MAXIMO'
+      Origin = 'VL_MAXIMO'
+      Precision = 20
+      Size = 6
+    end
+    object QFaixaComissaoDT_CADASTRO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DT_CADASTRO'
+      Origin = 'DT_CADASTRO'
     end
   end
   object TFaixaComissao: TJvMemoryData
@@ -184,6 +209,15 @@ object FFaixaComissao: TFFaixaComissao
       Origin = 'DS_FAIXACOMISSAO'
       Required = True
       Size = 50
+    end
+    object TFaixaComissaoNR_PARCELAS: TIntegerField
+      FieldName = 'NR_PARCELAS'
+    end
+    object TFaixaComissaoVL_MINIMO: TFloatField
+      FieldName = 'VL_MINIMO'
+    end
+    object TFaixaComissaoVL_MAXIMO: TFloatField
+      FieldName = 'VL_MAXIMO'
     end
     object TFaixaComissaoST_MARCADO: TBooleanField
       FieldName = 'ST_MARCADO'

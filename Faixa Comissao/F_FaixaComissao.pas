@@ -56,6 +56,13 @@ type
     QFaixaComissaoDS_FAIXACOMISSAO: TStringField;
     TFaixaComissaoDS_FAIXACOMISSAO: TStringField;
     TFaixaComissaoCD_FAIXACOMISSAO: TIntegerField;
+    QFaixaComissaoNR_PARCELAS: TIntegerField;
+    QFaixaComissaoVL_MINIMO: TFMTBCDField;
+    QFaixaComissaoVL_MAXIMO: TFMTBCDField;
+    QFaixaComissaoDT_CADASTRO: TDateTimeField;
+    TFaixaComissaoNR_PARCELAS: TIntegerField;
+    TFaixaComissaoVL_MINIMO: TFloatField;
+    TFaixaComissaoVL_MAXIMO: TFloatField;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -76,24 +83,24 @@ var
   FFaixaComissao: TFFaixaComissao;
 
 implementation
-uses Funcoes, Funcoes.FormPrincipal;
+uses Funcoes, Funcoes.FormPrincipal, Cad_FaixaComissao;
 
 {$R *.dfm}
 
 { TFFaixaComissao }
 
 procedure TFFaixaComissao.btnEditarClick(Sender: TObject);
-//var
-//  FCad: TFCad_Funcionario;
+var
+  FCad: TFCad_FaixaComissao;
 begin
-//  FCad := TFCad_Funcionario.Create(Self);
-//  try
-//    CopiaRegistro(TFuncionario, FCad.TFuncionario);
-//    if FCad.ShowModal = mrOk then
-//      CarregaDados;
-//  finally
-//    FreeAndNil(FCad);
-//  end;
+  FCad := TFCad_FaixaComissao.Create(Self);
+  try
+    CopiaRegistro(TFaixaComissao, FCad.TFaixaComissao);
+    if FCad.ShowModal = mrOk then
+      CarregaDados;
+  finally
+    FreeAndNil(FCad);
+  end;
 end;
 
 procedure TFFaixaComissao.btnExcluirClick(Sender: TObject);
@@ -105,16 +112,16 @@ begin
 end;
 
 procedure TFFaixaComissao.btnNovoClick(Sender: TObject);
-//var
-//  FCad: TFCad_Funcionario;
+var
+  FCad: TFCad_FaixaComissao;
 begin
-//  FCad := TFCad_Funcionario.Create(Self);
-//  try
-//    if FCad.ShowModal = mrOk then
-//      CarregaDados;
-//  finally
-//    FreeAndNil(FCad);
-//  end;
+  FCad := TFCad_FaixaComissao.Create(Self);
+  try
+    if FCad.ShowModal = mrOk then
+      CarregaDados;
+  finally
+    FreeAndNil(FCad);
+  end;
 end;
 
 procedure TFFaixaComissao.btnPesquisaClick(Sender: TObject);
