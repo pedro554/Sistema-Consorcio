@@ -228,4 +228,56 @@ object FFaixaComissao: TFFaixaComissao
     Left = 280
     Top = 116
   end
+  object QExcluiFaixaComissaoParcela: TFDQuery
+    Connection = DMBanco.con
+    SQL.Strings = (
+      
+        'DELETE FROM FAIXACOMISSAOPARCELA WHERE FAIXACOMISSAOPARCELA.CD_F' +
+        'AIXACOMISSAO = :CD_FAIXACOMISSAO')
+    Left = 352
+    Top = 116
+    ParamData = <
+      item
+        Name = 'CD_FAIXACOMISSAO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object FDAutoIncField1: TFDAutoIncField
+      FieldName = 'CD_FAIXACOMISSAO'
+      Origin = 'CD_FAIXACOMISSAO'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object StringField1: TStringField
+      FieldName = 'DS_FAIXACOMISSAO'
+      Origin = 'DS_FAIXACOMISSAO'
+      Required = True
+      Size = 50
+    end
+    object IntegerField1: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'NR_PARCELAS'
+      Origin = 'NR_PARCELAS'
+    end
+    object FMTBCDField1: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VL_MINIMO'
+      Origin = 'VL_MINIMO'
+      Precision = 20
+      Size = 6
+    end
+    object FMTBCDField2: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VL_MAXIMO'
+      Origin = 'VL_MAXIMO'
+      Precision = 20
+      Size = 6
+    end
+    object DateTimeField1: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DT_CADASTRO'
+      Origin = 'DT_CADASTRO'
+    end
+  end
 end

@@ -63,6 +63,13 @@ type
     TFaixaComissaoNR_PARCELAS: TIntegerField;
     TFaixaComissaoVL_MINIMO: TFloatField;
     TFaixaComissaoVL_MAXIMO: TFloatField;
+    QExcluiFaixaComissaoParcela: TFDQuery;
+    FDAutoIncField1: TFDAutoIncField;
+    StringField1: TStringField;
+    IntegerField1: TIntegerField;
+    FMTBCDField1: TFMTBCDField;
+    FMTBCDField2: TFMTBCDField;
+    DateTimeField1: TDateTimeField;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -95,7 +102,10 @@ var
 begin
   FCad := TFCad_FaixaComissao.Create(Self);
   try
+    FCad.TFaixaComissaoNR_PARCELAS.OnChange := nil;
+    FCad.TFaixaComissao.AfterInsert := nil;
     CopiaRegistro(TFaixaComissao, FCad.TFaixaComissao);
+    FCad.TFaixaComissao.AfterInsert := FCad.TFaixaComissaoAfterInsert;
     if FCad.ShowModal = mrOk then
       CarregaDados;
   finally
@@ -105,6 +115,9 @@ end;
 
 procedure TFFaixaComissao.btnExcluirClick(Sender: TObject);
 begin
+  QExcluiFaixaComissaoParcela.Close;
+  QExcluiFaixaComissaoParcela.ParamByName('CD_FAIXACOMISSAO').AsInteger := TFaixaComissaoCD_FAIXACOMISSAO.AsInteger;
+  QExcluiFaixaComissaoParcela.ExecSQL;
   ExcluirRegistroSelecionadoGenerico(TFaixaComissao,
                                      QFaixaComissao,
                                      'CD_FAIXACOMISSAO',
