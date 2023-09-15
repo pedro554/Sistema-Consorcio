@@ -145,6 +145,27 @@
             <Form>FCad_FaixaComissao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\CRM\F_CRM.pas">
+            <Form>FCRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\CRM\Cad_CRM.pas">
+            <Form>FCad_CRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cliente\Consulta_Cliente.pas">
+            <Form>FConsulta_Cliente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Comum\DM_Funcoes.Consulta.pas">
+            <Form>DMFuncoesConsulta</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\P_Funcionario\Consulta_Funcionario.pas">
+            <Form>FConsulta_Funcionario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

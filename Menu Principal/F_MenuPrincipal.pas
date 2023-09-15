@@ -25,10 +25,12 @@ type
     MVendedorFuncionario: TMenuItem;
     Clientes1: TMenuItem;
     MFaixaComissao: TMenuItem;
+    CRM1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure MVendedorFuncionarioClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure MFaixaComissaoClick(Sender: TObject);
+    procedure CRM1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,7 +41,7 @@ var
   FMenuPrincipal: TFMenuPrincipal;
 
 implementation
-uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao;
+uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao, F_CRM;
 
 {$R *.dfm}
 
@@ -48,6 +50,13 @@ var
   AForm: TFCliente;
 begin
   AbreForm(TFCliente, TObject(AForm));
+end;
+
+procedure TFMenuPrincipal.CRM1Click(Sender: TObject);
+var
+  AForm: TFCRM;
+begin
+  AbreForm(TFCRM, TObject(AForm));
 end;
 
 procedure TFMenuPrincipal.FormCreate(Sender: TObject);

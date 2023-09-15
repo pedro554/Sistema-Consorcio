@@ -45,5 +45,9 @@ object FMenuPrincipal: TFMenuPrincipal
         OnClick = MFaixaComissaoClick
       end
     end
+    object CRM1: TMenuItem
+      Caption = 'CRM'
+      OnClick = CRM1Click
+    end
   end
 end

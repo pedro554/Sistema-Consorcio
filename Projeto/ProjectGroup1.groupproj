@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{AD7F978D-8D9B-4808-8ECA-B19A5F1C97CC}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SistemaConsorcio.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SistemaConsorcio">
+        <MSBuild Projects="SistemaConsorcio.dproj"/>
+    </Target>
+    <Target Name="SistemaConsorcio:Clean">
+        <MSBuild Projects="SistemaConsorcio.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SistemaConsorcio:Make">
+        <MSBuild Projects="SistemaConsorcio.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SistemaConsorcio"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SistemaConsorcio:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SistemaConsorcio:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

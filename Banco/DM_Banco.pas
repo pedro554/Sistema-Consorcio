@@ -17,6 +17,7 @@ type
     procedure Conectar;
     { Private declarations }
   public
+    function SequenciaTabela(ATabela: String): Integer;
     { Public declarations }
   end;
 
@@ -56,6 +57,28 @@ end;
 procedure TDMBanco.DataModuleCreate(Sender: TObject);
 begin
   Conectar;
+end;
+
+function TDMBanco.SequenciaTabela(ATabela: String): Integer;
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := con;
+    Query.SQL.Text := 'SELECT AUTO_INCREMENT ' +
+                      'FROM information_schema.TABLES ' +
+                      'WHERE TABLE_SCHEMA = ''sistema'' ' +
+                      'AND TABLE_NAME = ' + QuotedStr(ATabela);
+    Query.Open;
+
+    if not Query.IsEmpty then
+      Result := Query.Fields[0].AsInteger
+    else
+      Result := -1;
+  finally
+    Query.Free;
+  end;
 end;
 
 end.
