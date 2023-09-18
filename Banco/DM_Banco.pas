@@ -12,12 +12,11 @@ type
   TDMBanco = class(TDataModule)
     con: TFDConnection;
     driver: TFDPhysMySQLDriverLink;
-    procedure DataModuleCreate(Sender: TObject);
   private
-    procedure Conectar;
     { Private declarations }
   public
     function SequenciaTabela(ATabela: String): Integer;
+    function Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
     { Public declarations }
   end;
 
@@ -25,7 +24,7 @@ var
   DMBanco: TDMBanco;
 
 implementation
-uses Funcoes;
+uses Funcoes, Cad_ConfgBanco;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -33,7 +32,9 @@ uses Funcoes;
 
 { TDMBanco }
 
-procedure TDMBanco.Conectar;
+function TDMBanco.Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
+var
+  FCad_ConfigBanco: TFCad_ConfigBanco;
 begin
   if con.Connected then
     Con.Connected := False;
@@ -42,21 +43,38 @@ begin
 
   con.Params.DriverID := 'MySQL';
   con.Params.Database := 'sistema';
-  con.Params.UserName := 'root';
+  con.Params.UserName := AUsuario;
+  con.Params.Values['Server'] := AHost;
   con.Params.Password := 'spsg91g8';
   driver.VendorLib := DiretorioSistema + '\lib\libmysql.dll';
 
   try
     con.Connected := True;
+    Result := con.Connected;
   except
     on e: exception do
-      raise Exception.Create('Falha ao conectar no banco de dados: ' + #13 + e.message);
+    begin
+      if not AMostraTelaConfig then
+      begin
+        MyMessage('Falha ao conectar no banco de dados: ' + #13 + e.message);
+        Result := False;
+      end
+      else
+      begin
+        FCad_ConfigBanco := TFCad_ConfigBanco.Create(nil);
+        try
+          if FCad_ConfigBanco.ShowModal = 1 then
+            Result := Conectar(
+              FCad_ConfigBanco.edtUsuario.Text,
+              FCad_ConfigBanco.edtIP.Text,
+              False
+            );
+        finally
+          FCad_ConfigBanco.Free;
+        end;
+      end;
+    end;
   end;
-end;
-
-procedure TDMBanco.DataModuleCreate(Sender: TObject);
-begin
-  Conectar;
 end;
 
 function TDMBanco.SequenciaTabela(ATabela: String): Integer;

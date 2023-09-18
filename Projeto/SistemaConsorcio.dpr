@@ -2,6 +2,7 @@ program SistemaConsorcio;
 
 uses
   Vcl.Forms,
+  IniFiles,
   F_MenuPrincipal in '..\Menu Principal\F_MenuPrincipal.pas' {FMenuPrincipal},
   Vcl.Themes,
   Vcl.Styles,
@@ -20,15 +21,31 @@ uses
   Cad_CRM in '..\CRM\Cad_CRM.pas' {FCad_CRM},
   Consulta_Cliente in '..\Cliente\Consulta_Cliente.pas' {FConsulta_Cliente},
   DM_Funcoes.Consulta in '..\Comum\DM_Funcoes.Consulta.pas' {DMFuncoesConsulta: TDataModule},
-  Consulta_Funcionario in '..\P_Funcionario\Consulta_Funcionario.pas' {FConsulta_Funcionario};
+  Consulta_Funcionario in '..\P_Funcionario\Consulta_Funcionario.pas' {FConsulta_Funcionario},
+  Cad_ConfgBanco in '..\Banco\Cad_ConfgBanco.pas' {FCad_ConfigBanco};
 
 {$R *.res}
+
+var
+  Ini: TIniFile;
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFMenuPrincipal, FMenuPrincipal);
   Application.CreateForm(TDMBanco, DMBanco);
+
+  Ini := TIniFile.Create(DiretorioSistema + '\cfgbanco.ini');
+  if not DMBanco.Conectar(
+    Ini.ReadString('banco', 'usuario', 'root'),
+    Ini.ReadString('banco', 'ip', 'localhost'),
+    True) then
+  begin
+    Ini.Free;
+    Application.Terminate;
+  end;
+  Ini.Free;
+
   Application.CreateForm(TDMFuncoesConsulta, DMFuncoesConsulta);
   Application.Run;
 end.

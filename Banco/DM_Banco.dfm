@@ -1,6 +1,5 @@
 object DMBanco: TDMBanco
   OldCreateOrder = False
-  OnCreate = DataModuleCreate
   Height = 384
   Width = 402
   object con: TFDConnection
@@ -9,7 +8,6 @@ object DMBanco: TDMBanco
       'User_Name=root'
       'Password=spsg91g8'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Left = 56
     Top = 28

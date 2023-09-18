@@ -107,11 +107,9 @@
         </DelphiCompile>
         <DCCReference Include="..\Menu Principal\F_MenuPrincipal.pas">
             <Form>FMenuPrincipal</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Banco\DM_Banco.pas">
             <Form>DMBanco</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\Comum\Funcoes.FormPrincipal.pas"/>
@@ -119,52 +117,43 @@
         <DCCReference Include="..\Comum\Variaveis_Sistema.pas"/>
         <DCCReference Include="..\P_Funcionario\Cad_Funcionario.pas">
             <Form>FCad_Funcionario</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\P_Funcionario\F_Funcionario.pas">
             <Form>FFuncionario</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Comum\FormularioBase.pas">
             <Form>Formulario</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Cliente\F_Cliente.pas">
             <Form>FCliente</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Cliente\Cad_Cliente.pas">
             <Form>FCad_Cliente</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Faixa Comissao\F_FaixaComissao.pas">
             <Form>FFaixaComissao</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Faixa Comissao\Cad_FaixaComissao.pas">
             <Form>FCad_FaixaComissao</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\CRM\F_CRM.pas">
             <Form>FCRM</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\CRM\Cad_CRM.pas">
             <Form>FCad_CRM</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Cliente\Consulta_Cliente.pas">
             <Form>FConsulta_Cliente</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Comum\DM_Funcoes.Consulta.pas">
             <Form>DMFuncoesConsulta</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\P_Funcionario\Consulta_Funcionario.pas">
             <Form>FConsulta_Funcionario</Form>
-            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Banco\Cad_ConfgBanco.pas">
+            <Form>FCad_ConfigBanco</Form>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

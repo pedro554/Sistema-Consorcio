@@ -26,11 +26,14 @@ type
     Clientes1: TMenuItem;
     MFaixaComissao: TMenuItem;
     CRM1: TMenuItem;
+    Configurao1: TMenuItem;
+    BancodeDados1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure MVendedorFuncionarioClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure MFaixaComissaoClick(Sender: TObject);
     procedure CRM1Click(Sender: TObject);
+    procedure BancodeDados1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,9 +44,16 @@ var
   FMenuPrincipal: TFMenuPrincipal;
 
 implementation
-uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao, F_CRM;
+uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao, F_CRM, Cad_ConfgBanco;
 
 {$R *.dfm}
+
+procedure TFMenuPrincipal.BancodeDados1Click(Sender: TObject);
+var
+  AForm: TFCad_ConfigBanco;
+begin
+  AbreForm(TFCad_ConfigBanco, TObject(AForm));
+end;
 
 procedure TFMenuPrincipal.Clientes1Click(Sender: TObject);
 var
