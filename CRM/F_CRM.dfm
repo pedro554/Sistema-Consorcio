@@ -3,7 +3,7 @@ object FCRM: TFCRM
   Top = 0
   Margins.Top = 5
   Caption = 'CRM'
-  ClientHeight = 585
+  ClientHeight = 580
   ClientWidth = 1078
   Color = clBtnFace
   DragMode = dmAutomatic
@@ -22,20 +22,19 @@ object FCRM: TFCRM
     Left = 0
     Top = 41
     Width = 1078
-    Height = 544
+    Height = 539
     Margins.Left = 0
     Margins.Top = 5
     Margins.Right = 0
     Margins.Bottom = 0
-    HorzScrollBar.Position = 1254
     Align = alClient
     TabOrder = 1
     object pnl4: TPanel
       Tag = 2
-      Left = -866
+      Left = 388
       Top = 0
       Width = 388
-      Height = 523
+      Height = 518
       Align = alLeft
       Caption = 'pnl1'
       Color = clCream
@@ -58,18 +57,18 @@ object FCRM: TFCRM
         ExplicitWidth = 144
       end
       object GridApresentacao: TStringGrid
-        Tag = 4
+        Tag = 2
         AlignWithMargins = True
         Left = 6
         Top = 35
         Width = 376
-        Height = 482
+        Height = 477
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
         Margins.Bottom = 5
         Align = alClient
-        ColCount = 4
+        ColCount = 2
         DefaultRowHeight = 22
         DoubleBuffered = True
         DrawingStyle = gdsClassic
@@ -80,27 +79,24 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
+        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
         ColWidths = (
-          64
-          304
-          88
-          3004)
+          240
+          130)
         ColAligments = (
-          1
           0
-          0
-          0)
+          1)
       end
     end
     object pnl2: TPanel
       Tag = 3
-      Left = -478
+      Left = 776
       Top = 0
       Width = 388
-      Height = 523
+      Height = 518
       Align = alLeft
       Caption = 'pnl1'
       Color = clGradientInactiveCaption
@@ -123,18 +119,18 @@ object FCRM: TFCRM
         ExplicitWidth = 162
       end
       object GridNegociacao: TStringGrid
-        Tag = 4
+        Tag = 2
         AlignWithMargins = True
         Left = 6
         Top = 35
         Width = 376
-        Height = 482
+        Height = 477
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
         Margins.Bottom = 5
         Align = alClient
-        ColCount = 4
+        ColCount = 2
         DefaultRowHeight = 22
         DoubleBuffered = True
         DrawingStyle = gdsClassic
@@ -145,27 +141,24 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
+        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
         ColWidths = (
-          64
-          304
-          88
-          3004)
+          240
+          130)
         ColAligments = (
-          1
           0
-          0
-          0)
+          1)
       end
     end
     object pnl3: TPanel
       Tag = 4
-      Left = -90
+      Left = 1164
       Top = 0
       Width = 388
-      Height = 523
+      Height = 518
       Align = alLeft
       Caption = 'pnl1'
       Color = clInfoBk
@@ -188,18 +181,18 @@ object FCRM: TFCRM
         ExplicitWidth = 127
       end
       object GridAguardando: TStringGrid
-        Tag = 4
+        Tag = 2
         AlignWithMargins = True
         Left = 6
         Top = 35
         Width = 376
-        Height = 482
+        Height = 477
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
         Margins.Bottom = 5
         Align = alClient
-        ColCount = 4
+        ColCount = 2
         DefaultRowHeight = 22
         DoubleBuffered = True
         DrawingStyle = gdsClassic
@@ -210,27 +203,24 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
+        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
         ColWidths = (
-          64
-          304
-          88
-          3004)
+          240
+          130)
         ColAligments = (
-          1
           0
-          0
-          0)
+          1)
       end
     end
     object pnl6: TPanel
       Tag = 6
-      Left = 686
+      Left = 1940
       Top = 0
       Width = 388
-      Height = 523
+      Height = 518
       Align = alLeft
       Caption = 'pnl1'
       Color = clMoneyGreen
@@ -253,18 +243,18 @@ object FCRM: TFCRM
         ExplicitWidth = 89
       end
       object GridFechado: TStringGrid
-        Tag = 4
+        Tag = 2
         AlignWithMargins = True
         Left = 6
         Top = 35
         Width = 376
-        Height = 482
+        Height = 477
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
         Margins.Bottom = 5
         Align = alClient
-        ColCount = 4
+        ColCount = 2
         DefaultRowHeight = 22
         DoubleBuffered = True
         DrawingStyle = gdsClassic
@@ -275,27 +265,24 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
+        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
         ColWidths = (
-          64
-          304
-          88
-          3004)
+          240
+          130)
         ColAligments = (
-          1
           0
-          0
-          0)
+          1)
       end
     end
     object pnl5: TPanel
       Tag = 5
-      Left = 298
+      Left = 1552
       Top = 0
       Width = 388
-      Height = 523
+      Height = 518
       Align = alLeft
       Caption = 'pnl1'
       Color = clSkyBlue
@@ -318,18 +305,18 @@ object FCRM: TFCRM
         ExplicitWidth = 154
       end
       object GridSemInteresse: TStringGrid
-        Tag = 4
+        Tag = 2
         AlignWithMargins = True
         Left = 6
         Top = 35
         Width = 376
-        Height = 482
+        Height = 477
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
         Margins.Bottom = 5
         Align = alClient
-        ColCount = 4
+        ColCount = 2
         DefaultRowHeight = 22
         DoubleBuffered = True
         DrawingStyle = gdsClassic
@@ -340,27 +327,24 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
+        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
         ColWidths = (
-          64
-          304
-          88
-          3004)
+          240
+          130)
         ColAligments = (
-          1
           0
-          0
-          0)
+          1)
       end
     end
     object pnl1: TPanel
       Tag = 1
-      Left = -1254
+      Left = 0
       Top = 0
       Width = 388
-      Height = 523
+      Height = 518
       Align = alLeft
       Caption = 'pnl1'
       Color = clHighlightText
@@ -383,18 +367,18 @@ object FCRM: TFCRM
         ExplicitWidth = 70
       end
       object GridAberto: TStringGrid
-        Tag = 4
+        Tag = 2
         AlignWithMargins = True
         Left = 6
         Top = 35
         Width = 376
-        Height = 482
+        Height = 477
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
         Margins.Bottom = 5
         Align = alClient
-        ColCount = 4
+        ColCount = 2
         DefaultRowHeight = 22
         DoubleBuffered = True
         DrawingStyle = gdsClassic
@@ -405,19 +389,18 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
+        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
+        ExplicitLeft = 8
+        ExplicitTop = 38
         ColWidths = (
-          64
-          303
-          88
-          3004)
+          240
+          130)
         ColAligments = (
-          1
           0
-          0
-          0)
+          1)
       end
     end
   end
@@ -533,6 +516,24 @@ object FCRM: TFCRM
       FieldName = 'CD_STATUS'
       Origin = 'CD_STATUS'
     end
+    object QAbertoCD_FUNCIONARIO: TIntegerField
+      FieldName = 'CD_FUNCIONARIO'
+      Origin = 'CD_FUNCIONARIO'
+      Required = True
+    end
+    object QAbertoVL_CREDITO: TFMTBCDField
+      FieldName = 'VL_CREDITO'
+      Origin = 'VL_CREDITO'
+      Required = True
+      currency = True
+      Precision = 20
+      Size = 6
+    end
+    object QAbertoDT_ATUALIZACAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DT_ATUALIZACAO'
+      Origin = 'DT_ATUALIZACAO'
+    end
   end
   object QNegociacao: TFDQuery
     Connection = DMBanco.con
@@ -595,6 +596,24 @@ object FCRM: TFCRM
       FieldName = 'CD_STATUS'
       Origin = 'CD_STATUS'
     end
+    object QNegociacaoCD_FUNCIONARIO: TIntegerField
+      FieldName = 'CD_FUNCIONARIO'
+      Origin = 'CD_FUNCIONARIO'
+      Required = True
+    end
+    object QNegociacaoVL_CREDITO: TFMTBCDField
+      FieldName = 'VL_CREDITO'
+      Origin = 'VL_CREDITO'
+      Required = True
+      currency = True
+      Precision = 20
+      Size = 6
+    end
+    object QNegociacaoDT_ATUALIZACAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DT_ATUALIZACAO'
+      Origin = 'DT_ATUALIZACAO'
+    end
   end
   object QAguardando: TFDQuery
     Connection = DMBanco.con
@@ -656,6 +675,24 @@ object FCRM: TFCRM
       AutoGenerateValue = arDefault
       FieldName = 'CD_STATUS'
       Origin = 'CD_STATUS'
+    end
+    object QAguardandoCD_FUNCIONARIO: TIntegerField
+      FieldName = 'CD_FUNCIONARIO'
+      Origin = 'CD_FUNCIONARIO'
+      Required = True
+    end
+    object QAguardandoVL_CREDITO: TFMTBCDField
+      FieldName = 'VL_CREDITO'
+      Origin = 'VL_CREDITO'
+      Required = True
+      currency = True
+      Precision = 20
+      Size = 6
+    end
+    object QAguardandoDT_ATUALIZACAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DT_ATUALIZACAO'
+      Origin = 'DT_ATUALIZACAO'
     end
   end
   object QAtualizaStatus: TFDQuery
@@ -742,6 +779,24 @@ object FCRM: TFCRM
       FieldName = 'CD_STATUS'
       Origin = 'CD_STATUS'
     end
+    object QApresentacaoCD_FUNCIONARIO: TIntegerField
+      FieldName = 'CD_FUNCIONARIO'
+      Origin = 'CD_FUNCIONARIO'
+      Required = True
+    end
+    object QApresentacaoVL_CREDITO: TFMTBCDField
+      FieldName = 'VL_CREDITO'
+      Origin = 'VL_CREDITO'
+      Required = True
+      currency = True
+      Precision = 20
+      Size = 6
+    end
+    object QApresentacaoDT_ATUALIZACAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DT_ATUALIZACAO'
+      Origin = 'DT_ATUALIZACAO'
+    end
   end
   object QSemInteresse: TFDQuery
     Connection = DMBanco.con
@@ -803,6 +858,24 @@ object FCRM: TFCRM
       AutoGenerateValue = arDefault
       FieldName = 'CD_STATUS'
       Origin = 'CD_STATUS'
+    end
+    object QSemInteresseCD_FUNCIONARIO: TIntegerField
+      FieldName = 'CD_FUNCIONARIO'
+      Origin = 'CD_FUNCIONARIO'
+      Required = True
+    end
+    object QSemInteresseVL_CREDITO: TFMTBCDField
+      FieldName = 'VL_CREDITO'
+      Origin = 'VL_CREDITO'
+      Required = True
+      currency = True
+      Precision = 20
+      Size = 6
+    end
+    object QSemInteresseDT_ATUALIZACAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DT_ATUALIZACAO'
+      Origin = 'DT_ATUALIZACAO'
     end
   end
   object QFechado: TFDQuery
@@ -866,6 +939,24 @@ object FCRM: TFCRM
       FieldName = 'CD_STATUS'
       Origin = 'CD_STATUS'
     end
+    object QFechadoCD_FUNCIONARIO: TIntegerField
+      FieldName = 'CD_FUNCIONARIO'
+      Origin = 'CD_FUNCIONARIO'
+      Required = True
+    end
+    object QFechadoVL_CREDITO: TFMTBCDField
+      FieldName = 'VL_CREDITO'
+      Origin = 'VL_CREDITO'
+      Required = True
+      currency = True
+      Precision = 20
+      Size = 6
+    end
+    object QFechadoDT_ATUALIZACAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DT_ATUALIZACAO'
+      Origin = 'DT_ATUALIZACAO'
+    end
   end
   object BindSourceAberto: TBindSourceDB
     DataSet = QAberto
@@ -884,20 +975,13 @@ object FCRM: TFCRM
       GridControl = GridFechado
       Columns = <
         item
-          MemberName = 'CD_CRM'
-          Header = 'C'#243'digo'
-        end
-        item
           MemberName = 'NM_CLIENTE'
           Header = 'Cliente'
+          Width = 240
         end
         item
-          MemberName = 'NR_FONE'
-          Header = 'Telefone'
-        end
-        item
-          MemberName = 'DS_OBS'
-          Header = 'Objetivo'
+          MemberName = 'VL_CREDITO'
+          Header = 'Valor Cr'#233'dito'
         end>
     end
     object LinkGridToDataSourceBindSourceAguardando: TLinkGridToDataSource
@@ -906,20 +990,13 @@ object FCRM: TFCRM
       GridControl = GridAguardando
       Columns = <
         item
-          MemberName = 'CD_CRM'
-          Header = 'C'#243'digo'
-        end
-        item
           MemberName = 'NM_CLIENTE'
           Header = 'Cliente'
+          Width = 240
         end
         item
-          MemberName = 'NR_FONE'
-          Header = 'Telefone'
-        end
-        item
-          MemberName = 'DS_OBS'
-          Header = 'Objetivo'
+          MemberName = 'VL_CREDITO'
+          Header = 'Valor Cr'#233'dito'
         end>
     end
     object LinkGridToDataSourceBindSourceNegociacao: TLinkGridToDataSource
@@ -928,20 +1005,13 @@ object FCRM: TFCRM
       GridControl = GridNegociacao
       Columns = <
         item
-          MemberName = 'CD_CRM'
-          Header = 'C'#243'digo'
-        end
-        item
           MemberName = 'NM_CLIENTE'
           Header = 'Cliente'
+          Width = 240
         end
         item
-          MemberName = 'NR_FONE'
-          Header = 'Telefone'
-        end
-        item
-          MemberName = 'DS_OBS'
-          Header = 'Objetivo'
+          MemberName = 'VL_CREDITO'
+          Header = 'Valor Cr'#233'dito'
         end>
     end
     object LinkGridToDataSourceBindSourceAberto: TLinkGridToDataSource
@@ -950,20 +1020,14 @@ object FCRM: TFCRM
       GridControl = GridAberto
       Columns = <
         item
-          MemberName = 'CD_CRM'
-          Header = 'C'#243'digo'
-        end
-        item
           MemberName = 'NM_CLIENTE'
           Header = 'Cliente'
+          Width = 240
         end
         item
-          MemberName = 'NR_FONE'
-          Header = 'Telefone'
-        end
-        item
-          MemberName = 'DS_OBS'
-          Header = 'Objetivo'
+          MemberName = 'VL_CREDITO'
+          Header = 'Valor Cr'#233'dito'
+          ShowThousandSeparator = False
         end>
     end
     object LinkGridToDataSourceBindSourceApresentacao: TLinkGridToDataSource
@@ -972,20 +1036,13 @@ object FCRM: TFCRM
       GridControl = GridApresentacao
       Columns = <
         item
-          MemberName = 'CD_CRM'
-          Header = 'C'#243'digo'
-        end
-        item
           MemberName = 'NM_CLIENTE'
           Header = 'Cliente'
+          Width = 240
         end
         item
-          MemberName = 'NR_FONE'
-          Header = 'Telefone'
-        end
-        item
-          MemberName = 'DS_OBS'
-          Header = 'Objetivo'
+          MemberName = 'VL_CREDITO'
+          Header = 'Valor Cr'#233'dito'
         end>
     end
     object LinkGridToDataSourceBindSourceSemInteresse: TLinkGridToDataSource
@@ -994,20 +1051,14 @@ object FCRM: TFCRM
       GridControl = GridSemInteresse
       Columns = <
         item
-          MemberName = 'CD_CRM'
-          Header = 'C'#243'digo'
-        end
-        item
           MemberName = 'NM_CLIENTE'
           Header = 'Cliente'
+          Width = 240
         end
         item
-          MemberName = 'NR_FONE'
-          Header = 'Telefone'
-        end
-        item
-          MemberName = 'DS_OBS'
-          Header = 'Objetivo'
+          MemberName = 'VL_CREDITO'
+          Header = 'Valor Cr'#233'dito'
+          Width = -1
         end>
     end
   end

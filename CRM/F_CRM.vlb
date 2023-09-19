@@ -69,7 +69,7 @@ Coordinates=507,1,90,33
 Coordinates=507,218,96,33
 
 [QAtualizaStatus]
-Coordinates=77,673,93,51
+Coordinates=447,560,93,51
 
 [StringField10]
 Coordinates=448,789,79,33
@@ -156,83 +156,162 @@ Visible=False
 Coordinates=894,105,126,33
 
 [ScrollBox1]
-Coordinates=274,750,68,33
+Coordinates=475,637,68,33
 
 [pnl3]
-Coordinates=866,673,41,51
+Coordinates=901,560,41,51
 
 [lbl2]
-Coordinates=531,673,41,51
+Coordinates=767,560,41,51
 
 [GridAguardando]
-Coordinates=569,267,96,123
+Coordinates=222,366,96,87
 Visible=True
 
 [pnl4]
-Coordinates=397,673,41,51
+Coordinates=313,560,41,51
 
 [GridApresentacao]
-Coordinates=527,46,103,123
+Coordinates=856,91,103,87
 Visible=True
 
 [lbl3]
-Coordinates=330,673,41,51
+Coordinates=179,560,41,51
 
 [pnl2]
-Coordinates=263,673,41,51
+Coordinates=77,637,41,51
 
 [GridNegociacao]
-Coordinates=498,488,93,123
+Coordinates=850,366,93,87
 
 [lbl4]
-Coordinates=196,673,41,51
+Coordinates=834,560,41,51
 
 [lbl1]
-Coordinates=732,673,41,51
+Coordinates=700,560,41,51
 
 [lbl5]
-Coordinates=10,673,41,51
+Coordinates=633,560,41,51
 
 [GridFechado]
-Coordinates=204,46,77,123
+Coordinates=538,366,77,87
 
 [GridAberto]
-Coordinates=195,488,68,123
+Coordinates=195,91,68,87
 Visible=True
 
 [pnl1]
-Coordinates=464,673,41,51
+Coordinates=246,560,41,51
 
 [GridSemInteresse]
-Coordinates=229,267,102,123
+Coordinates=508,91,102,87
+Visible=True
 
 [pnl5]
-Coordinates=799,673,41,51
+Coordinates=10,637,41,51
 
 [lbl6]
-Coordinates=598,673,41,51
+Coordinates=566,560,41,51
 
 [pnl6]
-Coordinates=665,673,41,51
+Coordinates=10,560,41,51
 
 [BindingsList1]
 Coordinates=112,1,82,33
 
 [BindSourceAberto]
-Coordinates=10,452,105,195
+Coordinates=10,10,105,249
 
 [BindSourceApresentacao]
-Coordinates=307,10,140,195
+Coordinates=636,10,140,249
 
 [BindSourceNegociacao]
-Coordinates=289,452,129,195
+Coordinates=641,285,129,249
 
 [BindSourceAguardando]
-Coordinates=357,231,132,195
+Coordinates=10,285,132,249
 
 [BindSourceSemInteresse]
-Coordinates=10,231,139,195
+Coordinates=289,10,139,249
 
 [BindSourceFechado]
-Coordinates=10,10,114,195
+Coordinates=344,285,114,249
+
+[btnExcluir]
+Coordinates=385,637,64,33
+
+[btnFinalizarMovimento]
+Coordinates=233,637,126,33
+
+[Excluir1]
+Coordinates=627,824,54,33
+
+[QExcluiCRM]
+Coordinates=77,560,76,51
+
+[pnl7]
+Coordinates=380,560,41,51
+
+[btnAlterar]
+Coordinates=144,637,63,33
+
+[pm]
+Coordinates=160,56,40,33
+
+[btnNovo]
+Coordinates=569,637,56,33
+
+[QAbertoVL_CREDITO]
+Coordinates=213,196,120,33
+
+[QApresentacaoVL_CREDITO]
+Coordinates=230,278,155,33
+
+[QSemInteresseCD_FUNCIONARIO]
+Coordinates=564,456,182,33
+
+[QFechadoVL_CREDITO]
+Coordinates=635,600,129,33
+
+[QApresentacaoDT_ATUALIZACAO]
+Coordinates=866,157,184,33
+
+[QNegociacaoCD_FUNCIONARIO]
+Coordinates=866,209,173,33
+
+[QSemInteresseDT_ATUALIZACAO]
+Coordinates=866,261,183,33
+
+[QSemInteresseVL_CREDITO]
+Coordinates=866,313,154,33
+
+[QAbertoCD_FUNCIONARIO]
+Coordinates=866,365,148,33
+
+[QApresentacaoCD_FUNCIONARIO]
+Coordinates=866,417,183,33
+
+[QAguardandoCD_FUNCIONARIO]
+Coordinates=866,469,176,33
+
+[QAbertoDT_ATUALIZACAO]
+Coordinates=866,521,149,33
+
+[QFechadoCD_FUNCIONARIO]
+Coordinates=866,573,157,33
+
+[QAguardandoDT_ATUALIZACAO]
+Coordinates=866,625,176,33
+
+[QNegociacaoVL_CREDITO]
+Coordinates=866,677,145,33
+
+[QNegociacaoDT_ATUALIZACAO]
+Coordinates=866,729,173,33
+
+[QFechadoDT_ATUALIZACAO]
+Coordinates=1088,1,158,33
+
+[QAguardandoVL_CREDITO]
+Coordinates=1088,53,148,33
 
