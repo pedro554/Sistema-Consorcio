@@ -56,6 +56,8 @@ type
     TFuncionarioST_MARCADO: TBooleanField;
     QFuncionarioCD_FUNCIONARIO: TFDAutoIncField;
     QFuncionarioNM_FUNCIONARIO: TStringField;
+    QFuncionarioST_ATIVO: TStringField;
+    TFuncionarioST_ATIVO: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);

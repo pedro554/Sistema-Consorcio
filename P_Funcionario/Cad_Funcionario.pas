@@ -50,6 +50,9 @@ type
     edtNM_FUNCIONARIO: TDBEdit;
     lbl1: TLabel;
     Transacao: TFDTransaction;
+    chkST_ATIVO: TDBCheckBox;
+    QFuncionarioST_ATIVO: TStringField;
+    TFuncionarioST_ATIVO: TStringField;
     procedure btnGravarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

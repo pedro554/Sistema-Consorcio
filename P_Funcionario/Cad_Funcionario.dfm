@@ -35,7 +35,7 @@ object FCad_Funcionario: TFCad_Funcionario
     Width = 635
     Height = 41
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 2
     object btnGravar: TSpeedButton
       Left = 195
       Top = 10
@@ -61,6 +61,18 @@ object FCad_Funcionario: TFCad_Funcionario
     DataField = 'NM_FUNCIONARIO'
     DataSource = SFuncionario
     TabOrder = 0
+  end
+  object chkST_ATIVO: TDBCheckBox
+    Left = 168
+    Top = 63
+    Width = 97
+    Height = 17
+    Caption = 'Ativo'
+    DataField = 'ST_ATIVO'
+    DataSource = SFuncionario
+    TabOrder = 1
+    ValueChecked = 'SIM'
+    ValueUnchecked = 'N'#195'O'
   end
   object QFuncionario: TFDQuery
     Connection = DMBanco.con
@@ -93,6 +105,12 @@ object FCad_Funcionario: TFCad_Funcionario
       Required = True
       Size = 50
     end
+    object QFuncionarioST_ATIVO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ST_ATIVO'
+      Origin = 'ST_ATIVO'
+      Size = 3
+    end
   end
   object TFuncionario: TJvMemoryData
     FieldDefs = <>
@@ -106,6 +124,10 @@ object FCad_Funcionario: TFCad_Funcionario
       FieldName = 'NM_FUNCIONARIO'
       Origin = 'NM_FUNCIONARIO'
       Size = 50
+    end
+    object TFuncionarioST_ATIVO: TStringField
+      FieldName = 'ST_ATIVO'
+      Size = 3
     end
   end
   object SFuncionario: TDataSource

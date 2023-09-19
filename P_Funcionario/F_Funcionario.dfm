@@ -169,6 +169,12 @@ object FFuncionario: TFFuncionario
       Required = True
       Size = 50
     end
+    object QFuncionarioST_ATIVO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ST_ATIVO'
+      Origin = 'ST_ATIVO'
+      Size = 3
+    end
   end
   object TFuncionario: TJvMemoryData
     FieldDefs = <>
@@ -186,6 +192,10 @@ object FFuncionario: TFFuncionario
     end
     object TFuncionarioST_MARCADO: TBooleanField
       FieldName = 'ST_MARCADO'
+    end
+    object TFuncionarioST_ATIVO: TStringField
+      FieldName = 'ST_ATIVO'
+      Size = 3
     end
   end
   object SFuncioario: TDataSource
