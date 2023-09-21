@@ -5,6 +5,7 @@ interface
 uses
   FormularioBase,
   DM_Banco,
+  DM_CRM,
   Winapi.Windows,
   Winapi.Messages,
   System.SysUtils,
@@ -151,6 +152,12 @@ type
     QFechadoCD_FUNCIONARIO: TIntegerField;
     QFechadoVL_CREDITO: TFMTBCDField;
     QFechadoDT_ATUALIZACAO: TDateTimeField;
+    QFechadoCD_FAIXACOMISSAO: TIntegerField;
+    QAbertoCD_FAIXACOMISSAO: TIntegerField;
+    QApresentacaoCD_FAIXACOMISSAO: TIntegerField;
+    QNegociacaoCD_FAIXACOMISSAO: TIntegerField;
+    QAguardandoCD_FAIXACOMISSAO: TIntegerField;
+    QSemInteresseCD_FAIXACOMISSAO: TIntegerField;
     procedure GridAbertoDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure GridAbertoDragDrop(Sender, Source: TObject; X, Y: Integer);
     procedure FormShow(Sender: TObject);
@@ -159,8 +166,11 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     FDatasetOrigem: TDataSet;
+    DMCRM: TDMCRM;
     procedure CarregaDados;
     procedure AtualizaStatus(AStatus: Integer);
     procedure ConfigSelecaoFechado;
@@ -229,10 +239,11 @@ begin
     Abort;
   end;
 
-  if MyMessage('Deseja finalizar o movimento ' + FDatasetOrigem.FieldByName('CD_CRM').AsString + '?', 4) = 6 then
-    AtualizaStatus(C_FINALIZADO)
+  if MyMessage('Deseja finalizar o movimento ' + FDatasetOrigem.FieldByName('CD_CRM').AsString + '?', 4) <> 6 then
+    Abort;
 
-  {Realizar calculos de comissão}
+  AtualizaStatus(C_FINALIZADO);
+  DMCRM.FinalizaMovimento(FDatasetOrigem);
 end;
 
 procedure TFCRM.btnNovoClick(Sender: TObject);
@@ -274,6 +285,25 @@ procedure TFCRM.ConfigSelecaoFechado;
 begin
   FDatasetOrigem := BindSourceFechado.DataSet;
   btnFinalizarMovimento.Enabled := True;
+end;
+
+procedure TFCRM.FormCreate(Sender: TObject);
+begin
+  inherited;
+  DMCRM := TDMCRM.Create(nil);
+end;
+
+procedure TFCRM.FormDestroy(Sender: TObject);
+begin
+  QAberto.Close;
+  QApresentacao.Close;
+  QNegociacao.Close;
+  QAguardando.Close;
+  QSemInteresse.Close;
+  QFechado.Close;
+  QAtualizaStatus.Close;
+  QExcluiCRM.Close;
+  FreeAndNil(DMCRM)
 end;
 
 procedure TFCRM.FormShow(Sender: TObject);

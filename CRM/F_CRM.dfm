@@ -15,6 +15,7 @@ object FCRM: TFCRM
   OldCreateOrder = False
   PopupMenu = pm
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -27,11 +28,12 @@ object FCRM: TFCRM
     Margins.Top = 5
     Margins.Right = 0
     Margins.Bottom = 0
+    HorzScrollBar.Position = 1254
     Align = alClient
     TabOrder = 1
     object pnl4: TPanel
       Tag = 2
-      Left = 388
+      Left = -866
       Top = 0
       Width = 388
       Height = 518
@@ -79,7 +81,6 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
-        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
@@ -93,7 +94,7 @@ object FCRM: TFCRM
     end
     object pnl2: TPanel
       Tag = 3
-      Left = 776
+      Left = -478
       Top = 0
       Width = 388
       Height = 518
@@ -141,7 +142,6 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
-        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
@@ -155,7 +155,7 @@ object FCRM: TFCRM
     end
     object pnl3: TPanel
       Tag = 4
-      Left = 1164
+      Left = -90
       Top = 0
       Width = 388
       Height = 518
@@ -203,7 +203,6 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
-        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
@@ -217,7 +216,7 @@ object FCRM: TFCRM
     end
     object pnl6: TPanel
       Tag = 6
-      Left = 1940
+      Left = 686
       Top = 0
       Width = 388
       Height = 518
@@ -265,7 +264,6 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
-        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
@@ -279,7 +277,7 @@ object FCRM: TFCRM
     end
     object pnl5: TPanel
       Tag = 5
-      Left = 1552
+      Left = 298
       Top = 0
       Width = 388
       Height = 518
@@ -327,10 +325,11 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
-        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
+        ExplicitLeft = 7
+        ExplicitTop = 38
         ColWidths = (
           240
           130)
@@ -341,7 +340,7 @@ object FCRM: TFCRM
     end
     object pnl1: TPanel
       Tag = 1
-      Left = 0
+      Left = -1254
       Top = 0
       Width = 388
       Height = 518
@@ -389,12 +388,9 @@ object FCRM: TFCRM
         ParentDoubleBuffered = False
         PopupMenu = pm
         TabOrder = 0
-        OnDblClick = btnAlterarClick
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
-        ExplicitLeft = 8
-        ExplicitTop = 38
         ColWidths = (
           240
           130)
@@ -534,6 +530,11 @@ object FCRM: TFCRM
       FieldName = 'DT_ATUALIZACAO'
       Origin = 'DT_ATUALIZACAO'
     end
+    object QAbertoCD_FAIXACOMISSAO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_FAIXACOMISSAO'
+      Origin = 'CD_FAIXACOMISSAO'
+    end
   end
   object QNegociacao: TFDQuery
     Connection = DMBanco.con
@@ -614,6 +615,11 @@ object FCRM: TFCRM
       FieldName = 'DT_ATUALIZACAO'
       Origin = 'DT_ATUALIZACAO'
     end
+    object QNegociacaoCD_FAIXACOMISSAO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_FAIXACOMISSAO'
+      Origin = 'CD_FAIXACOMISSAO'
+    end
   end
   object QAguardando: TFDQuery
     Connection = DMBanco.con
@@ -693,6 +699,11 @@ object FCRM: TFCRM
       AutoGenerateValue = arDefault
       FieldName = 'DT_ATUALIZACAO'
       Origin = 'DT_ATUALIZACAO'
+    end
+    object QAguardandoCD_FAIXACOMISSAO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_FAIXACOMISSAO'
+      Origin = 'CD_FAIXACOMISSAO'
     end
   end
   object QAtualizaStatus: TFDQuery
@@ -797,6 +808,11 @@ object FCRM: TFCRM
       FieldName = 'DT_ATUALIZACAO'
       Origin = 'DT_ATUALIZACAO'
     end
+    object QApresentacaoCD_FAIXACOMISSAO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_FAIXACOMISSAO'
+      Origin = 'CD_FAIXACOMISSAO'
+    end
   end
   object QSemInteresse: TFDQuery
     Connection = DMBanco.con
@@ -877,6 +893,11 @@ object FCRM: TFCRM
       FieldName = 'DT_ATUALIZACAO'
       Origin = 'DT_ATUALIZACAO'
     end
+    object QSemInteresseCD_FAIXACOMISSAO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_FAIXACOMISSAO'
+      Origin = 'CD_FAIXACOMISSAO'
+    end
   end
   object QFechado: TFDQuery
     Connection = DMBanco.con
@@ -956,6 +977,11 @@ object FCRM: TFCRM
       AutoGenerateValue = arDefault
       FieldName = 'DT_ATUALIZACAO'
       Origin = 'DT_ATUALIZACAO'
+    end
+    object QFechadoCD_FAIXACOMISSAO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_FAIXACOMISSAO'
+      Origin = 'CD_FAIXACOMISSAO'
     end
   end
   object BindSourceAberto: TBindSourceDB

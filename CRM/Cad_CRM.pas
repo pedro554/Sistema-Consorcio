@@ -60,13 +60,27 @@ type
     actlst: TActionList;
     ACT_F8: TAction;
     ACT_F6: TAction;
+    QCRMCD_FAIXACOMISSAO: TIntegerField;
+    TCRMCD_FAIXACOMISSAO: TIntegerField;
+    QFaixaComissao: TFDQuery;
+    QFaixaComissaoCD_FAIXACOMISSAO: TFDAutoIncField;
+    QFaixaComissaoDS_FAIXACOMISSAO: TStringField;
+    TCRMDS_FAIXACOMISSAO: TStringField;
+    lbl8: TLabel;
+    edtCD_FAIXACOMISSAO: TDBEdit;
+    edtDS_FAIXACOMISSAO: TDBEdit;
+    QFaixaComissaoVL_MINIMO: TFMTBCDField;
+    QFaixaComissaoVL_MAXIMO: TFMTBCDField;
+    QCRMDS_FAIXACOMISSAO: TStringField;
     procedure FormDestroy(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnPsqClienteClick(Sender: TObject);
     procedure btnPsqFuncionarioClick(Sender: TObject);
+    procedure TCRMVL_CREDITOChange(Sender: TField);
   private
     procedure CarregaCRM(ACodCRM: Integer);
+    procedure ValidaFaixaComissao;
     { Private declarations }
   public
     procedure Inicializa(ACodCRM: Integer);
@@ -98,6 +112,7 @@ begin
   ValidaCampo(TCRMCD_FUNCIONARIO);
   ValidaCampo(TCRMCD_STATUS);
   ValidaCampo(TCRMVL_CREDITO);
+  ValidaFaixaComissao;
 
   CarregaCRM(TCRMCD_CRM.AsInteger);
   CopiaRegistro(TCRM, QCRM, QCRM.IsEmpty);
@@ -142,6 +157,7 @@ procedure TFCad_CRM.FormDestroy(Sender: TObject);
 begin
   QCRM.Close;
   TCRM.Close;
+  QFaixaComissao.Close;
 end;
 
 procedure TFCad_CRM.Inicializa(ACodCRM: Integer);
@@ -149,7 +165,36 @@ begin
   TCRM.Close;
   TCRM.Open;
   CarregaCRM(ACodCRM);
-  CopiaRegistro(QCRM, TCRM);
+  TCRMVL_CREDITO.OnChange := nil;
+  try
+    CopiaRegistro(QCRM, TCRM);
+  finally
+    TCRMVL_CREDITO.OnChange := TCRMVL_CREDITOChange;
+  end;
+end;
+
+procedure TFCad_CRM.TCRMVL_CREDITOChange(Sender: TField);
+begin
+  TCRMVL_CREDITO.OnChange := nil;
+  try
+    ValidaFaixaComissao;
+    TCRMCD_FAIXACOMISSAO.AsInteger := QFaixaComissaoCD_FAIXACOMISSAO.AsInteger;
+    TCRMDS_FAIXACOMISSAO.AsString := QFaixaComissaoDS_FAIXACOMISSAO.AsString;
+  finally
+    TCRMVL_CREDITO.OnChange := TCRMVL_CREDITOChange;
+  end;
+end;
+
+procedure TFCad_CRM.ValidaFaixaComissao;
+begin
+  QFaixaComissao.Close;
+  QFaixaComissao.ParamByName('VL_CREDITO').AsFloat := TCRMVL_CREDITO.AsFloat;
+  QFaixaComissao.Open;
+  if QFaixaComissao.IsEmpty then
+  begin
+    MyMessage('Nenhuma faixa de comissão encontrada para este valor de crédito. Verifique!');
+    Abort;
+  end;
 end;
 
 end.

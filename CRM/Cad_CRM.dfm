@@ -2,7 +2,7 @@ object FCad_CRM: TFCad_CRM
   Left = 0
   Top = 0
   Caption = 'Cadastro de Movimenta'#231#227'o'
-  ClientHeight = 254
+  ClientHeight = 278
   ClientWidth = 635
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -30,7 +30,7 @@ object FCad_CRM: TFCad_CRM
   end
   object lbl2: TLabel
     Left = 102
-    Top = 119
+    Top = 142
     Width = 41
     Height = 13
     Alignment = taRightJustify
@@ -110,6 +110,20 @@ object FCad_CRM: TFCad_CRM
     Alignment = taRightJustify
     Caption = 'Data Atualiza'#231#227'o'
   end
+  object lbl8: TLabel
+    Left = 54
+    Top = 119
+    Width = 89
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Faixa de Comiss'#227'o'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object edtCD_CLIENTE: TDBEdit
     Left = 149
     Top = 24
@@ -134,20 +148,21 @@ object FCad_CRM: TFCad_CRM
   end
   object edtDS_OBS: TDBMemo
     Left = 149
-    Top = 116
+    Top = 139
     Width = 337
     Height = 89
     DataField = 'DS_OBS'
     DataSource = SCRM
-    TabOrder = 8
+    TabOrder = 10
   end
   object pnl1: TPanel
     Left = 0
-    Top = 213
+    Top = 237
     Width = 635
     Height = 41
     Align = alBottom
-    TabOrder = 9
+    TabOrder = 11
+    ExplicitTop = 213
     object btnGravar: TSpeedButton
       Left = 195
       Top = 10
@@ -246,18 +261,44 @@ object FCad_CRM: TFCad_CRM
     Enabled = False
     TabOrder = 7
   end
+  object edtCD_FAIXACOMISSAO: TDBEdit
+    Left = 149
+    Top = 116
+    Width = 81
+    Height = 21
+    TabStop = False
+    DataField = 'CD_FAIXACOMISSAO'
+    DataSource = SCRM
+    Enabled = False
+    TabOrder = 8
+  end
+  object edtDS_FAIXACOMISSAO: TDBEdit
+    Left = 236
+    Top = 116
+    Width = 250
+    Height = 21
+    TabStop = False
+    DataField = 'DS_FAIXACOMISSAO'
+    DataSource = SCRM
+    Enabled = False
+    TabOrder = 9
+  end
   object QCRM: TFDQuery
     Connection = DMBanco.con
     SQL.Strings = (
       'SELECT'
       'CRM.*,'
-      'CLIENTE.NM_CLIENTE'
+      'CLIENTE.NM_CLIENTE,'
+      'FAIXACOMISSAO.DS_FAIXACOMISSAO'
       ''
       'FROM'
       'CRM'
       ''
       'LEFT JOIN CLIENTE ON'
       'CLIENTE.CD_CLIENTE = CRM.CD_CLIENTE'
+      ''
+      'LEFT JOIN FAIXACOMISSAO ON'
+      'FAIXACOMISSAO.CD_FAIXACOMISSAO = CRM.CD_FAIXACOMISSAO'
       ''
       'WHERE'
       'CRM.CD_CRM = :CD_CRM')
@@ -322,6 +363,19 @@ object FCad_CRM: TFCad_CRM
       FieldName = 'DT_ATUALIZACAO'
       Origin = 'DT_ATUALIZACAO'
     end
+    object QCRMCD_FAIXACOMISSAO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_FAIXACOMISSAO'
+      Origin = 'CD_FAIXACOMISSAO'
+    end
+    object QCRMDS_FAIXACOMISSAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DS_FAIXACOMISSAO'
+      Origin = 'DS_FAIXACOMISSAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
   end
   object SCRM: TDataSource
     DataSet = TCRM
@@ -366,6 +420,7 @@ object FCad_CRM: TFCad_CRM
     end
     object TCRMVL_CREDITO: TFloatField
       FieldName = 'VL_CREDITO'
+      OnChange = TCRMVL_CREDITOChange
       DisplayFormat = '#0.00'
     end
     object TCRMDT_ATUALIZACAO: TDateTimeField
@@ -373,6 +428,13 @@ object FCad_CRM: TFCad_CRM
     end
     object TCRMDT_CADASTRO: TDateTimeField
       FieldName = 'DT_CADASTRO'
+    end
+    object TCRMCD_FAIXACOMISSAO: TIntegerField
+      FieldName = 'CD_FAIXACOMISSAO'
+    end
+    object TCRMDS_FAIXACOMISSAO: TStringField
+      FieldName = 'DS_FAIXACOMISSAO'
+      Size = 50
     end
   end
   object actlst: TActionList
@@ -387,6 +449,53 @@ object FCad_CRM: TFCad_CRM
       Caption = 'ACT_F6'
       ShortCut = 117
       OnExecute = btnCancelarClick
+    end
+  end
+  object QFaixaComissao: TFDQuery
+    Connection = DMBanco.con
+    SQL.Strings = (
+      'SELECT'
+      'FAIXACOMISSAO.*'
+      ''
+      'FROM'
+      'FAIXACOMISSAO'
+      ''
+      'WHERE'
+      'FAIXACOMISSAO.VL_MINIMO <= :VL_CREDITO AND'
+      'FAIXACOMISSAO.VL_MAXIMO >= :VL_CREDITO')
+    Left = 8
+    Top = 72
+    ParamData = <
+      item
+        Name = 'VL_CREDITO'
+        DataType = ftFloat
+        ParamType = ptInput
+        Value = Null
+      end>
+    object QFaixaComissaoCD_FAIXACOMISSAO: TFDAutoIncField
+      FieldName = 'CD_FAIXACOMISSAO'
+      Origin = 'CD_FAIXACOMISSAO'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object QFaixaComissaoDS_FAIXACOMISSAO: TStringField
+      FieldName = 'DS_FAIXACOMISSAO'
+      Origin = 'DS_FAIXACOMISSAO'
+      Required = True
+      Size = 50
+    end
+    object QFaixaComissaoVL_MINIMO: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VL_MINIMO'
+      Origin = 'VL_MINIMO'
+      Precision = 20
+      Size = 6
+    end
+    object QFaixaComissaoVL_MAXIMO: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VL_MAXIMO'
+      Origin = 'VL_MAXIMO'
+      Precision = 20
+      Size = 6
     end
   end
 end
