@@ -23,7 +23,8 @@ uses
   DM_Funcoes.Consulta in '..\Comum\DM_Funcoes.Consulta.pas' {DMFuncoesConsulta: TDataModule},
   Consulta_Funcionario in '..\P_Funcionario\Consulta_Funcionario.pas' {FConsulta_Funcionario},
   Cad_ConfgBanco in '..\Banco\Cad_ConfgBanco.pas' {FCad_ConfigBanco},
-  DM_CRM in '..\CRM\DM_CRM.pas' {DMCRM: TDataModule};
+  DM_CRM in '..\CRM\DM_CRM.pas' {DMCRM: TDataModule},
+  Constantes in '..\Comum\Constantes.pas';
 
 {$R *.res}
 

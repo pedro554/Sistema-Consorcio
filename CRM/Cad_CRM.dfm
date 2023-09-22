@@ -162,7 +162,6 @@ object FCad_CRM: TFCad_CRM
     Height = 41
     Align = alBottom
     TabOrder = 12
-    ExplicitTop = 237
     object btnGravar: TSpeedButton
       Left = 195
       Top = 10
@@ -196,12 +195,12 @@ object FCad_CRM: TFCad_CRM
       'FECHADO')
     TabOrder = 4
     Values.Strings = (
+      '0'
       '1'
       '2'
       '3'
       '4'
-      '5'
-      '6')
+      '5')
     ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
     ListSettings.OutfilteredValueFont.Color = clRed
     ListSettings.OutfilteredValueFont.Height = -11
@@ -415,11 +414,13 @@ object FCad_CRM: TFCad_CRM
       FieldName = 'CD_CRM'
     end
     object TCRMCD_CLIENTE: TIntegerField
+      DisplayLabel = 'Cliente'
       FieldName = 'CD_CLIENTE'
       Origin = 'CD_CLIENTE'
     end
     object TCRMCD_STATUS: TIntegerField
       AutoGenerateValue = arDefault
+      DisplayLabel = 'Status'
       FieldName = 'CD_STATUS'
       Origin = 'CD_STATUS'
     end
@@ -437,6 +438,7 @@ object FCad_CRM: TFCad_CRM
       Size = 50
     end
     object TCRMCD_FUNCIONARIO: TIntegerField
+      DisplayLabel = 'Vendedor'
       FieldName = 'CD_FUNCIONARIO'
     end
     object TCRMNM_FUNCIONARIO: TStringField
@@ -444,6 +446,7 @@ object FCad_CRM: TFCad_CRM
       Size = 50
     end
     object TCRMVL_CREDITO: TFloatField
+      DisplayLabel = 'Valor Cr'#233'dito'
       FieldName = 'VL_CREDITO'
       OnChange = TCRMVL_CREDITOChange
       DisplayFormat = '#0.00'

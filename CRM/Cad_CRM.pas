@@ -114,7 +114,7 @@ begin
     TCRM.Post;
   ValidaCampo(TCRMCD_CLIENTE);
   ValidaCampo(TCRMCD_FUNCIONARIO);
-  ValidaCampo(TCRMCD_STATUS);
+  ValidaCampo(TCRMCD_STATUS, False, True);
   ValidaCampo(TCRMVL_CREDITO);
   ValidaFaixaComissao;
 
@@ -183,6 +183,7 @@ end;
 procedure TFCad_CRM.TCRMAfterInsert(DataSet: TDataSet);
 begin
   TCRMTP_PARCELA.AsString := 'M';
+  TCRMCD_STATUS.AsInteger := 0;
 end;
 
 procedure TFCad_CRM.TCRMVL_CREDITOChange(Sender: TField);

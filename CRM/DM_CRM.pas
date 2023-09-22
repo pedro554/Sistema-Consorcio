@@ -44,6 +44,8 @@ type
     { Private declarations }
   public
     procedure FinalizaMovimento(const ACodMovimento: Integer);
+    function MontaTitle(ATexto: String): String;
+    function MontaDescricao(ATexto: String): String;
     { Public declarations }
   end;
 
@@ -53,7 +55,7 @@ var
 implementation
 
 uses
-  DM_Banco, Funcoes;
+  DM_Banco, Funcoes, Constantes;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -107,13 +109,23 @@ begin
     QComissaoParcelaCD_FAIXACOMISSAO.AsInteger  := QCRMCD_FAIXACOMISSAO.AsInteger;
     QComissaoParcelaCD_FUNCIONARIO.AsInteger    := QCRMCD_FUNCIONARIO.AsInteger;
     QComissaoParcelaCD_CLIENTE.AsInteger        := QCRMCD_CLIENTE.AsInteger;
-    QComissaoParcelaTP_PARCELA.AsString        := QCRMTP_PARCELA.AsString;
+    QComissaoParcelaTP_PARCELA.AsString         := QCRMTP_PARCELA.AsString;
     QComissaoParcela.Post;
     QFaixaComissaoParcela.Next;
     Inc(lvNrParcela);
   end;
 
   MyMessage('Movimento finalizado!');
+end;
+
+function TDMCRM.MontaTitle(ATexto: String): String;
+begin
+  Result := '<font color="' + C_COR_TITLE + '">' + ATexto  + '</font>';
+end;
+
+function TDMCRM.MontaDescricao(ATexto: String): String;
+begin
+  Result := '<font color="' + C_COR_DESCRICAO + '">' + ATexto  + '</font>';
 end;
 
 end.
