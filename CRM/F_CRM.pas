@@ -212,6 +212,11 @@ procedure TFCRM.btnAlterarClick(Sender: TObject);
 var
   FCadCRM: TFCad_CRM;
 begin
+  if FDatasetOrigem = nil then
+    Abort;
+
+  if FDatasetOrigem.IsEmpty then
+    Abort;
   FCadCRM := TFCad_CRM.Create(Self);
   try
     FCadCRM.Inicializa(FDatasetOrigem.FieldByName('CD_CRM').AsInteger);
@@ -224,6 +229,12 @@ end;
 
 procedure TFCRM.btnExcluirClick(Sender: TObject);
 begin
+  if FDatasetOrigem = nil then
+    Abort;
+
+  if FDatasetOrigem.IsEmpty then
+    Abort;
+
   QExcluiCRM.Close;
   QExcluiCRM.ParamByName('CD_CRM').AsInteger := FDatasetOrigem.FieldByName('CD_CRM').AsInteger;
   QExcluiCRM.ExecSQL;
