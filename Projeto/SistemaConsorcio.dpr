@@ -22,7 +22,8 @@ uses
   Consulta_Cliente in '..\Cliente\Consulta_Cliente.pas' {FConsulta_Cliente},
   DM_Funcoes.Consulta in '..\Comum\DM_Funcoes.Consulta.pas' {DMFuncoesConsulta: TDataModule},
   Consulta_Funcionario in '..\P_Funcionario\Consulta_Funcionario.pas' {FConsulta_Funcionario},
-  Cad_ConfgBanco in '..\Banco\Cad_ConfgBanco.pas' {FCad_ConfigBanco};
+  Cad_ConfgBanco in '..\Banco\Cad_ConfgBanco.pas' {FCad_ConfigBanco},
+  DM_CRM in '..\CRM\DM_CRM.pas' {DMCRM: TDataModule};
 
 {$R *.res}
 
@@ -34,7 +35,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFMenuPrincipal, FMenuPrincipal);
   Application.CreateForm(TDMBanco, DMBanco);
-
   Ini := TIniFile.Create(DiretorioSistema + '\cfgbanco.ini');
   if not DMBanco.Conectar(
     Ini.ReadString('banco', 'usuario', 'root'),

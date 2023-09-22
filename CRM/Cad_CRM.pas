@@ -72,12 +72,16 @@ type
     QFaixaComissaoVL_MINIMO: TFMTBCDField;
     QFaixaComissaoVL_MAXIMO: TFMTBCDField;
     QCRMDS_FAIXACOMISSAO: TStringField;
+    QCRMTP_PARCELA: TStringField;
+    TCRMTP_PARCELA: TStringField;
+    chkTP_PARCELA: TDBCheckBox;
     procedure FormDestroy(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnPsqClienteClick(Sender: TObject);
     procedure btnPsqFuncionarioClick(Sender: TObject);
     procedure TCRMVL_CREDITOChange(Sender: TField);
+    procedure TCRMAfterInsert(DataSet: TDataSet);
   private
     procedure CarregaCRM(ACodCRM: Integer);
     procedure ValidaFaixaComissao;
@@ -167,10 +171,18 @@ begin
   CarregaCRM(ACodCRM);
   TCRMVL_CREDITO.OnChange := nil;
   try
-    CopiaRegistro(QCRM, TCRM);
+    if QCRM.IsEmpty then
+      TCRM.Append
+    else
+      CopiaRegistro(QCRM, TCRM);
   finally
     TCRMVL_CREDITO.OnChange := TCRMVL_CREDITOChange;
   end;
+end;
+
+procedure TFCad_CRM.TCRMAfterInsert(DataSet: TDataSet);
+begin
+  TCRMTP_PARCELA.AsString := 'M';
 end;
 
 procedure TFCad_CRM.TCRMVL_CREDITOChange(Sender: TField);

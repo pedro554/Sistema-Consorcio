@@ -239,11 +239,15 @@ begin
     Abort;
   end;
 
-  if MyMessage('Deseja finalizar o movimento ' + FDatasetOrigem.FieldByName('CD_CRM').AsString + '?', 4) <> 6 then
+  if MyMessage('Deseja finalizar o movimento do Cliente ' +
+               FDatasetOrigem.FieldByName('NM_CLIENTE').AsString +
+               ' no valor de ' +
+               FormatFloat('#,0.00', FDatasetOrigem.FieldByName('VL_CREDITO').AsFloat) +
+               '?', 4) <> 6 then
     Abort;
 
+  DMCRM.FinalizaMovimento(FDatasetOrigem.FieldByName('CD_CRM').AsInteger);
   AtualizaStatus(C_FINALIZADO);
-  DMCRM.FinalizaMovimento(FDatasetOrigem);
 end;
 
 procedure TFCRM.btnNovoClick(Sender: TObject);

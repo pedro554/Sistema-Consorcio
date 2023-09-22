@@ -28,12 +28,11 @@ object FCRM: TFCRM
     Margins.Top = 5
     Margins.Right = 0
     Margins.Bottom = 0
-    HorzScrollBar.Position = 1254
     Align = alClient
     TabOrder = 1
     object pnl4: TPanel
       Tag = 2
-      Left = -866
+      Left = 388
       Top = 0
       Width = 388
       Height = 518
@@ -94,7 +93,7 @@ object FCRM: TFCRM
     end
     object pnl2: TPanel
       Tag = 3
-      Left = -478
+      Left = 776
       Top = 0
       Width = 388
       Height = 518
@@ -155,7 +154,7 @@ object FCRM: TFCRM
     end
     object pnl3: TPanel
       Tag = 4
-      Left = -90
+      Left = 1164
       Top = 0
       Width = 388
       Height = 518
@@ -216,7 +215,7 @@ object FCRM: TFCRM
     end
     object pnl6: TPanel
       Tag = 6
-      Left = 686
+      Left = 1940
       Top = 0
       Width = 388
       Height = 518
@@ -277,7 +276,7 @@ object FCRM: TFCRM
     end
     object pnl5: TPanel
       Tag = 5
-      Left = 298
+      Left = 1552
       Top = 0
       Width = 388
       Height = 518
@@ -328,8 +327,6 @@ object FCRM: TFCRM
         OnDragDrop = GridAbertoDragDrop
         OnDragOver = GridAbertoDragOver
         OnMouseDown = GridAbertoMouseDown
-        ExplicitLeft = 7
-        ExplicitTop = 38
         ColWidths = (
           240
           130)
@@ -340,7 +337,7 @@ object FCRM: TFCRM
     end
     object pnl1: TPanel
       Tag = 1
-      Left = -1254
+      Left = 0
       Top = 0
       Width = 388
       Height = 518

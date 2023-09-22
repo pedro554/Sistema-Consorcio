@@ -2,7 +2,7 @@ object FCad_CRM: TFCad_CRM
   Left = 0
   Top = 0
   Caption = 'Cadastro de Movimenta'#231#227'o'
-  ClientHeight = 278
+  ClientHeight = 296
   ClientWidth = 635
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -30,7 +30,7 @@ object FCad_CRM: TFCad_CRM
   end
   object lbl2: TLabel
     Left = 102
-    Top = 142
+    Top = 161
     Width = 41
     Height = 13
     Alignment = taRightJustify
@@ -148,21 +148,21 @@ object FCad_CRM: TFCad_CRM
   end
   object edtDS_OBS: TDBMemo
     Left = 149
-    Top = 139
+    Top = 158
     Width = 337
     Height = 89
     DataField = 'DS_OBS'
     DataSource = SCRM
-    TabOrder = 10
+    TabOrder = 11
   end
   object pnl1: TPanel
     Left = 0
-    Top = 237
+    Top = 255
     Width = 635
     Height = 41
     Align = alBottom
-    TabOrder = 11
-    ExplicitTop = 213
+    TabOrder = 12
+    ExplicitTop = 237
     object btnGravar: TSpeedButton
       Left = 195
       Top = 10
@@ -283,6 +283,24 @@ object FCad_CRM: TFCad_CRM
     Enabled = False
     TabOrder = 9
   end
+  object chkTP_PARCELA: TDBCheckBox
+    Left = 149
+    Top = 139
+    Width = 97
+    Height = 17
+    Caption = 'Meia Parcela'
+    DataField = 'TP_PARCELA'
+    DataSource = SCRM
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 10
+    ValueChecked = 'M'
+    ValueUnchecked = 'N'
+  end
   object QCRM: TFDQuery
     Connection = DMBanco.con
     SQL.Strings = (
@@ -376,6 +394,12 @@ object FCad_CRM: TFCad_CRM
       ReadOnly = True
       Size = 50
     end
+    object QCRMTP_PARCELA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TP_PARCELA'
+      Origin = 'TP_PARCELA'
+      Size = 1
+    end
   end
   object SCRM: TDataSource
     DataSet = TCRM
@@ -384,6 +408,7 @@ object FCad_CRM: TFCad_CRM
   end
   object TCRM: TJvMemoryData
     FieldDefs = <>
+    AfterInsert = TCRMAfterInsert
     Left = 40
     Top = 8
     object TCRMCD_CRM: TIntegerField
@@ -436,6 +461,10 @@ object FCad_CRM: TFCad_CRM
       FieldName = 'DS_FAIXACOMISSAO'
       Size = 50
     end
+    object TCRMTP_PARCELA: TStringField
+      FieldName = 'TP_PARCELA'
+      Size = 1
+    end
   end
   object actlst: TActionList
     Left = 40
@@ -476,6 +505,7 @@ object FCad_CRM: TFCad_CRM
       FieldName = 'CD_FAIXACOMISSAO'
       Origin = 'CD_FAIXACOMISSAO'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object QFaixaComissaoDS_FAIXACOMISSAO: TStringField
       FieldName = 'DS_FAIXACOMISSAO'
