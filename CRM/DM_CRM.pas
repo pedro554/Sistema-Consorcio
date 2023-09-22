@@ -104,7 +104,7 @@ begin
     QComissaoParcela.Append;
     QComissaoParcelaNR_PARCELA.AsInteger        := lvNrParcela;
     QComissaoParcelaPC_COMISSAO.AsFloat         := QFaixaComissaoParcelaPC_COMISSAO.AsFloat;
-    QComissaoParcelaVL_COMISSAO.AsFloat         := CalcularComissao(lvPercentualComissao, QCRMVL_CREDITO.AsFloat);
+    QComissaoParcelaVL_COMISSAO.AsFloat         := CalcularComissao(lvPercentualComissao, QCRMVL_CREDITO.AsFloat) / QFaixaComissaoParcela.RecordCount;
     QComissaoParcelaCD_CRM.AsFloat              := QCRMCD_CRM.AsInteger;
     QComissaoParcelaCD_FAIXACOMISSAO.AsInteger  := QCRMCD_FAIXACOMISSAO.AsInteger;
     QComissaoParcelaCD_FUNCIONARIO.AsInteger    := QCRMCD_FUNCIONARIO.AsInteger;
