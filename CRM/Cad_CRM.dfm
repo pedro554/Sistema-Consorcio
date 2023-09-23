@@ -306,7 +306,8 @@ object FCad_CRM: TFCad_CRM
       'SELECT'
       'CRM.*,'
       'CLIENTE.NM_CLIENTE,'
-      'FAIXACOMISSAO.DS_FAIXACOMISSAO'
+      'FAIXACOMISSAO.DS_FAIXACOMISSAO,'
+      'FUNCIONARIO.NM_FUNCIONARIO'
       ''
       'FROM'
       'CRM'
@@ -316,6 +317,9 @@ object FCad_CRM: TFCad_CRM
       ''
       'LEFT JOIN FAIXACOMISSAO ON'
       'FAIXACOMISSAO.CD_FAIXACOMISSAO = CRM.CD_FAIXACOMISSAO'
+      ''
+      'LEFT JOIN FUNCIONARIO ON'
+      'FUNCIONARIO.CD_FUNCIOnARIO = CRM.CD_FUNCIONARIO'
       ''
       'WHERE'
       'CRM.CD_CRM = :CD_CRM')
@@ -398,6 +402,14 @@ object FCad_CRM: TFCad_CRM
       FieldName = 'TP_PARCELA'
       Origin = 'TP_PARCELA'
       Size = 1
+    end
+    object QCRMNM_FUNCIONARIO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NM_FUNCIONARIO'
+      Origin = 'NM_FUNCIONARIO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
     end
   end
   object SCRM: TDataSource

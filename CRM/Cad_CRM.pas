@@ -75,6 +75,7 @@ type
     QCRMTP_PARCELA: TStringField;
     TCRMTP_PARCELA: TStringField;
     chkTP_PARCELA: TDBCheckBox;
+    QCRMNM_FUNCIONARIO: TStringField;
     procedure FormDestroy(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
