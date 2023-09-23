@@ -77,6 +77,7 @@ object FCRM: TFCRM
     ParentDoubleBuffered = False
     DoubleBuffered = True
     TabOrder = 1
+    OnDblClick = btnAlterarClick
     Columns = <
       item
         Name = 'KAberto'
