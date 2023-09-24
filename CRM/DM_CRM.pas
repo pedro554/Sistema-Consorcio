@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, DateUtils;
 
 type
   TDMCRM = class(TDataModule)
@@ -37,6 +37,8 @@ type
     QCRMCD_FAIXACOMISSAO: TIntegerField;
     QCRMDS_FAIXACOMISSAO: TStringField;
     QCRMTP_PARCELA: TStringField;
+    QComissaoParcelaNR_MESPAGAMENTO: TIntegerField;
+    QComissaoParcelaNR_ANOPAGAMENTO: TIntegerField;
   private
     procedure CarregaFaixaComissaoParcela(const AFaixa: Integer; const ATipoParcela: string);
     function CalcularComissao(const porcentagemComissao: Double; const valorVenda: Double): Double;
@@ -87,6 +89,7 @@ procedure TDMCRM.FinalizaMovimento(const ACodMovimento: Integer);
 var
   lvNrParcela: Integer;
   lvPercentualComissao: Double;
+  lvDataPagamento: TDateTime;
 begin
   CarregaMovimento(ACodMovimento);
   CarregaFaixaComissaoParcela(QCRMCD_FAIXACOMISSAO.AsInteger,
@@ -95,6 +98,7 @@ begin
   QComissaoParcela.Close;
   QComissaoParcela.Open;
   lvNrParcela := 1;
+  lvDataPagamento := Date;
 
   QFaixaComissaoParcela.First;
   while not QFaixaComissaoParcela.Eof do
@@ -110,9 +114,12 @@ begin
     QComissaoParcelaCD_FUNCIONARIO.AsInteger    := QCRMCD_FUNCIONARIO.AsInteger;
     QComissaoParcelaCD_CLIENTE.AsInteger        := QCRMCD_CLIENTE.AsInteger;
     QComissaoParcelaTP_PARCELA.AsString         := QCRMTP_PARCELA.AsString;
+    QComissaoParcelaNR_MESPAGAMENTO.AsInteger   := MonthOf(lvDataPagamento);
+    QComissaoParcelaNR_ANOPAGAMENTO.AsInteger   := YearOf(lvDataPagamento);
     QComissaoParcela.Post;
     QFaixaComissaoParcela.Next;
     Inc(lvNrParcela);
+    lvDataPagamento := IncMonth(lvDataPagamento);
   end;
 
   MyMessage('Movimento finalizado!');

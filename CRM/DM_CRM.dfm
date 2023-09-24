@@ -15,7 +15,7 @@ object DMCRM: TDMCRM
       'FAIXACOMISSAOPARCELA.CD_FAIXACOMISSAO = :CD_FAIXACOMISSAO AND'
       'FAIXACOMISSAOPARCELA.TP_PARCELA = :TP_PARCELA')
     Left = 88
-    Top = 56
+    Top = 64
     ParamData = <
       item
         Name = 'CD_FAIXACOMISSAO'
@@ -108,6 +108,16 @@ object DMCRM: TDMCRM
       Origin = 'TP_PARCELA'
       Required = True
       Size = 1
+    end
+    object QComissaoParcelaNR_MESPAGAMENTO: TIntegerField
+      FieldName = 'NR_MESPAGAMENTO'
+      Origin = 'NR_MESPAGAMENTO'
+      Required = True
+    end
+    object QComissaoParcelaNR_ANOPAGAMENTO: TIntegerField
+      FieldName = 'NR_ANOPAGAMENTO'
+      Origin = 'NR_ANOPAGAMENTO'
+      Required = True
     end
   end
   object QCRM: TFDQuery
