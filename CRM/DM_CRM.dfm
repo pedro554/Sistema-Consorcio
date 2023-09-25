@@ -119,6 +119,11 @@ object DMCRM: TDMCRM
       Origin = 'NR_ANOPAGAMENTO'
       Required = True
     end
+    object QComissaoParcelaDT_PAGAMENTO: TIntegerField
+      FieldName = 'DT_PAGAMENTO'
+      Origin = 'DT_PAGAMENTO'
+      Required = True
+    end
   end
   object QCRM: TFDQuery
     Connection = DMBanco.con

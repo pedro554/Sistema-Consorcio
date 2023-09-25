@@ -28,12 +28,16 @@ type
     CRM1: TMenuItem;
     Configurao1: TMenuItem;
     BancodeDados1: TMenuItem;
+    Relatrios1: TMenuItem;
+    Comisso1: TMenuItem;
+    RelatriodePagamentodeComisso1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure MVendedorFuncionarioClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure MFaixaComissaoClick(Sender: TObject);
     procedure CRM1Click(Sender: TObject);
     procedure BancodeDados1Click(Sender: TObject);
+    procedure RelatriodePagamentodeComisso1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,7 +48,8 @@ var
   FMenuPrincipal: TFMenuPrincipal;
 
 implementation
-uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao, F_CRM, Cad_ConfgBanco;
+uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao, F_CRM, Cad_ConfgBanco,
+F_FiltroRelComissao;
 
 {$R *.dfm}
 
@@ -86,6 +91,14 @@ var
   AForm: TFFuncionario;
 begin
   AbreForm(TFFuncionario, TObject(AForm));
+end;
+
+procedure TFMenuPrincipal.RelatriodePagamentodeComisso1Click(
+  Sender: TObject);
+var
+  AForm: TFFaixaComissao;
+begin
+  AbreForm(TFFiltroRelComissao, TObject(AForm));
 end;
 
 end.

@@ -24,7 +24,9 @@ uses
   Consulta_Funcionario in '..\P_Funcionario\Consulta_Funcionario.pas' {FConsulta_Funcionario},
   Cad_ConfgBanco in '..\Banco\Cad_ConfgBanco.pas' {FCad_ConfigBanco},
   DM_CRM in '..\CRM\DM_CRM.pas' {DMCRM: TDataModule},
-  Constantes in '..\Comum\Constantes.pas';
+  Constantes in '..\Comum\Constantes.pas',
+  DM_RelComissaoPagar in '..\Comissao\DM_RelComissaoPagar.pas' {DMRelComissaoPagar: TDataModule},
+  F_FiltroRelComissao in '..\Comissao\F_FiltroRelComissao.pas' {FFiltroRelComissao};
 
 {$R *.res}
 

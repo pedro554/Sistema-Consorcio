@@ -2,7 +2,7 @@ unit Funcoes;
 
 interface
 uses
-  Data.DB, Vcl.Dialogs, Vcl.Forms, Variaveis_Sistema, Winapi.Windows, System.SysUtils;
+  Data.DB, Vcl.Dialogs, Vcl.Forms, Variaveis_Sistema, Winapi.Windows, System.SysUtils, DateUtils;
 
 procedure CopiaRegistro(AOrigem, ADestino: TDataSet; AAppend: Boolean = True; APost: Boolean = True);
 procedure CopiaTabela(AOrigem, ADestino: TDataSet);
@@ -15,8 +15,20 @@ procedure FiltraMarcado(ADataset: TDataSet);
 procedure RemoveFiltroTabela(ADataset: TDataSet);
 function DiretorioSistema: String;
 procedure AbreForm(AClasse: TFormClass; AVarForm: TObject);
+function  AnoMesCalc(Mes, Ano: Integer): Integer; overload;
+function  AnoMesCalc(Data: TDateTime): Integer; overload;
 
 implementation
+
+function AnoMesCalc(Mes, Ano: Integer): Integer;
+begin
+  Result := (Ano * 12) + Mes;
+end;
+
+function AnoMesCalc(Data: TDateTime): Integer;
+begin
+  Result := (YearOf(Data) * 12) + MonthOf(Data);
+end;
 
 procedure AbreForm(AClasse: TFormClass; AVarForm: TObject);
 begin

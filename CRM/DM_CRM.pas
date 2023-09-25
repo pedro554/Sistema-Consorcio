@@ -39,6 +39,7 @@ type
     QCRMTP_PARCELA: TStringField;
     QComissaoParcelaNR_MESPAGAMENTO: TIntegerField;
     QComissaoParcelaNR_ANOPAGAMENTO: TIntegerField;
+    QComissaoParcelaDT_PAGAMENTO: TIntegerField;
   private
     procedure CarregaFaixaComissaoParcela(const AFaixa: Integer; const ATipoParcela: string);
     function CalcularComissao(const porcentagemComissao: Double; const valorVenda: Double): Double;
@@ -116,6 +117,7 @@ begin
     QComissaoParcelaTP_PARCELA.AsString         := QCRMTP_PARCELA.AsString;
     QComissaoParcelaNR_MESPAGAMENTO.AsInteger   := MonthOf(lvDataPagamento);
     QComissaoParcelaNR_ANOPAGAMENTO.AsInteger   := YearOf(lvDataPagamento);
+    QComissaoParcelaDT_PAGAMENTO.AsInteger      := AnoMesCalc(lvDataPagamento);
     QComissaoParcela.Post;
     QFaixaComissaoParcela.Next;
     Inc(lvNrParcela);
