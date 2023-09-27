@@ -179,6 +179,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
       item
         Expanded = False
         FieldName = 'VL_CREDITO'
+        ReadOnly = True
         Title.Caption = 'Valor Cr'#233'dito'
         Width = 84
         Visible = True
@@ -186,6 +187,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
       item
         Expanded = False
         FieldName = 'NM_CLIENTE'
+        ReadOnly = True
         Title.Caption = 'Cliente'
         Width = 204
         Visible = True
