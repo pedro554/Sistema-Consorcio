@@ -49,6 +49,13 @@ object FMenuPrincipal: TFMenuPrincipal
       Caption = 'CRM'
       OnClick = CRM1Click
     end
+    object Manuteno1: TMenuItem
+      Caption = 'Manuten'#231#227'o'
+      object ManutenodeComisses1: TMenuItem
+        Caption = 'Manuten'#231#227'o de Comiss'#245'es'
+        OnClick = ManutenodeComisses1Click
+      end
+    end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios'
       object Comisso1: TMenuItem

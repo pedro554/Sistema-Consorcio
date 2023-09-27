@@ -170,6 +170,10 @@
             <Form>FFiltroRelComissao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Comissao\Cad_ManutComissao.pas">
+            <Form>FCad_ManutComissao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -31,6 +31,8 @@ type
     Relatrios1: TMenuItem;
     Comisso1: TMenuItem;
     RelatriodePagamentodeComisso1: TMenuItem;
+    Manuteno1: TMenuItem;
+    ManutenodeComisses1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure MVendedorFuncionarioClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -38,6 +40,7 @@ type
     procedure CRM1Click(Sender: TObject);
     procedure BancodeDados1Click(Sender: TObject);
     procedure RelatriodePagamentodeComisso1Click(Sender: TObject);
+    procedure ManutenodeComisses1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,7 +52,7 @@ var
 
 implementation
 uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao, F_CRM, Cad_ConfgBanco,
-F_FiltroRelComissao;
+F_FiltroRelComissao, Cad_ManutComissao;
 
 {$R *.dfm}
 
@@ -77,6 +80,13 @@ end;
 procedure TFMenuPrincipal.FormCreate(Sender: TObject);
 begin
   stat.Panels.Items[0].Text := 'Versão: ' + IntToStr(VAR_VERSAO);
+end;
+
+procedure TFMenuPrincipal.ManutenodeComisses1Click(Sender: TObject);
+var
+  AForm: TFFaixaComissao;
+begin
+  AbreForm(TFCad_ManutComissao, TObject(AForm));
 end;
 
 procedure TFMenuPrincipal.MFaixaComissaoClick(Sender: TObject);

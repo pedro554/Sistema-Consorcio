@@ -26,7 +26,8 @@ uses
   DM_CRM in '..\CRM\DM_CRM.pas' {DMCRM: TDataModule},
   Constantes in '..\Comum\Constantes.pas',
   DM_RelComissaoPagar in '..\Comissao\DM_RelComissaoPagar.pas' {DMRelComissaoPagar: TDataModule},
-  F_FiltroRelComissao in '..\Comissao\F_FiltroRelComissao.pas' {FFiltroRelComissao};
+  F_FiltroRelComissao in '..\Comissao\F_FiltroRelComissao.pas' {FFiltroRelComissao},
+  Cad_ManutComissao in '..\Comissao\Cad_ManutComissao.pas' {FCad_ManutComissao};
 
 {$R *.res}
 
