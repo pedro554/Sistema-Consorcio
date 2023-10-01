@@ -14,6 +14,7 @@ object FMenuPrincipal: TFMenuPrincipal
   OldCreateOrder = False
   WindowState = wsMaximized
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object stat: TStatusBar
@@ -25,7 +26,17 @@ object FMenuPrincipal: TFMenuPrincipal
       item
         Text = 'Vers'#227'o'
         Width = 200
+      end
+      item
+        Text = 'CPF/CNPJ:'
+        Width = 200
+      end
+      item
+        Text = 'Validade:'
+        Width = 200
       end>
+    ExplicitLeft = 280
+    ExplicitTop = 472
   end
   object mm: TMainMenu
     Left = 184

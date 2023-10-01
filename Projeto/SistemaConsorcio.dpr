@@ -27,12 +27,14 @@ uses
   Constantes in '..\Comum\Constantes.pas',
   DM_RelComissaoPagar in '..\Comissao\DM_RelComissaoPagar.pas' {DMRelComissaoPagar: TDataModule},
   F_FiltroRelComissao in '..\Comissao\F_FiltroRelComissao.pas' {FFiltroRelComissao},
-  Cad_ManutComissao in '..\Comissao\Cad_ManutComissao.pas' {FCad_ManutComissao};
+  Cad_ManutComissao in '..\Comissao\Cad_ManutComissao.pas' {FCad_ManutComissao},
+  Cad_Empresa in '..\Empresa\Cad_Empresa.pas' {FCad_Empresa};
 
 {$R *.res}
 
 var
   Ini: TIniFile;
+  lvMsgErro: String;
 
 begin
   Application.Initialize;
@@ -49,6 +51,12 @@ begin
     Application.Terminate;
   end;
   Ini.Free;
+
+  if not DMBanco.ValidaValidadeSistema(lvMsgErro) then
+  begin
+    MyMessage(lvMsgErro);
+    Application.Terminate;
+  end;
 
   Application.CreateForm(TDMFuncoesConsulta, DMFuncoesConsulta);
   Application.Run;

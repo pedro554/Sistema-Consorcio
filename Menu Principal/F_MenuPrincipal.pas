@@ -33,7 +33,6 @@ type
     RelatriodePagamentodeComisso1: TMenuItem;
     Manuteno1: TMenuItem;
     ManutenodeComisses1: TMenuItem;
-    procedure FormCreate(Sender: TObject);
     procedure MVendedorFuncionarioClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure MFaixaComissaoClick(Sender: TObject);
@@ -41,6 +40,7 @@ type
     procedure BancodeDados1Click(Sender: TObject);
     procedure RelatriodePagamentodeComisso1Click(Sender: TObject);
     procedure ManutenodeComisses1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,9 +77,11 @@ begin
   AbreForm(TFCRM, TObject(AForm));
 end;
 
-procedure TFMenuPrincipal.FormCreate(Sender: TObject);
+procedure TFMenuPrincipal.FormShow(Sender: TObject);
 begin
   stat.Panels.Items[0].Text := 'Versão: ' + IntToStr(VAR_VERSAO);
+  stat.Panels.Items[1].Text := 'CPF/CNPJ: ' + VAR_CPFCNPJ;
+  stat.Panels.Items[2].Text := 'Validade: ' + VAR_VALIDADE;
 end;
 
 procedure TFMenuPrincipal.ManutenodeComisses1Click(Sender: TObject);

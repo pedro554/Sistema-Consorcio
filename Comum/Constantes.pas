@@ -21,6 +21,12 @@ const
   C_COR_TITLE: String = 'clWindowText';
   C_COR_DESCRICAO: String = 'clWindowText';
 
+  C_USUARIOBANCOVALIDADE: String = 'root';
+  C_SENHABANCOVALIDADE: String = 'spsg91g8';
+  C_HOSTBANCOVALIDADE: String = 'localhost';
+  C_PORTABANCOVALIDADE: Integer = 3306;
+  C_NOMEBANCOVALIDADE: String = 'sistema_validade';
+
 implementation
 
 end.

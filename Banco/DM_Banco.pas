@@ -6,17 +6,25 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
-  Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL;
+  Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet;
 
 type
   TDMBanco = class(TDataModule)
     con: TFDConnection;
     driver: TFDPhysMySQLDriverLink;
+    conValidade: TFDConnection;
+    QValidade: TFDQuery;
+    QEmpresa: TFDQuery;
+    QValidadeDT_VALIDADE: TDateTimeField;
+    QEmpresaNR_CPFCNPJ: TStringField;
   private
     { Private declarations }
   public
     function SequenciaTabela(ATabela: String): Integer;
     function Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
+    function ValidaValidadeSistema(out AMsg: String): Boolean;
     { Public declarations }
   end;
 
@@ -24,7 +32,7 @@ var
   DMBanco: TDMBanco;
 
 implementation
-uses Funcoes, Cad_ConfgBanco;
+uses Funcoes, Cad_ConfgBanco, Variaveis_Sistema, Constantes, Cad_Empresa;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -96,6 +104,83 @@ begin
       Result := -1;
   finally
     Query.Free;
+  end;
+end;
+
+function TDMBanco.ValidaValidadeSistema(out AMsg: String): Boolean;
+var
+  FCad_Empresa: TFCad_Empresa;
+  lvRecarregaQuery: Boolean;
+begin
+  lvRecarregaQuery := False;
+
+  if conValidade.Connected then
+    conValidade.Connected := False;
+
+  conValidade.Params.Clear;
+
+  conValidade.Params.DriverID := 'MySQL';
+  conValidade.Params.Database := C_NOMEBANCOVALIDADE;
+  conValidade.Params.UserName := C_USUARIOBANCOVALIDADE;
+  conValidade.Params.Values['Server'] := C_HOSTBANCOVALIDADE;
+  conValidade.Params.Password := C_SENHABANCOVALIDADE;
+
+  try
+    conValidade.Connected := True;
+  except
+    on e: exception do
+    begin
+      AMsg := 'Falha ao conectar no banco de dados para verificar a validade do sistema!' + #13#10 + e.message;
+      Result := False;
+      lvRecarregaQuery := True;
+      Exit;
+    end;
+  end;
+
+  QEmpresa.Close;
+  QEmpresa.Open;
+  VAR_CPFCNPJ := QEmpresaNR_CPFCNPJ.AsString;
+  try
+    QValidade.Close;
+    QValidade.ParamByName('NR_CPFCNPJ').AsString := VAR_CPFCNPJ;
+    QValidade.Open;
+
+    if QValidade.IsEmpty then
+    begin
+      FCad_Empresa := TFCad_Empresa.Create(nil);
+      try
+        if FCad_Empresa.ShowModal <> 1 then
+        begin
+          AMsg := 'É necessário cadastrar uma empresa para utilizar o sistema!';
+          Result := False;
+          Exit;
+        end;
+        lvRecarregaQuery := True;
+      finally
+        FCad_Empresa.Free;
+      end;
+    end;
+
+    if lvRecarregaQuery then
+    begin
+      QEmpresa.Close;
+      QEmpresa.Open;
+      VAR_CPFCNPJ := QEmpresaNR_CPFCNPJ.AsString;
+      QValidade.Close;
+      QValidade.ParamByName('NR_CPFCNPJ').AsString := VAR_CPFCNPJ;
+      QValidade.Open;
+    end;
+
+    VAR_VALIDADE := QValidadeDT_VALIDADE.AsString;
+    Result := not ((QValidadeDT_VALIDADE.AsDateTime < Date) or QValidade.IsEmpty);
+    AMsg := 'A ativação do sistema está vencida ou não foi encontrada, entre em contato com a empresa para renovar/ativar o sistema.';
+  except
+    on e: exception do
+    begin
+      AMsg := 'Falha ao verificar validade do sistema.' + #13#10 + e.Message;
+      Result := False;
+      Exit;
+    end;
   end;
 end;
 

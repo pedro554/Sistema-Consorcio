@@ -1,24 +1,36 @@
 unit Funcoes;
 
 interface
+
 uses
-  Data.DB, Vcl.Dialogs, Vcl.Forms, Variaveis_Sistema, Winapi.Windows, System.SysUtils, DateUtils;
+  Data.DB, Vcl.Dialogs, Vcl.Forms, Variaveis_Sistema, Winapi.Windows,
+  System.SysUtils, DateUtils, pcnAuxiliar, IpHlpApi, IpTypes, WinSock2;
 
 procedure CopiaRegistro(AOrigem, ADestino: TDataSet; AAppend: Boolean = True; APost: Boolean = True);
 procedure CopiaTabela(AOrigem, ADestino: TDataSet);
 procedure ValidaCampo(ACampo: TField; APermiteVazio: Boolean = False; APermiteZero: Boolean = False; APermiteMenorZero: Boolean = False);
-function MyMessage(AMsg: String; ABtn: Integer = 0): Integer;
+function MyMessage(AMsg: string; ABtn: Integer = 0): Integer;
 procedure ValidarCPF(const CPF: string);
 procedure ValidarCNPJ(const CNPJ: string);
 procedure SelecionaRegistroGrid(ADataset: TDataSet);
 procedure FiltraMarcado(ADataset: TDataSet);
 procedure RemoveFiltroTabela(ADataset: TDataSet);
-function DiretorioSistema: String;
+function DiretorioSistema: string;
 procedure AbreForm(AClasse: TFormClass; AVarForm: TObject);
-function  AnoMesCalc(Mes, Ano: Integer): Integer; overload;
-function  AnoMesCalc(Data: TDateTime): Integer; overload;
+function AnoMesCalc(Mes, Ano: Integer): Integer; overload;
+function AnoMesCalc(Data: TDateTime): Integer; overload;
+procedure ValidaCPFCNPJ(const ACPFCNPJ: string);
 
 implementation
+
+procedure ValidaCPFCNPJ(const ACPFCNPJ: string);
+begin
+  if not ValidarCNPJouCPF(ACPFCNPJ) then
+  begin
+    MyMessage('CPF / CNPJ inválido!');
+    Abort;
+  end;
+end;
 
 function AnoMesCalc(Mes, Ano: Integer): Integer;
 begin
@@ -40,7 +52,7 @@ begin
   end;
 end;
 
-function DiretorioSistema: String;
+function DiretorioSistema: string;
 begin
   Result := ExtractFileDir(Application.ExeName);
 end;
@@ -53,7 +65,7 @@ end;
 
 procedure FiltraMarcado(ADataset: TDataSet);
 begin
-  ADataSet.Filtered := False;
+  ADataset.Filtered := False;
   ADataset.Filter := 'ST_MARCADO="True"';
   ADataset.Filtered := True;
 end;
@@ -145,7 +157,7 @@ begin
   end;
 end;
 
-function MyMessage(AMsg: String; ABtn: Integer = 0): Integer;
+function MyMessage(AMsg: string; ABtn: Integer = 0): Integer;
 begin
   {
   MB_OK = 0;
@@ -161,34 +173,34 @@ end;
 procedure ValidaCampo(ACampo: TField; APermiteVazio: Boolean = False; APermiteZero: Boolean = False; APermiteMenorZero: Boolean = False);
 var
   lvValida: Boolean;
-  lvDisplayCampo: String;
+  lvDisplayCampo: string;
 begin
   lvValida := False;
   case ACampo.DataType of
     ftString, ftBlob, ftMemo:
-    begin
-      if not APermiteVazio then
-        lvValida := ACampo.AsString <> '';
-    end;
+      begin
+        if not APermiteVazio then
+          lvValida := ACampo.AsString <> '';
+      end;
     ftInteger:
-    begin
-      if not APermiteZero then
-        lvValida := ACampo.AsInteger > 0
-      else if not APermiteMenorZero then
-        lvValida := ACampo.AsInteger >= 0;
-    end;
+      begin
+        if not APermiteZero then
+          lvValida := ACampo.AsInteger > 0
+        else if not APermiteMenorZero then
+          lvValida := ACampo.AsInteger >= 0;
+      end;
     ftFloat, ftCurrency:
-    begin
-      if not APermiteZero then
-        lvValida := ACampo.AsFloat > 0
-      else if not APermiteMenorZero then
-        lvValida := ACampo.AsFloat >= 0;
-    end;
+      begin
+        if not APermiteZero then
+          lvValida := ACampo.AsFloat > 0
+        else if not APermiteMenorZero then
+          lvValida := ACampo.AsFloat >= 0;
+      end;
     ftDate, ftTime, ftDateTime, ftTimeStamp:
-    begin
-      if not APermiteVazio then
-        lvValida := ACampo.AsInteger <> 0
-    end;
+      begin
+        if not APermiteVazio then
+          lvValida := ACampo.AsInteger <> 0
+      end;
   end;
 
   lvDisplayCampo := ACampo.DisplayLabel;
@@ -212,7 +224,7 @@ end;
 procedure CopiaRegistro(AOrigem, ADestino: TDataSet; AAppend: Boolean = True; APost: Boolean = True);
 var
   I: Integer;
-  lvFieldName: String;
+  lvFieldName: string;
 begin
   if not ADestino.Active then
     ADestino.Open;
@@ -240,3 +252,4 @@ begin
 end;
 
 end.
+
