@@ -52,10 +52,18 @@ begin
   end;
   Ini.Free;
 
+  if not DMBanco.AtualizaBancoDeDados(lvMsgErro) then
+  begin
+    MyMessage(lvMsgErro);
+    Application.Terminate;
+    Exit;
+  end;
+
   if not DMBanco.ValidaValidadeSistema(lvMsgErro) then
   begin
     MyMessage(lvMsgErro);
     Application.Terminate;
+    Exit;
   end;
 
   Application.CreateForm(TDMFuncoesConsulta, DMFuncoesConsulta);

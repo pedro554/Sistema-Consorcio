@@ -4,7 +4,8 @@ interface
 
 uses
   Data.DB, Vcl.Dialogs, Vcl.Forms, Variaveis_Sistema, Winapi.Windows,
-  System.SysUtils, DateUtils, pcnAuxiliar, IpHlpApi, IpTypes, WinSock2;
+  System.SysUtils, DateUtils, pcnAuxiliar, IpHlpApi, IpTypes, WinSock2, JvMemoryDataset,
+  System.Win.ComObj, tlHelp32;
 
 procedure CopiaRegistro(AOrigem, ADestino: TDataSet; AAppend: Boolean = True; APost: Boolean = True);
 procedure CopiaTabela(AOrigem, ADestino: TDataSet);
@@ -20,8 +21,56 @@ procedure AbreForm(AClasse: TFormClass; AVarForm: TObject);
 function AnoMesCalc(Mes, Ano: Integer): Integer; overload;
 function AnoMesCalc(Data: TDateTime): Integer; overload;
 procedure ValidaCPFCNPJ(const ACPFCNPJ: string);
+function ExtraiNumeros(const AString: string): string;
+procedure OrdenarTabelaMemoriaPorCampo(ADataset: TJvMemoryData; campo: TField);
+function DelphiAberto: Boolean;
 
 implementation
+
+function DelphiAberto: Boolean;
+var
+  ContinueLoop: BOOL;
+  FSnapshotHandle: THandle;
+  FProcessEntry32: TProcessEntry32;
+begin
+  Result := False;
+
+  FSnapshotHandle := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  FProcessEntry32.dwSize := SizeOf(TProcessEntry32);
+  ContinueLoop := Process32First(FSnapshotHandle, FProcessEntry32);
+
+  while Integer(ContinueLoop) <> 0 do
+  begin
+    if (UpperCase(ExtractFileName(FProcessEntry32.szExeFile)) = UpperCase('bds.exe')) then
+    begin
+      Result := True;
+      Break;
+    end;
+    ContinueLoop := Process32Next(FSnapshotHandle, FProcessEntry32);
+  end;
+
+  CloseHandle(FSnapshotHandle);
+end;
+
+procedure OrdenarTabelaMemoriaPorCampo(ADataset: TJvMemoryData; campo: TField);
+begin
+  if not ADataset.Active then
+    Exit;
+
+  ADataset.SortOnFields(campo.FieldName);
+end;
+
+function ExtraiNumeros(const AString: string): string;
+var
+  i: Integer;
+begin
+  Result := '';
+  for i := 1 to Length(AString) do
+  begin
+    if AString[i] in ['0'..'9'] then
+      Result := Result + AString[i];
+  end;
+end;
 
 procedure ValidaCPFCNPJ(const ACPFCNPJ: string);
 begin

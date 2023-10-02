@@ -74,4 +74,37 @@ object DMBanco: TDMBanco
       Size = 14
     end
   end
+  object QAtualizacao: TFDQuery
+    Connection = con
+    SQL.Strings = (
+      'SELECT'
+      '*'
+      ''
+      'FROM'
+      'ATUALIZACAO')
+    Left = 168
+    Top = 200
+    object QAtualizacaoDT_ATUALIZACAO: TDateTimeField
+      FieldName = 'DT_ATUALIZACAO'
+      Origin = 'DT_ATUALIZACAO'
+      Required = True
+    end
+    object QAtualizacaoNR_VERSAO: TIntegerField
+      FieldName = 'NR_VERSAO'
+      Origin = 'NR_VERSAO'
+      Required = True
+    end
+  end
+  object TAtualizacao: TJvMemoryData
+    FieldDefs = <>
+    Left = 232
+    Top = 256
+    object TAtualizacaoDS_ARQUIVO: TStringField
+      FieldName = 'DS_ARQUIVO'
+      Size = 200
+    end
+    object TAtualizacaoNR_VERSAO: TIntegerField
+      FieldName = 'NR_VERSAO'
+    end
+  end
 end

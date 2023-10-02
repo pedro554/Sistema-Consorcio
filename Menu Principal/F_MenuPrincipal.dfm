@@ -35,8 +35,6 @@ object FMenuPrincipal: TFMenuPrincipal
         Text = 'Validade:'
         Width = 200
       end>
-    ExplicitLeft = 280
-    ExplicitTop = 472
   end
   object mm: TMainMenu
     Left = 184

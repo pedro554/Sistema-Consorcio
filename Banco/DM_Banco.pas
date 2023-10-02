@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet;
+  FireDAC.Comp.DataSet, JvMemoryDataset;
 
 type
   TDMBanco = class(TDataModule)
@@ -19,12 +19,19 @@ type
     QEmpresa: TFDQuery;
     QValidadeDT_VALIDADE: TDateTimeField;
     QEmpresaNR_CPFCNPJ: TStringField;
+    QAtualizacao: TFDQuery;
+    QAtualizacaoDT_ATUALIZACAO: TDateTimeField;
+    QAtualizacaoNR_VERSAO: TIntegerField;
+    TAtualizacao: TJvMemoryData;
+    TAtualizacaoDS_ARQUIVO: TStringField;
+    TAtualizacaoNR_VERSAO: TIntegerField;
   private
     { Private declarations }
   public
     function SequenciaTabela(ATabela: String): Integer;
     function Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
     function ValidaValidadeSistema(out AMsg: String): Boolean;
+    function AtualizaBancoDeDados(out AMsg: String): Boolean;
     { Public declarations }
   end;
 
@@ -39,6 +46,77 @@ uses Funcoes, Cad_ConfgBanco, Variaveis_Sistema, Constantes, Cad_Empresa;
 {$R *.dfm}
 
 { TDMBanco }
+
+function TDMBanco.AtualizaBancoDeDados(out AMsg: String): Boolean;
+var
+  searchResult: TSearchRec;
+  Query: TFDQuery;
+  lvSQL: TStringList;
+begin
+  Result := DelphiAberto;
+  QAtualizacao.Close;
+  QAtualizacao.Open;
+  TAtualizacao.Close;
+  TAtualizacao.Open;
+
+  if FindFirst(DiretorioSistema + '\bdatualizacao\*.sql', faAnyFile, searchResult) = 0 then
+  begin
+    try
+      repeat
+        if (searchResult.Name <> '.') and (searchResult.Name <> '..') then
+        begin
+          if StrToInt(ExtraiNumeros(searchResult.Name)) > QAtualizacaoNR_VERSAO.AsInteger then
+          begin
+            TAtualizacao.Append;
+            TAtualizacaoNR_VERSAO.AsString := ExtraiNumeros(searchResult.Name);
+            TAtualizacaoDS_ARQUIVO.AsString := DiretorioSistema + '\bdatualizacao\' + searchResult.Name;
+            TAtualizacao.Post;
+          end;
+        end;
+      until FindNext(searchResult) <> 0;
+    finally
+      FindClose(searchResult);
+    end;
+  end;
+
+  if TAtualizacao.IsEmpty then
+    Exit;
+
+  OrdenarTabelaMemoriaPorCampo(TAtualizacao, TAtualizacaoNR_VERSAO);
+
+  TAtualizacao.First;
+  try
+    Query := TFDQuery.Create(nil);
+    Query.Connection := con;
+    lvSQL := TStringList.Create;
+
+    while not TAtualizacao.Eof do
+    begin
+      lvSQL.LoadFromFile(TAtualizacaoDS_ARQUIVO.AsString);
+      try
+        Query.ExecSQL(lvSQL.Text);
+      except
+        on e: exception do
+        begin
+          if not DelphiAberto then
+          begin
+            AMsg := 'Falha ao atualizar banco de dados.' + #13#10 +
+                    'Nº Atualização: ' + TAtualizacaoNR_VERSAO.AsString + #13#10 +
+                    e.Message;
+            Exit;
+          end;
+        end;
+      end;
+      if not DelphiAberto then
+        DeleteFile(TAtualizacaoDS_ARQUIVO.AsString);
+      TAtualizacao.Next;
+    end;
+    Result := True;
+  finally
+    Query.Free;
+    lvSQL.Free;
+  end;
+end;
 
 function TDMBanco.Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
 var
