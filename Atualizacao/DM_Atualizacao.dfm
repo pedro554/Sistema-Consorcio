@@ -26,4 +26,20 @@ object DMAtualizacao: TDMAtualizacao
     Left = 160
     Top = 136
   end
+  object QVersao: TFDQuery
+    Connection = DMBanco.con
+    SQL.Strings = (
+      'SELECT'
+      '*'
+      ''
+      'FROM'
+      'VERSAO')
+    Left = 40
+    Top = 136
+    object QVersaoNR_VERSAOSISTEMA: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'NR_VERSAOSISTEMA'
+      Origin = 'NR_VERSAOSISTEMA'
+    end
+  end
 end

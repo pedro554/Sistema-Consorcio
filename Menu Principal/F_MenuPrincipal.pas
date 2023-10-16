@@ -54,7 +54,7 @@ var
 
 implementation
 uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao, F_CRM, Cad_ConfgBanco,
-F_FiltroRelComissao, Cad_ManutComissao, DM_Atualizacao;
+F_FiltroRelComissao, Cad_ManutComissao, DM_Atualizacao, DM_Banco;
 
 {$R *.dfm}
 
@@ -81,7 +81,7 @@ end;
 
 procedure TFMenuPrincipal.FormShow(Sender: TObject);
 begin
-  stat.Panels.Items[0].Text := 'Versão: ' + IntToStr(VAR_VERSAO);
+  stat.Panels.Items[0].Text := 'Versão: ' + DMBanco.RetornaVersaoSistema;
   stat.Panels.Items[1].Text := 'CPF/CNPJ: ' + VAR_CPFCNPJ;
   stat.Panels.Items[2].Text := 'Validade: ' + VAR_VALIDADE;
   ThreadAtualizacao.Start;
@@ -117,12 +117,17 @@ begin
 end;
 
 procedure TFMenuPrincipal.ThreadAtualizacaoRun(Sender: TIdThreadComponent);
+var
+  lvSucesso: Boolean;
 begin
+  lvSucesso := False;
   try
-  if DMAtualizacao.BaixarAtualizacao then
-    MyMessage('Atualização do sistema finalizada!');
+    if DMAtualizacao.BaixarAtualizacao then
+      lvSucesso := True;
   finally
     Sender.Terminate;
+    if lvSucesso then
+      MyMessage('Atualização finalizada com sucesso.');
   end;
 end;
 

@@ -27,6 +27,7 @@ type
     QAtualizacaoDS_COMANDO: TBlobField;
     QVersao: TFDQuery;
     QVersaoNR_VERSAOBANCO: TIntegerField;
+    QVersaoNR_VERSAOSISTEMA: TIntegerField;
   private
     function ConectarServidor(out AMsg: String): Boolean;
     { Private declarations }
@@ -35,6 +36,7 @@ type
     function Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
     function ValidaValidadeSistema(out AMsg: String): Boolean;
     function AtualizaBancoDeDados(out AMsg: String): Boolean;
+    function RetornaVersaoSistema: String;
     { Public declarations }
   end;
 
@@ -93,8 +95,6 @@ begin
     QAtualizacao.Next;
   end;
   {$ENDREGION}
-
-  VAR_VERSAO_BANCO := QVersaoNR_VERSAOBANCO.AsInteger;
 end;
 
 function TDMBanco.Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
@@ -171,6 +171,13 @@ begin
       Exit;
     end;
   end;
+end;
+
+function TDMBanco.RetornaVersaoSistema: String;
+begin
+  QVersao.Close;
+  QVersao.Open;
+  Result := QVersaoNR_VERSAOSISTEMA.AsString;
 end;
 
 function TDMBanco.SequenciaTabela(ATabela: String): Integer;

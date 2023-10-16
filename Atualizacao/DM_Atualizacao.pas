@@ -14,11 +14,14 @@ type
   TDMAtualizacao = class(TDataModule)
     ftpAtualizacao: TIdFTP;
     QVerificaAtualizacao: TFDQuery;
+    QVersao: TFDQuery;
+    QVersaoNR_VERSAOSISTEMA: TIntegerField;
     procedure DataModuleDestroy(Sender: TObject);
   private
     function ConectarServidorFTP(out AMsgErro: String): Boolean;
     procedure DesconectarFTP;
     function VerificaTemAtualizacao: Boolean;
+    procedure ConsultaVersao;
     { Private declarations }
   public
     function BaixarAtualizacao: Boolean;
@@ -59,6 +62,13 @@ begin
     RenameFile(DiretorioSistema + '\SistemaConsorcio.exe', DiretorioSistema + '\SistemaConsorcioOLD.exe');
     ftpAtualizacao.Get(C_DIRETORIOATUALIZACAO + 'SistemaConsorcio.exe', DiretorioSistema + '\SistemaConsorcio.exe', False);
     Result := True;
+
+    ConsultaVersao;
+    if not (QVersao.State in [dsEdit, dsInsert]) then
+      QVersao.Edit;
+
+    QVersaoNR_VERSAOSISTEMA.AsInteger := QVerificaAtualizacao.FieldByName('NR_VERSAO').AsInteger;
+    QVersao.Post;
   finally
     DesconectarFTP;
   end;
@@ -87,6 +97,12 @@ begin
   end;
 end;
 
+procedure TDMAtualizacao.ConsultaVersao;
+begin
+  QVersao.Close;
+  QVersao.Open;
+end;
+
 procedure TDMAtualizacao.DataModuleDestroy(Sender: TObject);
 begin
   DesconectarFTP;
@@ -107,9 +123,17 @@ end;
 function TDMAtualizacao.VerificaTemAtualizacao: Boolean;
 begin
   try
+    ConsultaVersao;
+
+    if QVersao.IsEmpty then
+    begin
+      QVersao.Append;
+      QVersao.Post;
+    end;
+
     QVerificaAtualizacao.Close;
     QVerificaAtualizacao.Open;
-    Result := QVerificaAtualizacao.FieldByName('NR_VERSAO').AsInteger > VAR_VERSAO;
+    Result := QVerificaAtualizacao.FieldByName('NR_VERSAO').AsInteger > QVersaoNR_VERSAOSISTEMA.AsInteger;
   except
     on e: exception do
     begin

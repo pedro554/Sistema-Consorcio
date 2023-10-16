@@ -86,6 +86,7 @@ object FCad_Empresa: TFCad_Empresa
     end
   end
   object QEmpresa: TFDQuery
+    Connection = DMBanco.conServidor
     SQL.Strings = (
       'SELECT '
       'CLIENTE.*'

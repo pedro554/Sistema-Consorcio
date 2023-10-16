@@ -8,15 +8,11 @@ object DMBanco: TDMBanco
       'Password=spsg91g8'
       'User_Name=root'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Left = 56
     Top = 28
   end
   object driver: TFDPhysMySQLDriverLink
-    VendorLib = 
-      'D:\Projetos\Sistema-Consorcio\Projeto\Win32\Debug\lib\libmysql.d' +
-      'll'
     Left = 56
     Top = 84
   end
@@ -123,6 +119,11 @@ object DMBanco: TDMBanco
       FieldName = 'NR_VERSAOBANCO'
       Origin = 'NR_VERSAOBANCO'
       Required = True
+    end
+    object QVersaoNR_VERSAOSISTEMA: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'NR_VERSAOSISTEMA'
+      Origin = 'NR_VERSAOSISTEMA'
     end
   end
 end
