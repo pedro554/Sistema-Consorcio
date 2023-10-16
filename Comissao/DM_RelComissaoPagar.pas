@@ -43,6 +43,7 @@ type
     TComissaoNM_FUNCIONARIO: TStringField;
     QComissaoDT_PAGAMENTO: TIntegerField;
     TComissaoDT_PAGAMENTO: TIntegerField;
+    procedure DataModuleDestroy(Sender: TObject);
   private
     Param: TParametros;
     procedure CarregaDados;
@@ -56,6 +57,7 @@ var
   DMRelComissaoPagar: TDMRelComissaoPagar;
 
 implementation
+uses Constantes;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -69,6 +71,13 @@ begin
   QComissao.ParamByName('DT_INICIO').AsInteger := Param.DataInicio;
   QComissao.ParamByName('DT_FIM').AsInteger := Param.DataFim;
   QComissao.Open;
+
+  if QComissao.IsEmpty then
+  begin
+    MyMessage(C_NENHUM_REGISTRO);
+    Abort;
+  end;
+
   TComissao.Close;
   TComissao.Open;
 
@@ -90,6 +99,12 @@ begin
     TComissao.Post;
     QComissao.Next;
   end;
+end;
+
+procedure TDMRelComissaoPagar.DataModuleDestroy(Sender: TObject);
+begin
+  TComissao.Close;
+  QComissao.Close;
 end;
 
 procedure TDMRelComissaoPagar.Inicializa(ADatasetFiltro: TDataSet);

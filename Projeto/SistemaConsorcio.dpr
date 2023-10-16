@@ -28,7 +28,8 @@ uses
   DM_RelComissaoPagar in '..\Comissao\DM_RelComissaoPagar.pas' {DMRelComissaoPagar: TDataModule},
   F_FiltroRelComissao in '..\Comissao\F_FiltroRelComissao.pas' {FFiltroRelComissao},
   Cad_ManutComissao in '..\Comissao\Cad_ManutComissao.pas' {FCad_ManutComissao},
-  Cad_Empresa in '..\Empresa\Cad_Empresa.pas' {FCad_Empresa};
+  Cad_Empresa in '..\Empresa\Cad_Empresa.pas' {FCad_Empresa},
+  DM_Atualizacao in '..\Atualizacao\DM_Atualizacao.pas' {DMAtualizacao: TDataModule};
 
 {$R *.res}
 
@@ -52,6 +53,13 @@ begin
   end;
   Ini.Free;
 
+  if not DMBanco.ValidaValidadeSistema(lvMsgErro) then
+  begin
+    MyMessage(lvMsgErro);
+    Application.Terminate;
+    Exit;
+  end;
+
   if not DMBanco.AtualizaBancoDeDados(lvMsgErro) then
   begin
     MyMessage(lvMsgErro);
@@ -59,12 +67,8 @@ begin
     Exit;
   end;
 
-  if not DMBanco.ValidaValidadeSistema(lvMsgErro) then
-  begin
-    MyMessage(lvMsgErro);
-    Application.Terminate;
-    Exit;
-  end;
+  Application.CreateForm(TDMAtualizacao, DMAtualizacao);
+  DMAtualizacao.ExcluirExecutavelOLD;
 
   Application.CreateForm(TDMFuncoesConsulta, DMFuncoesConsulta);
   Application.Run;

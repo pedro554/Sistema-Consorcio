@@ -31,6 +31,8 @@ type
     TEmpresaNM_CLIENTE: TStringField;
     QEmpresaLocal: TFDQuery;
     QEmpresaLocalNR_CPFCNPJ: TStringField;
+    TEmpresaNR_MACADRESS: TStringField;
+    QEmpresaNR_MACADRESS: TStringField;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelarClick(Sender: TObject);
@@ -46,7 +48,7 @@ var
   FCad_Empresa: TFCad_Empresa;
 
 implementation
-uses Funcoes;
+uses Funcoes, Constantes;
 
 {$R *.dfm}
 
@@ -91,7 +93,8 @@ end;
 
 procedure TFCad_Empresa.TEmpresaAfterInsert(DataSet: TDataSet);
 begin
-  TEmpresaDT_VALIDADE.AsDateTime := Date + 3;
+  TEmpresaDT_VALIDADE.AsDateTime := Date + C_DIASVERSAOTESTE;
+  TEmpresaNR_MACADRESS.AsString := GetMacAddress;
 end;
 
 end.

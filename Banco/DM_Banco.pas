@@ -14,18 +14,21 @@ type
   TDMBanco = class(TDataModule)
     con: TFDConnection;
     driver: TFDPhysMySQLDriverLink;
-    conValidade: TFDConnection;
+    conServidor: TFDConnection;
     QValidade: TFDQuery;
     QEmpresa: TFDQuery;
     QValidadeDT_VALIDADE: TDateTimeField;
     QEmpresaNR_CPFCNPJ: TStringField;
     QAtualizacao: TFDQuery;
-    QAtualizacaoDT_ATUALIZACAO: TDateTimeField;
     QAtualizacaoNR_VERSAO: TIntegerField;
     TAtualizacao: TJvMemoryData;
     TAtualizacaoDS_ARQUIVO: TStringField;
     TAtualizacaoNR_VERSAO: TIntegerField;
+    QAtualizacaoDS_COMANDO: TBlobField;
+    QVersao: TFDQuery;
+    QVersaoNR_VERSAOBANCO: TIntegerField;
   private
+    function ConectarServidor(out AMsg: String): Boolean;
     { Private declarations }
   public
     function SequenciaTabela(ATabela: String): Integer;
@@ -49,73 +52,49 @@ uses Funcoes, Cad_ConfgBanco, Variaveis_Sistema, Constantes, Cad_Empresa;
 
 function TDMBanco.AtualizaBancoDeDados(out AMsg: String): Boolean;
 var
-  searchResult: TSearchRec;
   Query: TFDQuery;
-  lvSQL: TStringList;
 begin
-  Result := DelphiAberto;
+  Result := True;
+  QVersao.Close;
+  QVersao.Open;
+
+  if QVersao.IsEmpty then
+    QVersao.Append;
+
   QAtualizacao.Close;
+  QAtualizacao.ParamByName('NR_VERSAO').AsInteger := QVersaoNR_VERSAOBANCO.AsInteger;
   QAtualizacao.Open;
-  TAtualizacao.Close;
-  TAtualizacao.Open;
 
-  if FindFirst(DiretorioSistema + '\bdatualizacao\*.sql', faAnyFile, searchResult) = 0 then
+  {$REGION 'Looping atualizacao do banco de dados local'}
+  while not QAtualizacao.Eof do
   begin
-    try
-      repeat
-        if (searchResult.Name <> '.') and (searchResult.Name <> '..') then
-        begin
-          if StrToInt(ExtraiNumeros(searchResult.Name)) > QAtualizacaoNR_VERSAO.AsInteger then
-          begin
-            TAtualizacao.Append;
-            TAtualizacaoNR_VERSAO.AsString := ExtraiNumeros(searchResult.Name);
-            TAtualizacaoDS_ARQUIVO.AsString := DiretorioSistema + '\bdatualizacao\' + searchResult.Name;
-            TAtualizacao.Post;
-          end;
-        end;
-      until FindNext(searchResult) <> 0;
-    finally
-      FindClose(searchResult);
-    end;
-  end;
-
-  if TAtualizacao.IsEmpty then
-    Exit;
-
-  OrdenarTabelaMemoriaPorCampo(TAtualizacao, TAtualizacaoNR_VERSAO);
-
-  TAtualizacao.First;
-  try
     Query := TFDQuery.Create(nil);
-    Query.Connection := con;
-    lvSQL := TStringList.Create;
-
-    while not TAtualizacao.Eof do
-    begin
-      lvSQL.LoadFromFile(TAtualizacaoDS_ARQUIVO.AsString);
+    try
+      Query.Connection := con;
       try
-        Query.ExecSQL(lvSQL.Text);
+        Query.ExecSQL(QAtualizacaoDS_COMANDO.AsString);
+
+        if not (QVersao.State in [dsEdit, dsInsert]) then
+          QVersao.Edit;
+
+        QVersaoNR_VERSAOBANCO.AsInteger := QAtualizacaoNR_VERSAO.AsInteger;
+        QVersao.Post;
       except
         on e: exception do
         begin
-          if not DelphiAberto then
-          begin
-            AMsg := 'Falha ao atualizar banco de dados.' + #13#10 +
-                    'Nº Atualização: ' + TAtualizacaoNR_VERSAO.AsString + #13#10 +
-                    e.Message;
-            Exit;
-          end;
+          AMsg := 'Falha ao atualizar banco de dados.' + #13#10 + TratarMsgErroBanco(e.Message);
+          Result := False;
+          Exit;
         end;
       end;
-      if not DelphiAberto then
-        DeleteFile(TAtualizacaoDS_ARQUIVO.AsString);
-      TAtualizacao.Next;
+    finally
+      Query.Free;
     end;
-    Result := True;
-  finally
-    Query.Free;
-    lvSQL.Free;
+    QAtualizacao.Next;
   end;
+  {$ENDREGION}
+
+  VAR_VERSAO_BANCO := QVersaoNR_VERSAOBANCO.AsInteger;
 end;
 
 function TDMBanco.Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
@@ -134,6 +113,7 @@ begin
   con.Params.Password := 'spsg91g8';
   driver.VendorLib := DiretorioSistema + '\lib\libmysql.dll';
 
+  {$REGION 'Conectar ao banco de dados'}
   try
     con.Connected := True;
     Result := con.Connected;
@@ -159,6 +139,36 @@ begin
           FCad_ConfigBanco.Free;
         end;
       end;
+    end;
+  end;
+  {$ENDREGION}
+end;
+
+function TDMBanco.ConectarServidor(out AMsg: String): Boolean;
+begin
+  if conServidor.Connected then
+    conServidor.Connected := False;
+
+  conServidor.Params.Clear;
+  conServidor.Params.DriverID := 'MySQL';
+  conServidor.Params.Database := C_NOMEBANCOVALIDADE;
+  conServidor.Params.UserName := C_USUARIOBANCOVALIDADE;
+  conServidor.Params.Values['Server'] := C_HOSTBANCOVALIDADE;
+  conServidor.Params.Password := C_SENHABANCOVALIDADE;
+
+  try
+    conServidor.Connected := True;
+    Result := True;
+  except
+    on e: exception do
+    begin
+      AMsg := 'Falha ao conectar no banco de dados para verificar a validade do sistema!' +
+              #13#10#13#10 +
+              TratarMsgErroBanco(e.Message) +
+              #13#10#13#10 +
+              'Verifique se a VPN está conectada ou entre em contato com a empresa.';
+      Result := False;
+      Exit;
     end;
   end;
 end;
@@ -191,62 +201,47 @@ var
   lvRecarregaQuery: Boolean;
 begin
   lvRecarregaQuery := False;
+  if not ConectarServidor(AMsg) then
+    Exit;
 
-  if conValidade.Connected then
-    conValidade.Connected := False;
-
-  conValidade.Params.Clear;
-
-  conValidade.Params.DriverID := 'MySQL';
-  conValidade.Params.Database := C_NOMEBANCOVALIDADE;
-  conValidade.Params.UserName := C_USUARIOBANCOVALIDADE;
-  conValidade.Params.Values['Server'] := C_HOSTBANCOVALIDADE;
-  conValidade.Params.Password := C_SENHABANCOVALIDADE;
-
-  try
-    conValidade.Connected := True;
-  except
-    on e: exception do
-    begin
-      AMsg := 'Falha ao conectar no banco de dados para verificar a validade do sistema!' + #13#10 + e.message;
-      Result := False;
-      lvRecarregaQuery := True;
-      Exit;
-    end;
-  end;
-
+  {$REGION 'Verificar cadastro da empresa'}
   QEmpresa.Close;
   QEmpresa.Open;
+  if QEmpresa.IsEmpty then
+  begin
+    FCad_Empresa := TFCad_Empresa.Create(nil);
+    try
+      if FCad_Empresa.ShowModal <> 1 then
+      begin
+        AMsg := 'É necessário cadastrar uma empresa para utilizar o sistema!';
+        Result := False;
+        Exit;
+      end;
+      lvRecarregaQuery := True;
+    finally
+      FCad_Empresa.Free;
+    end;
+  end;
+  {$ENDREGION}
+
+  if lvRecarregaQuery then
+  begin
+    QEmpresa.Close;
+    QEmpresa.Open;
+  end;
   VAR_CPFCNPJ := QEmpresaNR_CPFCNPJ.AsString;
+
+  {$REGION 'Validar maquina/validade sistema'}
   try
     QValidade.Close;
-    QValidade.ParamByName('NR_CPFCNPJ').AsString := VAR_CPFCNPJ;
+    QValidade.ParamByName('NR_MACADRESS').AsString := GetMacAddress;
     QValidade.Open;
 
     if QValidade.IsEmpty then
     begin
-      FCad_Empresa := TFCad_Empresa.Create(nil);
-      try
-        if FCad_Empresa.ShowModal <> 1 then
-        begin
-          AMsg := 'É necessário cadastrar uma empresa para utilizar o sistema!';
-          Result := False;
-          Exit;
-        end;
-        lvRecarregaQuery := True;
-      finally
-        FCad_Empresa.Free;
-      end;
-    end;
-
-    if lvRecarregaQuery then
-    begin
-      QEmpresa.Close;
-      QEmpresa.Open;
-      VAR_CPFCNPJ := QEmpresaNR_CPFCNPJ.AsString;
-      QValidade.Close;
-      QValidade.ParamByName('NR_CPFCNPJ').AsString := VAR_CPFCNPJ;
-      QValidade.Open;
+      Result := False;
+      AMsg := 'Este computador não está cadastrado para utilizar o sistema. Entre em contato com a empresa!';
+      Exit;
     end;
 
     VAR_VALIDADE := QValidadeDT_VALIDADE.AsString;
@@ -260,6 +255,7 @@ begin
       Exit;
     end;
   end;
+  {$ENDREGION}
 end;
 
 end.

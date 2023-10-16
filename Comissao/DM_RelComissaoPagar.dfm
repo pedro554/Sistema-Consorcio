@@ -1,5 +1,6 @@
 object DMRelComissaoPagar: TDMRelComissaoPagar
   OldCreateOrder = False
+  OnDestroy = DataModuleDestroy
   Height = 385
   Width = 609
   object RelComissao: TfrxReport

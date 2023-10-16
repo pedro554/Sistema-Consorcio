@@ -68,9 +68,6 @@ object FCad_Empresa: TFCad_Empresa
     Height = 41
     Align = alBottom
     TabOrder = 2
-    ExplicitLeft = 232
-    ExplicitTop = 152
-    ExplicitWidth = 185
     object btnGravar: TSpeedButton
       Left = 195
       Top = 8
@@ -89,7 +86,6 @@ object FCad_Empresa: TFCad_Empresa
     end
   end
   object QEmpresa: TFDQuery
-    Connection = DMBanco.conValidade
     SQL.Strings = (
       'SELECT '
       'CLIENTE.*'
@@ -119,6 +115,10 @@ object FCad_Empresa: TFCad_Empresa
       Required = True
       Size = 50
     end
+    object QEmpresaNR_MACADRESS: TStringField
+      FieldName = 'NR_MACADRESS'
+      Size = 50
+    end
   end
   object SEmpresa: TDataSource
     DataSet = TEmpresa
@@ -146,6 +146,10 @@ object FCad_Empresa: TFCad_Empresa
       DisplayLabel = 'Nome / Raz'#227'o Social'
       FieldName = 'NM_CLIENTE'
       Origin = 'NM_CLIENTE'
+      Size = 50
+    end
+    object TEmpresaNR_MACADRESS: TStringField
+      FieldName = 'NR_MACADRESS'
       Size = 50
     end
   end

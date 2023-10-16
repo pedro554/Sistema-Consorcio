@@ -15,7 +15,7 @@ uses
   Vcl.Forms,
   Vcl.Dialogs,
   Vcl.ComCtrls,
-  Vcl.Menus;
+  Vcl.Menus, IdBaseComponent, IdThreadComponent;
 
 type
   TFMenuPrincipal = class(TFormulario)
@@ -33,6 +33,7 @@ type
     RelatriodePagamentodeComisso1: TMenuItem;
     Manuteno1: TMenuItem;
     ManutenodeComisses1: TMenuItem;
+    ThreadAtualizacao: TIdThreadComponent;
     procedure MVendedorFuncionarioClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure MFaixaComissaoClick(Sender: TObject);
@@ -41,6 +42,7 @@ type
     procedure RelatriodePagamentodeComisso1Click(Sender: TObject);
     procedure ManutenodeComisses1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ThreadAtualizacaoRun(Sender: TIdThreadComponent);
   private
     { Private declarations }
   public
@@ -52,7 +54,7 @@ var
 
 implementation
 uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao, F_CRM, Cad_ConfgBanco,
-F_FiltroRelComissao, Cad_ManutComissao;
+F_FiltroRelComissao, Cad_ManutComissao, DM_Atualizacao;
 
 {$R *.dfm}
 
@@ -82,6 +84,7 @@ begin
   stat.Panels.Items[0].Text := 'Versão: ' + IntToStr(VAR_VERSAO);
   stat.Panels.Items[1].Text := 'CPF/CNPJ: ' + VAR_CPFCNPJ;
   stat.Panels.Items[2].Text := 'Validade: ' + VAR_VALIDADE;
+  ThreadAtualizacao.Start;
 end;
 
 procedure TFMenuPrincipal.ManutenodeComisses1Click(Sender: TObject);
@@ -111,6 +114,16 @@ var
   AForm: TFFaixaComissao;
 begin
   AbreForm(TFFiltroRelComissao, TObject(AForm));
+end;
+
+procedure TFMenuPrincipal.ThreadAtualizacaoRun(Sender: TIdThreadComponent);
+begin
+  try
+  if DMAtualizacao.BaixarAtualizacao then
+    MyMessage('Atualização do sistema finalizada!');
+  finally
+    Sender.Terminate;
+  end;
 end;
 
 end.

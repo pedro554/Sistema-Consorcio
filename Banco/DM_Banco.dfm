@@ -20,19 +20,16 @@ object DMBanco: TDMBanco
     Left = 56
     Top = 84
   end
-  object conValidade: TFDConnection
+  object conServidor: TFDConnection
     Params.Strings = (
-      'Database=sistema_validade'
-      'Password=spsg91g8'
-      'User_Name=root'
+      'Server='
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Left = 168
     Top = 28
   end
   object QValidade: TFDQuery
-    Connection = conValidade
+    Connection = conServidor
     SQL.Strings = (
       'SELECT'
       '*'
@@ -41,15 +38,13 @@ object DMBanco: TDMBanco
       'CLIENTE'
       ''
       'WHERE '
-      'CLIENTE.NR_CPFCNPJ = :NR_CPFCNPJ')
+      'CLIENTE.NR_MACADRESS = :NR_MACADRESS')
     Left = 168
     Top = 88
     ParamData = <
       item
-        Name = 'NR_CPFCNPJ'
-        DataType = ftInteger
+        Name = 'NR_MACADRESS'
         ParamType = ptInput
-        Value = Null
       end>
     object QValidadeDT_VALIDADE: TDateTimeField
       FieldName = 'DT_VALIDADE'
@@ -75,24 +70,31 @@ object DMBanco: TDMBanco
     end
   end
   object QAtualizacao: TFDQuery
-    Connection = con
+    Connection = conServidor
     SQL.Strings = (
       'SELECT'
       '*'
       ''
       'FROM'
-      'ATUALIZACAO')
+      'ATUALIZACAO_BANCO'
+      ''
+      'WHERE'
+      'NR_VERSAO > :NR_VERSAO')
     Left = 168
     Top = 200
-    object QAtualizacaoDT_ATUALIZACAO: TDateTimeField
-      FieldName = 'DT_ATUALIZACAO'
-      Origin = 'DT_ATUALIZACAO'
-      Required = True
-    end
+    ParamData = <
+      item
+        Name = 'NR_VERSAO'
+        ParamType = ptInput
+      end>
     object QAtualizacaoNR_VERSAO: TIntegerField
       FieldName = 'NR_VERSAO'
       Origin = 'NR_VERSAO'
       Required = True
+    end
+    object QAtualizacaoDS_COMANDO: TBlobField
+      FieldName = 'DS_COMANDO'
+      Size = 1000
     end
   end
   object TAtualizacao: TJvMemoryData
@@ -105,6 +107,22 @@ object DMBanco: TDMBanco
     end
     object TAtualizacaoNR_VERSAO: TIntegerField
       FieldName = 'NR_VERSAO'
+    end
+  end
+  object QVersao: TFDQuery
+    Connection = con
+    SQL.Strings = (
+      'SELECT'
+      '*'
+      ''
+      'FROM'
+      'VERSAO')
+    Left = 40
+    Top = 136
+    object QVersaoNR_VERSAOBANCO: TIntegerField
+      FieldName = 'NR_VERSAOBANCO'
+      Origin = 'NR_VERSAOBANCO'
+      Required = True
     end
   end
 end

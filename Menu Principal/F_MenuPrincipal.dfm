@@ -83,4 +83,13 @@ object FMenuPrincipal: TFMenuPrincipal
       end
     end
   end
+  object ThreadAtualizacao: TIdThreadComponent
+    Active = False
+    Loop = False
+    Priority = tpNormal
+    StopMode = smTerminate
+    OnRun = ThreadAtualizacaoRun
+    Left = 360
+    Top = 88
+  end
 end

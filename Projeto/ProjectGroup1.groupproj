@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{AD7F978D-8D9B-4808-8ECA-B19A5F1C97CC}</ProjectGuid>
+        <ProjectGuid>{25725B5A-F689-4B2B-9FDE-0F532A3BE3C8}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
         <Projects Include="SistemaConsorcio.dproj">
