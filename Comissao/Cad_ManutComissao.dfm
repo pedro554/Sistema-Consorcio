@@ -2,7 +2,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
   Left = 0
   Top = 0
   Caption = 'Manuten'#231#227'o de Comiss'#245'es'
-  ClientHeight = 299
+  ClientHeight = 404
   ClientWidth = 803
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,144 +15,16 @@ object FCad_ManutComissao: TFCad_ManutComissao
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
-  object lbl5: TLabel
-    Left = 166
-    Top = 11
-    Width = 46
-    Height = 13
-    Alignment = taRightJustify
-    Caption = 'Vendedor'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-  end
-  object btnPsqFuncionario: TSpeedButton
-    Left = 561
-    Top = 8
-    Width = 23
-    Height = 21
-    Caption = '...'
-    OnClick = btnPsqFuncionarioClick
-  end
-  object lbl1: TLabel
-    Left = 161
-    Top = 34
-    Width = 51
-    Height = 13
-    Alignment = taRightJustify
-    Caption = 'Data Inicio'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-  end
-  object btnFiltrar: TSpeedButton
-    Left = 464
-    Top = 54
-    Width = 120
-    Height = 21
-    Caption = 'Filtrar'
-    OnClick = btnFiltrarClick
-  end
-  object lbl2: TLabel
-    Left = 170
-    Top = 57
-    Width = 42
-    Height = 13
-    Alignment = taRightJustify
-    Caption = 'Data Fim'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-  end
-  object edtCD_FUNCIONARIO: TDBEdit
-    Left = 218
-    Top = 8
-    Width = 81
-    Height = 21
-    TabStop = False
-    DataField = 'CD_FUNCIONARIO'
-    DataSource = SFiltro
-    Enabled = False
-    TabOrder = 0
-  end
-  object edtNM_FUNCIONARIO: TDBEdit
-    Left = 305
-    Top = 8
-    Width = 250
-    Height = 21
-    TabStop = False
-    DataField = 'NM_FUNCIONARIO'
-    DataSource = SFiltro
-    Enabled = False
-    TabOrder = 1
-  end
-  object NR_MESINICIO: TJvDBComboBox
-    Left = 218
-    Top = 31
-    Width = 121
-    Height = 21
-    DataField = 'NR_MESINICIO'
-    DataSource = SFiltro
-    Items.Strings = (
-      'JANEIRO'
-      'FEVEREIRO'
-      'MAR'#199'O'
-      'ABRIL'
-      'MAIO'
-      'JUNHO'
-      'JULHO'
-      'AGOSTO'
-      'SETEMBRO'
-      'OUTUBRO'
-      'NOVEMBRO'
-      'DEZEMBRO')
-    TabOrder = 2
-    Values.Strings = (
-      '1'
-      '2'
-      '3'
-      '4'
-      '5'
-      '6'
-      '7'
-      '8'
-      '9'
-      '10'
-      '11'
-      '12')
-    ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
-    ListSettings.OutfilteredValueFont.Color = clRed
-    ListSettings.OutfilteredValueFont.Height = -11
-    ListSettings.OutfilteredValueFont.Name = 'Tahoma'
-    ListSettings.OutfilteredValueFont.Style = []
-  end
-  object edtNR_ANOINICIO: TDBEdit
-    Left = 345
-    Top = 31
-    Width = 82
-    Height = 21
-    DataField = 'NR_ANOINICIO'
-    DataSource = SFiltro
-    TabOrder = 3
-  end
   object Grid1: TJvDBGrid
-    Left = 8
-    Top = 81
-    Width = 787
-    Height = 171
+    Left = 0
+    Top = 107
+    Width = 803
+    Height = 256
+    Align = alClient
     DataSource = SComissaoParcela
     DrawingStyle = gdsClassic
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 6
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -173,7 +45,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
         FieldName = 'NR_PARCELA'
         ReadOnly = True
         Title.Caption = 'N'#186' Parcela'
-        Width = 63
+        Width = 59
         Visible = True
       end
       item
@@ -181,7 +53,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
         FieldName = 'VL_CREDITO'
         ReadOnly = True
         Title.Caption = 'Valor Cr'#233'dito'
-        Width = 84
+        Width = 79
         Visible = True
       end
       item
@@ -189,7 +61,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
         FieldName = 'NM_CLIENTE'
         ReadOnly = True
         Title.Caption = 'Cliente'
-        Width = 204
+        Width = 192
         Visible = True
       end
       item
@@ -197,7 +69,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
         FieldName = 'PC_COMISSAO'
         ReadOnly = True
         Title.Caption = '%'
-        Width = 62
+        Width = 58
         Visible = True
       end
       item
@@ -205,7 +77,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
         FieldName = 'VL_COMISSAO'
         ReadOnly = True
         Title.Caption = 'Valor'
-        Width = 105
+        Width = 99
         Visible = True
       end
       item
@@ -216,7 +88,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
           'M'
           'N')
         Title.Caption = 'Tipo Parcela'
-        Width = 75
+        Width = 71
         Visible = True
       end
       item
@@ -224,7 +96,7 @@ object FCad_ManutComissao: TFCad_ManutComissao
         Expanded = False
         FieldName = 'NR_MESPAGAMENTO'
         Title.Caption = 'M'#234's Pag.'
-        Width = 67
+        Width = 63
         Visible = True
       end
       item
@@ -232,17 +104,29 @@ object FCad_ManutComissao: TFCad_ManutComissao
         Expanded = False
         FieldName = 'NR_ANOPAGAMENTO'
         Title.Caption = 'Ano Pag.'
-        Width = 103
+        Width = 98
+        Visible = True
+      end
+      item
+        Color = clCream
+        Expanded = False
+        FieldName = 'ST_ESTORNO'
+        PickList.Strings = (
+          'SIM'
+          'N'#195'O')
+        Title.Caption = 'Estorno'
+        Width = 59
         Visible = True
       end>
   end
   object pnl1: TPanel
     Left = 0
-    Top = 258
+    Top = 363
     Width = 803
     Height = 41
     Align = alBottom
-    TabOrder = 7
+    TabOrder = 2
+    ExplicitTop = 258
     object btnGravar: TSpeedButton
       Left = 278
       Top = 10
@@ -260,54 +144,235 @@ object FCad_ManutComissao: TFCad_ManutComissao
       OnClick = btnCancelarClick
     end
   end
-  object JvDBComboBox1: TJvDBComboBox
-    Left = 218
-    Top = 54
-    Width = 121
-    Height = 21
-    DataField = 'NR_MESFIM'
-    DataSource = SFiltro
-    Items.Strings = (
-      'JANEIRO'
-      'FEVEREIRO'
-      'MAR'#199'O'
-      'ABRIL'
-      'MAIO'
-      'JUNHO'
-      'JULHO'
-      'AGOSTO'
-      'SETEMBRO'
-      'OUTUBRO'
-      'NOVEMBRO'
-      'DEZEMBRO')
-    TabOrder = 4
-    Values.Strings = (
-      '1'
-      '2'
-      '3'
-      '4'
-      '5'
-      '6'
-      '7'
-      '8'
-      '9'
-      '10'
-      '11'
-      '12')
-    ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
-    ListSettings.OutfilteredValueFont.Color = clRed
-    ListSettings.OutfilteredValueFont.Height = -11
-    ListSettings.OutfilteredValueFont.Name = 'Tahoma'
-    ListSettings.OutfilteredValueFont.Style = []
-  end
-  object edtNR_MESINICIO: TDBEdit
-    Left = 345
-    Top = 54
-    Width = 82
-    Height = 21
-    DataField = 'NR_ANOFIM'
-    DataSource = SFiltro
-    TabOrder = 5
+  object pnl2: TPanel
+    Left = 0
+    Top = 0
+    Width = 803
+    Height = 107
+    Align = alTop
+    TabOrder = 0
+    object lbl5: TLabel
+      Left = 166
+      Top = 11
+      Width = 46
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Vendedor'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btnPsqFuncionario: TSpeedButton
+      Left = 561
+      Top = 8
+      Width = 23
+      Height = 21
+      Caption = '...'
+      OnClick = btnPsqFuncionarioClick
+    end
+    object lbl1: TLabel
+      Left = 161
+      Top = 57
+      Width = 51
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Data Inicio'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btnFiltrar: TSpeedButton
+      Left = 464
+      Top = 77
+      Width = 120
+      Height = 21
+      Caption = 'Filtrar'
+      OnClick = btnFiltrarClick
+    end
+    object lbl2: TLabel
+      Left = 170
+      Top = 80
+      Width = 42
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Data Fim'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl6: TLabel
+      Left = 179
+      Top = 34
+      Width = 33
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Cliente'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btnPsqCliente: TSpeedButton
+      Left = 561
+      Top = 31
+      Width = 23
+      Height = 21
+      Caption = '...'
+      OnClick = btnPsqClienteClick
+    end
+    object edtCD_FUNCIONARIO: TDBEdit
+      Left = 218
+      Top = 8
+      Width = 81
+      Height = 21
+      TabStop = False
+      DataField = 'CD_FUNCIONARIO'
+      DataSource = SFiltro
+      Enabled = False
+      TabOrder = 0
+    end
+    object edtNM_FUNCIONARIO: TDBEdit
+      Left = 305
+      Top = 8
+      Width = 250
+      Height = 21
+      TabStop = False
+      DataField = 'NM_FUNCIONARIO'
+      DataSource = SFiltro
+      Enabled = False
+      TabOrder = 1
+    end
+    object NR_MESINICIO: TJvDBComboBox
+      Left = 218
+      Top = 54
+      Width = 121
+      Height = 21
+      DataField = 'NR_MESINICIO'
+      DataSource = SFiltro
+      Items.Strings = (
+        'JANEIRO'
+        'FEVEREIRO'
+        'MAR'#199'O'
+        'ABRIL'
+        'MAIO'
+        'JUNHO'
+        'JULHO'
+        'AGOSTO'
+        'SETEMBRO'
+        'OUTUBRO'
+        'NOVEMBRO'
+        'DEZEMBRO')
+      TabOrder = 4
+      Values.Strings = (
+        '1'
+        '2'
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8'
+        '9'
+        '10'
+        '11'
+        '12')
+      ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+      ListSettings.OutfilteredValueFont.Color = clRed
+      ListSettings.OutfilteredValueFont.Height = -11
+      ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+      ListSettings.OutfilteredValueFont.Style = []
+    end
+    object edtNR_ANOINICIO: TDBEdit
+      Left = 345
+      Top = 54
+      Width = 82
+      Height = 21
+      DataField = 'NR_ANOINICIO'
+      DataSource = SFiltro
+      TabOrder = 5
+    end
+    object JvDBComboBox1: TJvDBComboBox
+      Left = 218
+      Top = 77
+      Width = 121
+      Height = 21
+      DataField = 'NR_MESFIM'
+      DataSource = SFiltro
+      Items.Strings = (
+        'JANEIRO'
+        'FEVEREIRO'
+        'MAR'#199'O'
+        'ABRIL'
+        'MAIO'
+        'JUNHO'
+        'JULHO'
+        'AGOSTO'
+        'SETEMBRO'
+        'OUTUBRO'
+        'NOVEMBRO'
+        'DEZEMBRO')
+      TabOrder = 6
+      Values.Strings = (
+        '1'
+        '2'
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8'
+        '9'
+        '10'
+        '11'
+        '12')
+      ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+      ListSettings.OutfilteredValueFont.Color = clRed
+      ListSettings.OutfilteredValueFont.Height = -11
+      ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+      ListSettings.OutfilteredValueFont.Style = []
+    end
+    object edtNR_MESINICIO: TDBEdit
+      Left = 345
+      Top = 77
+      Width = 82
+      Height = 21
+      DataField = 'NR_ANOFIM'
+      DataSource = SFiltro
+      TabOrder = 7
+    end
+    object edtCD_CLIENTE: TDBEdit
+      Left = 218
+      Top = 31
+      Width = 81
+      Height = 21
+      TabStop = False
+      DataField = 'CD_CLIENTE'
+      DataSource = SFiltro
+      Enabled = False
+      TabOrder = 2
+    end
+    object edtNM_CLIENTE: TDBEdit
+      Left = 305
+      Top = 31
+      Width = 250
+      Height = 21
+      TabStop = False
+      DataField = 'NM_CLIENTE'
+      DataSource = SFiltro
+      Enabled = False
+      TabOrder = 3
+    end
   end
   object TFiltro: TJvMemoryData
     FieldDefs = <>
@@ -337,6 +402,13 @@ object FCad_ManutComissao: TFCad_ManutComissao
     object TFiltroNR_ANOFIM: TIntegerField
       DisplayLabel = 'Ano Fim'
       FieldName = 'NR_ANOFIM'
+    end
+    object TFiltroCD_CLIENTE: TIntegerField
+      FieldName = 'CD_CLIENTE'
+    end
+    object TFiltroNM_CLIENTE: TStringField
+      FieldName = 'NM_CLIENTE'
+      Size = 50
     end
   end
   object SFiltro: TDataSource
@@ -472,6 +544,10 @@ object FCad_ManutComissao: TFCad_ManutComissao
       ProviderFlags = []
       ReadOnly = True
       Size = 50
+    end
+    object QComissaoParcelaST_ESTORNO: TStringField
+      FieldName = 'ST_ESTORNO'
+      Size = 3
     end
   end
   object SComissaoParcela: TDataSource
@@ -610,6 +686,10 @@ object FCad_ManutComissao: TFCad_ManutComissao
     object TComissaoParcelaNM_CLIENTE: TStringField
       FieldName = 'NM_CLIENTE'
       Size = 50
+    end
+    object TComissaoParcelaST_ESTORNO: TStringField
+      FieldName = 'ST_ESTORNO'
+      Size = 3
     end
   end
   object QFaixaComissaoParcela: TFDQuery

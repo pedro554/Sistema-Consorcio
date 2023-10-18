@@ -12,7 +12,7 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45194.608324618100000000
-    ReportOptions.LastChange = 45194.782255289350000000
+    ReportOptions.LastChange = 45217.323977280100000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -41,12 +41,122 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
       MirrorMode = []
-      object Header1: TfrxHeader
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897650000000000000
+        Top = 98.267780000000000000
+        Width = 718.110700000000000000
+        DataSet = SComissao
+        DataSetName = 'SComissao'
+        RowCount = 0
+        object Memo13: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Width = 313.700990000000000000
+          Height = 18.897650000000000000
+          DataField = 'NM_FUNCIONARIO'
+          DataSet = SComissao
+          DataSetName = 'SComissao'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftTop, ftBottom]
+          Memo.UTF8W = (
+            '[SComissao."NM_FUNCIONARIO"]')
+          ParentFont = False
+        end
+        object Memo14: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 313.700990000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          DataField = 'VL_COMISSAO'
+          DataSet = SComissao
+          DataSetName = 'SComissao'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[SComissao."VL_COMISSAO"]')
+          ParentFont = False
+        end
+        object Memo15: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 445.984540000000000000
+          Width = 86.929190000000000000
+          Height = 18.897650000000000000
+          DataField = 'NR_MESPAGAMENTO'
+          DataSet = SComissao
+          DataSetName = 'SComissao'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[SComissao."NR_MESPAGAMENTO"]')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 532.913730000000000000
+          Width = 105.826840000000000000
+          Height = 18.897650000000000000
+          DataField = 'NR_ANOPAGAMENTO'
+          DataSet = SComissao
+          DataSetName = 'SComissao'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[SComissao."NR_ANOPAGAMENTO"]')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 638.740570000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'ST_ESTORNO'
+          DataSet = SComissao
+          DataSetName = 'SComissao'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[SComissao."ST_ESTORNO"]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
         FillType = ftBrush
         Frame.Typ = []
         Height = 56.692950000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
+        Condition = 'SComissao."CD_FUNCIONARIO"'
+        StartNewPage = True
         object Memo1: TfrxMemoView
           Align = baWidth
           AllowVectorExport = True
@@ -66,7 +176,7 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
         object Memo2: TfrxMemoView
           AllowVectorExport = True
           Top = 37.795300000000000000
-          Width = 393.071120000000000000
+          Width = 313.700990000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -82,7 +192,7 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
         end
         object Memo4: TfrxMemoView
           AllowVectorExport = True
-          Left = 393.071120000000000000
+          Left = 313.700990000000000000
           Top = 37.795300000000000000
           Width = 132.283550000000000000
           Height = 18.897650000000000000
@@ -100,7 +210,7 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
         end
         object Memo6: TfrxMemoView
           AllowVectorExport = True
-          Left = 525.354670000000000000
+          Left = 445.984540000000000000
           Top = 37.795300000000000000
           Width = 86.929190000000000000
           Height = 18.897650000000000000
@@ -118,7 +228,7 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
         end
         object Memo7: TfrxMemoView
           AllowVectorExport = True
-          Left = 612.283860000000000000
+          Left = 532.913730000000000000
           Top = 37.795300000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
@@ -134,96 +244,26 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
             'Ano Pag.')
           ParentFont = False
         end
-      end
-      object MasterData1: TfrxMasterData
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 18.897650000000000000
-        Top = 98.267780000000000000
-        Width = 718.110700000000000000
-        DataSet = SComissao
-        DataSetName = 'SComissao'
-        RowCount = 0
-        object SComissaoNM_FUNCIONARIO: TfrxMemoView
-          IndexTag = 1
+        object Memo8: TfrxMemoView
           AllowVectorExport = True
-          Width = 393.071120000000000000
+          Left = 638.740570000000000000
+          Top = 37.795300000000000000
+          Width = 79.370130000000000000
           Height = 18.897650000000000000
-          DataField = 'NM_FUNCIONARIO'
-          DataSet = SComissao
-          DataSetName = 'SComissao'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftTop, ftBottom]
-          Memo.UTF8W = (
-            '[SComissao."NM_FUNCIONARIO"]')
-          ParentFont = False
-        end
-        object Memo9: TfrxMemoView
-          IndexTag = 1
-          AllowVectorExport = True
-          Left = 393.071120000000000000
-          Width = 132.283550000000000000
-          Height = 18.897650000000000000
-          DataField = 'VL_COMISSAO'
-          DataSet = SComissao
-          DataSetName = 'SComissao'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[SComissao."VL_COMISSAO"]')
-          ParentFont = False
-        end
-        object Memo11: TfrxMemoView
-          IndexTag = 1
-          AllowVectorExport = True
-          Left = 525.354670000000000000
-          Width = 86.929190000000000000
-          Height = 18.897650000000000000
-          DataField = 'NR_MESPAGAMENTO'
-          DataSet = SComissao
-          DataSetName = 'SComissao'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[SComissao."NR_MESPAGAMENTO"]')
-          ParentFont = False
-        end
-        object Memo12: TfrxMemoView
-          IndexTag = 1
-          AllowVectorExport = True
-          Left = 612.283860000000000000
-          Width = 105.826840000000000000
-          Height = 18.897650000000000000
-          DataField = 'NR_ANOPAGAMENTO'
-          DataSet = SComissao
-          DataSetName = 'SComissao'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Fill.BackColor = cl3DLight
           HAlign = haCenter
           Memo.UTF8W = (
-            '[SComissao."NR_ANOPAGAMENTO"]')
+            'Estorno')
           ParentFont = False
         end
       end
-      object Footer1: TfrxFooter
+      object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
@@ -247,9 +287,7 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
           Frame.Typ = [ftLeft, ftRight, ftBottom]
           HAlign = haRight
           Memo.UTF8W = (
-            
-              'Total Comiss'#227'o a Pagar: [SUM(<SComissao."VL_COMISSAO">,MasterDat' +
-              'a1)]')
+            'Total Comiss'#227'o a Pagar: [SComissao."VL_PAGAR"]')
           ParentFont = False
         end
       end
@@ -367,6 +405,10 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
       Origin = 'DT_PAGAMENTO'
       Required = True
     end
+    object QComissaoST_ESTORNO: TStringField
+      FieldName = 'ST_ESTORNO'
+      Size = 3
+    end
   end
   object TComissao: TJvMemoryData
     FieldDefs = <
@@ -434,6 +476,13 @@ object DMRelComissaoPagar: TDMRelComissaoPagar
     end
     object TComissaoDT_PAGAMENTO: TIntegerField
       FieldName = 'DT_PAGAMENTO'
+    end
+    object TComissaoST_ESTORNO: TStringField
+      FieldName = 'ST_ESTORNO'
+      Size = 3
+    end
+    object TComissaoVL_PAGAR: TFloatField
+      FieldName = 'VL_PAGAR'
     end
   end
   object SComissao: TfrxDBDataset

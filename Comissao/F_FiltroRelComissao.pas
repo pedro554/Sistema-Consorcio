@@ -32,6 +32,12 @@ type
     btnReiniciaFiltro: TSpeedButton;
     TFiltroDT_INICIO: TIntegerField;
     TFiltroDT_FIM: TIntegerField;
+    lbl5: TLabel;
+    btnPsqFuncionario: TSpeedButton;
+    edtCD_FUNCIONARIO: TDBEdit;
+    edtNM_FUNCIONARIO: TDBEdit;
+    TFiltroCD_FUNCIONARIO: TIntegerField;
+    TFiltroNM_FUNCIONARIO: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure TFiltroAfterInsert(DataSet: TDataSet);
@@ -39,6 +45,7 @@ type
     procedure btnGerarRelClick(Sender: TObject);
     procedure btnReiniciaFiltroClick(Sender: TObject);
     procedure TFiltroBeforePost(DataSet: TDataSet);
+    procedure btnPsqFuncionarioClick(Sender: TObject);
   private
     DMRel: TDMRelComissaoPagar;
     procedure ReiniciaFiltro;
@@ -53,7 +60,7 @@ var
 
 implementation
 uses
-  Consulta_Funcionario;
+  DM_Consulta;
 
 {$R *.dfm}
 
@@ -70,6 +77,11 @@ begin
   ValidaFiltro;
   DMRel.Inicializa(TFiltro);
   ReiniciaFiltro;
+end;
+
+procedure TFFiltroRelComissao.btnPsqFuncionarioClick(Sender: TObject);
+begin
+  DMConsulta.ConsultaFuncionario(TFiltro);
 end;
 
 procedure TFFiltroRelComissao.btnReiniciaFiltroClick(Sender: TObject);

@@ -10,24 +10,17 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
   FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids,
-  Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.ExtCtrls, System.Actions, Vcl.ActnList;
+  Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.ExtCtrls, System.Actions, Vcl.ActnList,
+  Vcl.Menus;
 
 type
   TFCad_ManutComissao = class(TFormulario)
-    lbl5: TLabel;
-    edtCD_FUNCIONARIO: TDBEdit;
-    edtNM_FUNCIONARIO: TDBEdit;
-    btnPsqFuncionario: TSpeedButton;
     TFiltro: TJvMemoryData;
     TFiltroCD_FUNCIONARIO: TIntegerField;
     TFiltroNM_FUNCIONARIO: TStringField;
     SFiltro: TDataSource;
-    lbl1: TLabel;
-    NR_MESINICIO: TJvDBComboBox;
-    edtNR_ANOINICIO: TDBEdit;
     TFiltroNR_MESINICIO: TIntegerField;
     TFiltroNR_ANOINICIO: TIntegerField;
-    btnFiltrar: TSpeedButton;
     QComissaoParcela: TFDQuery;
     Grid1: TJvDBGrid;
     pnl1: TPanel;
@@ -59,9 +52,6 @@ type
     TComissaoParcelaNR_ANOPAGAMENTO: TIntegerField;
     TComissaoParcelaDT_PAGAMENTO: TIntegerField;
     TComissaoParcelaCD_COMISSAOPARCELA: TIntegerField;
-    lbl2: TLabel;
-    JvDBComboBox1: TJvDBComboBox;
-    edtNR_MESINICIO: TDBEdit;
     TFiltroNR_MESFIM: TIntegerField;
     TFiltroNR_ANOFIM: TIntegerField;
     QFaixaComissaoParcela: TFDQuery;
@@ -78,6 +68,26 @@ type
     ACT_F6: TAction;
     QComissaoParcelaNM_CLIENTE: TStringField;
     TComissaoParcelaNM_CLIENTE: TStringField;
+    pnl2: TPanel;
+    lbl5: TLabel;
+    btnPsqFuncionario: TSpeedButton;
+    lbl1: TLabel;
+    btnFiltrar: TSpeedButton;
+    lbl2: TLabel;
+    edtCD_FUNCIONARIO: TDBEdit;
+    edtNM_FUNCIONARIO: TDBEdit;
+    NR_MESINICIO: TJvDBComboBox;
+    edtNR_ANOINICIO: TDBEdit;
+    JvDBComboBox1: TJvDBComboBox;
+    edtNR_MESINICIO: TDBEdit;
+    lbl6: TLabel;
+    edtCD_CLIENTE: TDBEdit;
+    edtNM_CLIENTE: TDBEdit;
+    btnPsqCliente: TSpeedButton;
+    TFiltroCD_CLIENTE: TIntegerField;
+    TFiltroNM_CLIENTE: TStringField;
+    QComissaoParcelaST_ESTORNO: TStringField;
+    TComissaoParcelaST_ESTORNO: TStringField;
     procedure btnPsqFuncionarioClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -86,6 +96,7 @@ type
     procedure TComissaoParcelaBeforePost(DataSet: TDataSet);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
+    procedure btnPsqClienteClick(Sender: TObject);
   private
     procedure AbreComissaoParcela;
     { Private declarations }
@@ -99,16 +110,45 @@ var
 implementation
 
 uses
-  Consulta_Funcionario, Funcoes;
+  Consulta_Funcionario, Funcoes, Consulta_Cliente;
 
 {$R *.dfm}
 
 procedure TFCad_ManutComissao.AbreComissaoParcela;
+
+  {$REGION 'SubMetodo que retorna a pesquisa SQL do filtro'}
+  function MontaSQLPesquisa: String;
+  begin
+    Result := 'SELECT ' +
+              'COMISSAOPARCELA.*, ' +
+              'CRM.VL_CREDITO, ' +
+              'CLIENTE.NM_CLIENTE ' +
+              'FROM ' +
+              'COMISSAOPARCELA ' +
+              'LEFT JOIN CRM ON ' +
+              'CRM.CD_CRM = COMISSAOPARCELA.CD_CRM ' +
+              'LEFT JOIN CLIENTE ON ' +
+              'CLIENTE.CD_CLIENTE = COMISSAOPARCELA.CD_CLIENTE ' +
+              'WHERE ' +
+              'COMISSAOPARCELA.CD_FUNCIONARIO = :CD_FUNCIONARIO AND ' +
+              'COMISSAOPARCELA.DT_PAGAMENTO BETWEEN :DT_INICIO AND :DT_FIM ';
+
+    if TFiltroCD_CLIENTE.AsInteger <> 0 then
+    begin
+      Result := Result + 'AND COMISSAOPARCELA.CD_CLIENTE = :CD_CLIENTE';
+    end;
+  end;
+  {$ENDREGION}
+
 begin
   QComissaoParcela.Close;
+  QComissaoParcela.SQL.Clear;
+  QComissaoParcela.SQL.Add(MontaSQLPesquisa);
   QComissaoParcela.ParamByName('CD_FUNCIONARIO').AsInteger := TFiltroCD_FUNCIONARIO.AsInteger;
   QComissaoParcela.ParamByName('DT_INICIO').AsInteger := AnoMesCalc(TFiltroNR_MESINICIO.AsInteger, TFiltroNR_ANOINICIO.AsInteger);
   QComissaoParcela.ParamByName('DT_FIM').AsInteger := AnoMesCalc(TFiltroNR_MESFIM.AsInteger, TFiltroNR_ANOFIM.AsInteger);
+  if QComissaoParcela.FindParam('CD_CLIENTE') <> nil then
+    QComissaoParcela.ParamByName('CD_CLIENTE').AsInteger := TFiltroCD_CLIENTE.AsInteger;
   QComissaoParcela.Open;
 end;
 
@@ -200,6 +240,19 @@ begin
     ModalResult := mrOk;
 end;
 
+procedure TFCad_ManutComissao.btnPsqClienteClick(Sender: TObject);
+var
+  FConsulta_Cliente: TFConsulta_Cliente;
+begin
+  FConsulta_Cliente := TFConsulta_Cliente.Create(Self);
+  try
+    if FConsulta_Cliente.ShowModal = mrOk then
+      CopiaRegistro(FConsulta_Cliente.TCliente, TFiltro, False);
+  finally
+    FreeAndNil(FConsulta_Cliente);
+  end;
+end;
+
 procedure TFCad_ManutComissao.btnPsqFuncionarioClick(Sender: TObject);
 var
   FConsulta_Funcionario: TFConsulta_Funcionario;
@@ -243,6 +296,12 @@ begin
   if Length(TComissaoParcelaNR_ANOPAGAMENTO.AsString) <> 4 then
   begin
     MyMessage('Valor inválido para o campo "Ano Pag."');
+    Abort;
+  end;
+
+  if (TComissaoParcelaST_ESTORNO.AsString <> 'SIM') and (TComissaoParcelaST_ESTORNO.AsString <> 'NÃO') then
+  begin
+    MyMessage('Valor inválido para o campo "Estorno"');
     Abort;
   end;
 

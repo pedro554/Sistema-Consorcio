@@ -29,7 +29,8 @@ uses
   F_FiltroRelComissao in '..\Comissao\F_FiltroRelComissao.pas' {FFiltroRelComissao},
   Cad_ManutComissao in '..\Comissao\Cad_ManutComissao.pas' {FCad_ManutComissao},
   Cad_Empresa in '..\Empresa\Cad_Empresa.pas' {FCad_Empresa},
-  DM_Atualizacao in '..\Atualizacao\DM_Atualizacao.pas' {DMAtualizacao: TDataModule};
+  DM_Atualizacao in '..\Atualizacao\DM_Atualizacao.pas' {DMAtualizacao: TDataModule},
+  DM_Consulta in '..\Comum\DM_Consulta.pas' {DMConsulta: TDataModule};
 
 {$R *.res}
 
@@ -42,6 +43,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFMenuPrincipal, FMenuPrincipal);
   Application.CreateForm(TDMBanco, DMBanco);
+  Application.CreateForm(TDMConsulta, DMConsulta);
   Ini := TIniFile.Create(DiretorioSistema + '\cfgbanco.ini');
   if not DMBanco.Conectar(
     Ini.ReadString('banco', 'usuario', 'root'),

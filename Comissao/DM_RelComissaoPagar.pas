@@ -43,10 +43,14 @@ type
     TComissaoNM_FUNCIONARIO: TStringField;
     QComissaoDT_PAGAMENTO: TIntegerField;
     TComissaoDT_PAGAMENTO: TIntegerField;
+    QComissaoST_ESTORNO: TStringField;
+    TComissaoST_ESTORNO: TStringField;
+    TComissaoVL_PAGAR: TFloatField;
     procedure DataModuleDestroy(Sender: TObject);
   private
     Param: TParametros;
     procedure CarregaDados;
+    function RetornaSQL: String;
     { Private declarations }
   public
     procedure Inicializa(ADatasetFiltro: TDataSet);
@@ -68,8 +72,12 @@ uses Constantes;
 procedure TDMRelComissaoPagar.CarregaDados;
 begin
   QComissao.Close;
+  QComissao.SQL.Clear;
+  QComissao.SQL.Add(RetornaSQL);
   QComissao.ParamByName('DT_INICIO').AsInteger := Param.DataInicio;
   QComissao.ParamByName('DT_FIM').AsInteger := Param.DataFim;
+  if QComissao.FindParam('CD_FUNCIONARIO') <> nil then
+    QComissao.ParamByName('CD_FUNCIONARIO').AsInteger := Param.Funcionario;
   QComissao.Open;
 
   if QComissao.IsEmpty then
@@ -96,6 +104,11 @@ begin
     TComissaoNR_MESPAGAMENTO.AsInteger := QComissaoNR_MESPAGAMENTO.AsInteger;
     TComissaoNR_ANOPAGAMENTO.AsInteger := QComissaoNR_ANOPAGAMENTO.AsInteger;
     TComissaoDT_PAGAMENTO.AsInteger := QComissaoDT_PAGAMENTO.AsInteger;
+    TComissaoST_ESTORNO.AsString := QComissaoST_ESTORNO.AsString;
+    if TComissaoST_ESTORNO.AsString = 'SIM' then
+      TComissaoVL_PAGAR.AsFloat := 0
+    else
+      TComissaoVL_PAGAR.AsFloat := TComissaoVL_COMISSAO.AsFloat;
     TComissao.Post;
     QComissao.Next;
   end;
@@ -111,10 +124,32 @@ procedure TDMRelComissaoPagar.Inicializa(ADatasetFiltro: TDataSet);
 begin
   Param.DataInicio  := ADatasetFiltro.FieldByName('DT_INICIO').AsInteger;
   Param.DataFim     := ADatasetFiltro.FieldByName('DT_FIM').AsInteger;
+  Param.Funcionario := ADatasetFiltro.FieldByName('CD_FUNCIONARIO').AsInteger;
 
   CarregaDados;
 
   RelComissao.ShowReport;
+end;
+
+function TDMRelComissaoPagar.RetornaSQL: String;
+begin
+  Result := 'SELECT ' +
+            'COMISSAOPARCELA.*, ' +
+            'FUNCIONARIO.NM_FUNCIONARIO ' +
+            'FROM ' +
+            'COMISSAOPARCELA ' +
+            'LEFT JOIN FUNCIONARIO ON ' +
+            'FUNCIONARIO.CD_FUNCIONARIO = COMISSAOPARCELA.CD_FUNCIONARIO ' +
+            'WHERE ' +
+            'COMISSAOPARCELA.DT_PAGAMENTO BETWEEN :DT_INICIO AND :DT_FIM ';
+
+  if Param.Funcionario <> 0 then
+  begin
+    Result := Result + 'AND COMISSAOPARCELA.CD_FUNCIONARIO = :CD_FUNCIONARIO ';
+  end;
+
+  Result := Result + 'ORDER BY ' +
+                     'COMISSAOPARCELA.CD_FUNCIONARIO ';
 end;
 
 end.
