@@ -48,6 +48,7 @@ begin
   if not DMBanco.Conectar(
     Ini.ReadString('banco', 'usuario', 'root'),
     Ini.ReadString('banco', 'ip', 'localhost'),
+    Ini.ReadString('banco', 'db', 'sistema'),
     True) then
   begin
     Ini.Free;

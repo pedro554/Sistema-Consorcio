@@ -17,7 +17,7 @@ object FCad_ConfigBanco: TFCad_ConfigBanco
   TextHeight = 13
   object lbl2: TLabel
     Left = 176
-    Top = 34
+    Top = 24
     Width = 36
     Height = 13
     Alignment = taRightJustify
@@ -31,7 +31,7 @@ object FCad_ConfigBanco: TFCad_ConfigBanco
   end
   object lbl4: TLabel
     Left = 202
-    Top = 57
+    Top = 47
     Width = 10
     Height = 13
     Alignment = taRightJustify
@@ -43,9 +43,23 @@ object FCad_ConfigBanco: TFCad_ConfigBanco
     Font.Style = []
     ParentFont = False
   end
+  object lbl5: TLabel
+    Left = 105
+    Top = 70
+    Width = 107
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Nome Banco de Dados'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object edtUsuario: TEdit
     Left = 218
-    Top = 31
+    Top = 21
     Width = 200
     Height = 21
     TabOrder = 0
@@ -56,8 +70,7 @@ object FCad_ConfigBanco: TFCad_ConfigBanco
     Width = 635
     Height = 41
     Align = alBottom
-    TabOrder = 2
-    ExplicitTop = 114
+    TabOrder = 3
     object btnGravar: TSpeedButton
       Left = 257
       Top = 10
@@ -85,10 +98,17 @@ object FCad_ConfigBanco: TFCad_ConfigBanco
   end
   object edtIP: TEdit
     Left = 218
-    Top = 54
+    Top = 44
     Width = 200
     Height = 21
     TabOrder = 1
+  end
+  object edtDB: TEdit
+    Left = 218
+    Top = 67
+    Width = 200
+    Height = 21
+    TabOrder = 2
   end
   object actlst: TActionList
     Left = 64

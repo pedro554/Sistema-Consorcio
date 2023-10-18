@@ -21,6 +21,8 @@ type
     actlst: TActionList;
     ACT_F8: TAction;
     ACT_F6: TAction;
+    lbl5: TLabel;
+    edtDB: TEdit;
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -58,7 +60,7 @@ end;
 
 procedure TFCad_ConfigBanco.btnTestarClick(Sender: TObject);
 begin
-  DMBanco.Conectar(edtUsuario.Text, edtIP.Text, False);
+  DMBanco.Conectar(edtUsuario.Text, edtIP.Text, edtDB.Text, False);
   if DMBanco.con.Connected then
     MyMessage('Conexão realizada com sucesso!');
 end;
@@ -67,6 +69,7 @@ procedure TFCad_ConfigBanco.CarregarArquivoIni;
 begin
   edtUsuario.Text := Ini.ReadString('banco', 'usuario', 'root');
   edtIP.Text := Ini.ReadString('banco', 'ip', 'localhost');
+  edtDB.Text := Ini.ReadString('banco', 'db', 'sistema');
 end;
 
 procedure TFCad_ConfigBanco.FormCreate(Sender: TObject);
@@ -84,6 +87,7 @@ procedure TFCad_ConfigBanco.GravaArquivoIni;
 begin
   Ini.WriteString('banco', 'usuario', edtUsuario.Text);
   Ini.WriteString('banco', 'ip', edtIP.Text);
+  Ini.WriteString('banco', 'db', edtDb.Text);
 end;
 
 end.

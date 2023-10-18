@@ -38,7 +38,7 @@ type
     { Private declarations }
   public
     function SequenciaTabela(ATabela: String): Integer;
-    function Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
+    function Conectar(AUsuario, AHost, ADB: String; AMostraTelaConfig: Boolean): Boolean;
     function ValidaValidadeSistema(out AMsg: String): Boolean;
     function AtualizaBancoDeDados(out AMsg: String): Boolean;
     function RetornaVersaoSistema: String;
@@ -102,7 +102,7 @@ begin
   {$ENDREGION}
 end;
 
-function TDMBanco.Conectar(AUsuario, AHost: String; AMostraTelaConfig: Boolean): Boolean;
+function TDMBanco.Conectar(AUsuario, AHost, ADB: String; AMostraTelaConfig: Boolean): Boolean;
 var
   FCad_ConfigBanco: TFCad_ConfigBanco;
 begin
@@ -112,7 +112,7 @@ begin
   con.Params.Clear;
 
   con.Params.DriverID := 'MySQL';
-  con.Params.Database := 'sistema';
+  con.Params.Database := ADB;
   con.Params.UserName := AUsuario;
   con.Params.Values['Server'] := AHost;
   con.Params.Password := 'spsg91g8';
@@ -138,6 +138,7 @@ begin
             Result := Conectar(
               FCad_ConfigBanco.edtUsuario.Text,
               FCad_ConfigBanco.edtIP.Text,
+              FCad_ConfigBanco.edtDB.Text,
               False
             );
         finally
