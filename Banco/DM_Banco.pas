@@ -156,7 +156,10 @@ begin
 
   conServidor.Params.Clear;
   conServidor.Params.DriverID := 'MySQL';
-  conServidor.Params.Database := C_NOMEBANCOVALIDADE;
+  if IsVersaoInterna then
+     conServidor.Params.Database := C_NOMEBANCOVALIDADETESTE
+  else
+    conServidor.Params.Database := C_NOMEBANCOVALIDADE;
   conServidor.Params.UserName := C_USUARIOBANCOVALIDADE;
   conServidor.Params.Values['Server'] := C_HOSTBANCOVALIDADE;
   conServidor.Params.Password := C_SENHABANCOVALIDADE;
@@ -219,7 +222,7 @@ begin
   {$REGION 'Verificar cadastro da empresa'}
   QEmpresa.Close;
   QEmpresa.Open;
-  if QEmpresa.IsEmpty and (not FileExists(DiretorioSistema + '\versaointerna.siscon')) then
+  if QEmpresa.IsEmpty and (not IsVersaoInterna) then
   begin
     FCad_Empresa := TFCad_Empresa.Create(nil);
     try
@@ -251,7 +254,7 @@ begin
 
     if QValidade.IsEmpty then
     begin
-      if FileExists(DiretorioSistema + '\versaointerna.siscon') then
+      if IsVersaoInterna then
       begin
         QCadMac.Close;
         QCadMac.Open;

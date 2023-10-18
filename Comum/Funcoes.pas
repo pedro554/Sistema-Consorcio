@@ -26,8 +26,14 @@ procedure OrdenarTabelaMemoriaPorCampo(ADataset: TJvMemoryData; campo: TField);
 function DelphiAberto: Boolean;
 function GetMacAddress: string;
 function TratarMsgErroBanco(AMsg: String): String;
+function IsVersaoInterna: Boolean;
 
 implementation
+
+function IsVersaoInterna: Boolean;
+begin
+  Result := FileExists(DiretorioSistema + '\versaointerna.siscon');
+end;
 
 function TratarMsgErroBanco(AMsg: String): String;
 begin
