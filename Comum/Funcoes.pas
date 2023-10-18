@@ -33,7 +33,7 @@ uses Constantes;
 
 function IsVersaoInterna: Boolean;
 begin
-  Result := FileExists(DiretorioSistema + C_ARQUIVOVERSAOINTERNA);
+  Result := FileExists(DiretorioSistema + '\' + C_ARQUIVOVERSAOINTERNA);
 end;
 
 function TratarMsgErroBanco(AMsg: String): String;

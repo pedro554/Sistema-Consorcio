@@ -70,13 +70,13 @@ object FCRM: TFCRM
   end
   object KanbanBoard: TAdvKanbanBoard
     Left = 0
-    Top = 41
+    Top = 82
     Width = 1029
-    Height = 597
+    Height = 556
     Align = alClient
     ParentDoubleBuffered = False
     DoubleBuffered = True
-    TabOrder = 1
+    TabOrder = 2
     OnDblClick = btnAlterarClick
     Columns = <
       item
@@ -256,6 +256,7 @@ object FCRM: TFCRM
     ItemsAppearance.Margins.Top = 10.000000000000000000
     ItemsAppearance.Margins.Right = 10.000000000000000000
     ItemsAppearance.Margins.Bottom = 10.000000000000000000
+    ItemsAppearance.Fill.Color = 16119285
     ItemsAppearance.Stroke.Color = 15987699
     ItemsAppearance.SelectedFill.Color = 16297243
     ItemsAppearance.SelectedStroke.Color = 16297243
@@ -265,8 +266,6 @@ object FCRM: TFCRM
     ItemsAppearance.FixedHeight = 25.000000000000000000
     OnAfterDropItem = KanbanBoardAfterDropItem
     OnSelectItem = KanbanBoardSelectItem
-    ExplicitLeft = 200
-    ExplicitTop = 46
     object KanbanBoardDatabaseAdapter: TAdvKanbanBoardDatabaseAdapter
       Left = 712
       Top = 200
@@ -278,6 +277,37 @@ object FCRM: TFCRM
       Item.Text = 'DS_CRM'
       Item.Column = 'CD_STATUS'
       Item.DBKey = 'CD_CRM'
+    end
+  end
+  object pnlFiltro: TPanel
+    Left = 0
+    Top = 41
+    Width = 1029
+    Height = 41
+    Align = alTop
+    TabOrder = 1
+    object lbl1: TLabel
+      Left = 8
+      Top = 14
+      Width = 33
+      Height = 13
+      Caption = 'Cliente'
+    end
+    object edtPesquisa: TEdit
+      Left = 47
+      Top = 10
+      Width = 250
+      Height = 21
+      TabOrder = 0
+    end
+    object btnFiltrar: TButton
+      Left = 303
+      Top = 10
+      Width = 120
+      Height = 21
+      Caption = 'Filtrar'
+      TabOrder = 1
+      OnClick = btnFiltrarClick
     end
   end
   object QAtualizaStatus: TFDQuery

@@ -78,10 +78,12 @@ type
     TCRMNM_CLIENTE: TStringField;
     TCRMVL_CREDITOMSG: TFloatField;
     TCRMNR_FONE: TStringField;
+    pnlFiltro: TPanel;
+    lbl1: TLabel;
+    edtPesquisa: TEdit;
+    btnFiltrar: TButton;
     procedure GridAbertoDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
-    procedure GridAbertoDragDrop(Sender, Source: TObject; X, Y: Integer);
     procedure FormShow(Sender: TObject);
-    procedure GridAbertoMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure btnFinalizarMovimentoClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
@@ -93,6 +95,7 @@ type
       AToItem: TAdvKanbanBoardItem);
     procedure KanbanBoardSelectItem(Sender: TObject;
       AColumn: TAdvKanbanBoardColumn; AItem: TAdvKanbanBoardItem);
+    procedure btnFiltrarClick(Sender: TObject);
   private
     pvCodCRM: String;
 
@@ -101,6 +104,7 @@ type
     procedure ConfigSelecaoFechado;
     procedure AtualizaStatus(AStatus: Integer; ACodRM: String);
     procedure ValidaSelecaoGrid;
+    function RetornaSQLCRM: String;
     { Private declarations }
   public
     { Public declarations }
@@ -175,10 +179,18 @@ begin
   end;
 end;
 
+procedure TFCRM.btnFiltrarClick(Sender: TObject);
+begin
+  CarregaDados;
+end;
+
 procedure TFCRM.CarregaDados;
 begin
   KanbanBoardDatabaseAdapter.Active := False;
   QCRM.Close;
+  QCRM.SQL.Clear;
+  QCRM.SQL.Add(RetornaSQLCRM);
+  QCRM.ParamByName('NM_CLIENTE').AsString := '%'+edtPesquisa.Text+'%';
   QCRM.Open;
   TCRM.Close;
   TCRM.Open;
@@ -198,7 +210,6 @@ begin
     TCRM.Post;
     QCRM.Next;
   end;
-
   KanbanBoardDatabaseAdapter.BeginUpdate;
   KanbanBoardDatabaseAdapter.KanbanBoard := KanbanBoard;
   KanbanBoardDatabaseAdapter.Active := True;
@@ -207,7 +218,6 @@ end;
 
 procedure TFCRM.ConfigSelecaoFechado;
 begin
-//  FDatasetOrigem := BindSourceFechado.DataSet;
   btnFinalizarMovimento.Enabled := True;
 end;
 
@@ -231,40 +241,9 @@ begin
   CarregaDados;
 end;
 
-procedure TFCRM.GridAbertoDragDrop(Sender, Source: TObject; X, Y: Integer);
-begin
-//  case TStringGrid(Sender).Parent.Tag of
-//    1: AtualizaStatus(C_ABERTO);
-//    2: AtualizaStatus(C_APRESENTACAO);
-//    3: AtualizaStatus(C_NEGOCIACAO);
-//    4: AtualizaStatus(C_AGUARDANDO);
-//    5: AtualizaStatus(C_SEMINTERESSE);
-//    6: AtualizaStatus(C_FECHADO);
-//  end;
-end;
-
 procedure TFCRM.GridAbertoDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
 begin
   Accept := Source is TStringGrid;
-end;
-
-procedure TFCRM.GridAbertoMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  btnFinalizarMovimento.Enabled := False;
-
-//  case TStringGrid(Sender).Parent.Tag of
-//    1: FDatasetOrigem := BindSourceAberto.DataSet;
-//    2: FDatasetOrigem := BindSourceApresentacao.DataSet;
-//    3: FDatasetOrigem := BindSourceNegociacao.DataSet;
-//    4: FDatasetOrigem := BindSourceAguardando.DataSet;
-//    5: FDatasetOrigem := BindSourceSemInteresse.DataSet;
-//    6:  ConfigSelecaoFechado;
-//  end;
-//
-//  if FDatasetOrigem.IsEmpty then Exit;
-//
-//  if Button = mbLeft then
-//    TStringGrid(Sender).BeginDrag(False, 4);
 end;
 
 procedure TFCRM.KanbanBoardAfterDropItem(Sender: TObject; AFromColumn,
@@ -287,6 +266,19 @@ procedure TFCRM.KanbanBoardSelectItem(Sender: TObject;
   AColumn: TAdvKanbanBoardColumn; AItem: TAdvKanbanBoardItem);
 begin
   pvCodCRM := AItem.DBKey;
+end;
+
+function TFCRM.RetornaSQLCRM: String;
+begin
+  Result := 'SELECT ' +
+            'CRM.*, ' +
+            'CLIENTE.NM_CLIENTE, ' +
+            'CLIENTE.NR_FONE ' +
+            'FROM ' +
+            'CRM ' +
+            'LEFT JOIN CLIENTE ON ' +
+            'CLIENTE.CD_CLIENTE = CRM.CD_CLIENTE ' +
+            'WHERE CLIENTE.NM_CLIENTE LIKE :NM_CLIENTE';
 end;
 
 procedure TFCRM.AtualizaStatus(AStatus: Integer; ACodRM: String);
