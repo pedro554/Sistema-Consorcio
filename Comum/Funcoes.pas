@@ -29,10 +29,11 @@ function TratarMsgErroBanco(AMsg: String): String;
 function IsVersaoInterna: Boolean;
 
 implementation
+uses Constantes;
 
 function IsVersaoInterna: Boolean;
 begin
-  Result := FileExists(DiretorioSistema + '\versaointerna.siscon');
+  Result := FileExists(DiretorioSistema + C_ARQUIVOVERSAOINTERNA);
 end;
 
 function TratarMsgErroBanco(AMsg: String): String;
