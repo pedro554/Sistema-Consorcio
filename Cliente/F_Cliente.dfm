@@ -37,14 +37,6 @@ object FCliente: TFCliente
       Height = 13
       Caption = 'Coluna'
     end
-    object btnPesquisa: TSpeedButton
-      Left = 270
-      Top = 29
-      Width = 120
-      Height = 21
-      Caption = 'Pesquisar'
-      OnClick = btnPesquisaClick
-    end
     object edtPesquisa: TEdit
       Left = 64
       Top = 6
@@ -59,6 +51,15 @@ object FCliente: TFCliente
       Height = 21
       Style = csDropDownList
       TabOrder = 1
+    end
+    object btnPesquisa: TButton
+      Left = 270
+      Top = 29
+      Width = 120
+      Height = 21
+      Caption = 'Pesquisar'
+      TabOrder = 2
+      OnClick = btnPesquisaClick
     end
   end
   object Grid: TJvDBGrid

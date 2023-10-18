@@ -40,7 +40,6 @@ type
     pnl1: TPanel;
     lbl1: TLabel;
     lbl2: TLabel;
-    btnPesquisa: TSpeedButton;
     edtPesquisa: TEdit;
     cbbColuna: TComboBox;
     Grid: TJvDBGrid;
@@ -70,6 +69,7 @@ type
     FMTBCDField1: TFMTBCDField;
     FMTBCDField2: TFMTBCDField;
     DateTimeField1: TDateTimeField;
+    btnPesquisa: TButton;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -140,6 +140,7 @@ end;
 procedure TFFaixaComissao.btnPesquisaClick(Sender: TObject);
 begin
   PesquisaGenerica(TFaixaComissao, PegaNomeCampoCombo(cbbColuna, Grid), edtPesquisa.Text);
+  Grid.SetFocus;
 end;
 
 procedure TFFaixaComissao.CarregaDados;

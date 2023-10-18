@@ -25,7 +25,6 @@ type
   TFConsulta_Funcionario = class(TFormulario)
     pnl1: TPanel;
     lbl1: TLabel;
-    btnPesquisar: TSpeedButton;
     lbl2: TLabel;
     edtPesquisa: TEdit;
     cbbColuna: TComboBox;
@@ -47,12 +46,13 @@ type
     TFuncionarioDT_CADASTRO: TDateTimeField;
     TFuncionarioST_ATIVO: TStringField;
     TFuncionarioCD_FUNCIONARIO: TIntegerField;
+    btnPesquisa: TButton;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure btnPesquisarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     procedure CarregaDados;
     { Private declarations }
@@ -73,11 +73,12 @@ begin
   ModalResult := mrCancel;
 end;
 
-procedure TFConsulta_Funcionario.btnPesquisarClick(Sender: TObject);
+procedure TFConsulta_Funcionario.btnPesquisaClick(Sender: TObject);
 begin
   DMFuncoesConsulta.PesquisaGenerica(TFuncionario,
                                      DMFuncoesConsulta.PegaNomeCampoCombo(cbbColuna, Grid),
                                      edtPesquisa.Text);
+  Grid.SetFocus;
 end;
 
 procedure TFConsulta_Funcionario.btnSelecionarClick(Sender: TObject);

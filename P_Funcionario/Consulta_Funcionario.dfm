@@ -31,14 +31,6 @@ object FConsulta_Funcionario: TFConsulta_Funcionario
       Alignment = taRightJustify
       Caption = 'Pesquisa'
     end
-    object btnPesquisar: TSpeedButton
-      Left = 320
-      Top = 11
-      Width = 120
-      Height = 21
-      Caption = 'Pesquisar'
-      OnClick = btnPesquisarClick
-    end
     object lbl2: TLabel
       Left = 25
       Top = 37
@@ -60,7 +52,16 @@ object FConsulta_Funcionario: TFConsulta_Funcionario
       Width = 250
       Height = 21
       Style = csDropDownList
+      TabOrder = 2
+    end
+    object btnPesquisa: TButton
+      Left = 320
+      Top = 11
+      Width = 120
+      Height = 21
+      Caption = 'Pesquisar'
       TabOrder = 1
+      OnClick = btnPesquisaClick
     end
   end
   object pnl2: TPanel

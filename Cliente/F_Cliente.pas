@@ -40,7 +40,6 @@ type
     pnl1: TPanel;
     lbl1: TLabel;
     lbl2: TLabel;
-    btnPesquisa: TSpeedButton;
     edtPesquisa: TEdit;
     cbbColuna: TComboBox;
     Grid: TJvDBGrid;
@@ -60,6 +59,7 @@ type
     TClienteST_MARCADO: TBooleanField;
     TClienteST_ATIVO: TStringField;
     QClienteST_ATIVO: TStringField;
+    btnPesquisa: TButton;
     procedure btnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -140,6 +140,7 @@ end;
 procedure TFCliente.btnPesquisaClick(Sender: TObject);
 begin
   PesquisaGenerica(TCliente, PegaNomeCampoCombo(cbbColuna, Grid), edtPesquisa.Text);
+  Grid.SetFocus;
 end;
 
 procedure TFCliente.FormCreate(Sender: TObject);

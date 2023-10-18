@@ -28,6 +28,11 @@ type
     QVersao: TFDQuery;
     QVersaoNR_VERSAOBANCO: TIntegerField;
     QVersaoNR_VERSAOSISTEMA: TIntegerField;
+    QCadMac: TFDQuery;
+    QCadMacNR_MACADRESS: TStringField;
+    QCadMacNR_CPFCNPJ: TStringField;
+    QCadMacNM_CLIENTE: TStringField;
+    QCadMacDT_VALIDADE: TDateTimeField;
   private
     function ConectarServidor(out AMsg: String): Boolean;
     { Private declarations }
@@ -214,7 +219,7 @@ begin
   {$REGION 'Verificar cadastro da empresa'}
   QEmpresa.Close;
   QEmpresa.Open;
-  if QEmpresa.IsEmpty then
+  if QEmpresa.IsEmpty and (not FileExists(DiretorioSistema + '\versaointerna.siscon')) then
   begin
     FCad_Empresa := TFCad_Empresa.Create(nil);
     try
@@ -246,9 +251,25 @@ begin
 
     if QValidade.IsEmpty then
     begin
-      Result := False;
-      AMsg := 'Este computador não está cadastrado para utilizar o sistema. Entre em contato com a empresa!';
-      Exit;
+      if FileExists(DiretorioSistema + '\versaointerna.siscon') then
+      begin
+        QCadMac.Close;
+        QCadMac.Open;
+        QCadMac.Append;
+        QCadMacNR_MACADRESS.AsString := GetMacAddress;
+        QCadMacNR_CPFCNPJ.AsString := 'VERSAOINTERNA';
+        QCadMacNM_CLIENTE.AsString := 'VERSAOINTERNA';
+        QCadMacDT_VALIDADE.AsDateTime := Now + 999;
+        QCadMac.Post;
+        Result := True;
+        Exit;
+      end
+      else
+      begin
+        Result := False;
+        AMsg := 'Este computador não está cadastrado para utilizar o sistema. Entre em contato com a empresa!';
+        Exit;
+      end;
     end;
 
     VAR_VALIDADE := QValidadeDT_VALIDADE.AsString;

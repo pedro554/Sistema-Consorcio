@@ -45,7 +45,6 @@ type
     pnl1: TPanel;
     lbl1: TLabel;
     lbl2: TLabel;
-    btnPesquisa: TSpeedButton;
     edtPesquisa: TEdit;
     cbbColuna: TComboBox;
     Grid: TJvDBGrid;
@@ -58,6 +57,7 @@ type
     QFuncionarioNM_FUNCIONARIO: TStringField;
     QFuncionarioST_ATIVO: TStringField;
     TFuncionarioST_ATIVO: TStringField;
+    btnPesquisa: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
@@ -145,6 +145,7 @@ end;
 procedure TFFuncionario.btnPesquisaClick(Sender: TObject);
 begin
   PesquisaGenerica(TFuncionario, PegaNomeCampoCombo(cbbColuna, Grid), edtPesquisa.Text);
+  Grid.SetFocus;
 end;
 
 procedure TFFuncionario.CarregaDados;

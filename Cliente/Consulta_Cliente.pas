@@ -43,7 +43,6 @@ type
     pnl1: TPanel;
     edtPesquisa: TEdit;
     lbl1: TLabel;
-    btnPesquisar: TSpeedButton;
     pnl2: TPanel;
     btnSelecionar: TSpeedButton;
     btnCancelar: TSpeedButton;
@@ -66,12 +65,13 @@ type
     ACT_F6: TAction;
     cbbColuna: TComboBox;
     lbl2: TLabel;
+    btnPesquisa: TButton;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btnPesquisarClick(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     procedure CarregaDados;
     { Private declarations }
@@ -94,11 +94,12 @@ begin
   ModalResult := mrCancel;
 end;
 
-procedure TFConsulta_Cliente.btnPesquisarClick(Sender: TObject);
+procedure TFConsulta_Cliente.btnPesquisaClick(Sender: TObject);
 begin
   DMFuncoesConsulta.PesquisaGenerica(TCliente,
                                      DMFuncoesConsulta.PegaNomeCampoCombo(cbbColuna, Grid),
                                      edtPesquisa.Text);
+  Grid.SetFocus;
 end;
 
 procedure TFConsulta_Cliente.btnSelecionarClick(Sender: TObject);

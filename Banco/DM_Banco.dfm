@@ -126,4 +126,32 @@ object DMBanco: TDMBanco
       Origin = 'NR_VERSAOSISTEMA'
     end
   end
+  object QCadMac: TFDQuery
+    Connection = conServidor
+    SQL.Strings = (
+      'SELECT'
+      '*'
+      ''
+      'FROM'
+      'CLIENTE'
+      ''
+      'LIMIT 1')
+    Left = 264
+    Top = 80
+    object QCadMacNR_MACADRESS: TStringField
+      FieldName = 'NR_MACADRESS'
+      Size = 50
+    end
+    object QCadMacNR_CPFCNPJ: TStringField
+      FieldName = 'NR_CPFCNPJ'
+      Size = 50
+    end
+    object QCadMacNM_CLIENTE: TStringField
+      FieldName = 'NM_CLIENTE'
+      Size = 50
+    end
+    object QCadMacDT_VALIDADE: TDateTimeField
+      FieldName = 'DT_VALIDADE'
+    end
+  end
 end
