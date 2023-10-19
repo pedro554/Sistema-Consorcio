@@ -3,52 +3,19 @@ unit Consulta_Cliente;
 interface
 
 uses
-  FormularioBase,
-  DM_Banco,
-  DM_Funcoes.Consulta,
-  Winapi.Windows,
-  Winapi.Messages,
-  System.SysUtils,
-  System.Variants,
-  System.Classes,
-  Vcl.Graphics,
-  Vcl.Controls,
-  Vcl.Forms,
-  Vcl.Dialogs,
-  Vcl.ExtCtrls,
-  Vcl.StdCtrls,
-  Vcl.Buttons,
-  Data.DB,
-  Vcl.Grids,
-  Vcl.DBGrids,
-  JvExDBGrids,
-  JvDBGrid,
-  FireDAC.Stan.Intf,
-  FireDAC.Stan.Option,
-  FireDAC.Stan.Param,
-  FireDAC.Stan.Error,
-  FireDAC.DatS,
-  FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf,
-  FireDAC.Stan.Async,
-  FireDAC.DApt,
-  FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client,
-  JvMemoryDataset,
-  System.Actions,
-  Vcl.ActnList;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FormularioBase.Consulta, Data.DB,
+  System.Actions, Vcl.ActnList, Vcl.Grids, Vcl.DBGrids, JvExDBGrids,
+  JvDBGrid, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, JvMemoryDataset, DM_Banco;
 
 type
-  TFConsulta_Cliente = class(TFormulario)
-    pnl1: TPanel;
-    edtPesquisa: TEdit;
-    lbl1: TLabel;
-    pnl2: TPanel;
-    btnSelecionar: TSpeedButton;
-    btnCancelar: TSpeedButton;
-    Grid: TJvDBGrid;
+  TFConsulta_Cliente = class(TFormularioConsulta)
     QCliente: TFDQuery;
     TCliente: TJvMemoryData;
+    SCliente: TDataSource;
     QClienteCD_CLIENTE: TFDAutoIncField;
     QClienteNM_CLIENTE: TStringField;
     QClienteNR_FONE: TStringField;
@@ -59,19 +26,11 @@ type
     TClienteDT_CADASTRO: TDateTimeField;
     TClienteST_ATIVO: TStringField;
     TClienteCD_CLIENTE: TIntegerField;
-    SCliente: TDataSource;
-    actlst: TActionList;
-    ACT_F8: TAction;
-    ACT_F6: TAction;
-    cbbColuna: TComboBox;
-    lbl2: TLabel;
-    btnPesquisa: TButton;
-    procedure btnSelecionarClick(Sender: TObject);
-    procedure btnCancelarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnPesquisaClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
   private
     procedure CarregaDados;
     { Private declarations }
@@ -83,15 +42,39 @@ var
   FConsulta_Cliente: TFConsulta_Cliente;
 
 implementation
-
-uses
-  Funcoes;
+uses Funcoes, DM_Funcoes.Consulta, Cad_Cliente;
 
 {$R *.dfm}
 
-procedure TFConsulta_Cliente.btnCancelarClick(Sender: TObject);
+{ TFConsulta_Cliente }
+
+procedure TFConsulta_Cliente.btnEditarClick(Sender: TObject);
+var
+  FCad: TFCad_Cliente;
 begin
-  ModalResult := mrCancel;
+  inherited;
+  FCad := TFCad_Cliente.Create(Self);
+  try
+    CopiaRegistro(TCliente, FCad.TCliente);
+    if FCad.ShowModal = mrOk then
+      CarregaDados;
+  finally
+    FreeAndNil(FCad);
+  end;
+end;
+
+procedure TFConsulta_Cliente.btnNovoClick(Sender: TObject);
+var
+  FCad: TFCad_Cliente;
+begin
+  inherited;
+  FCad := TFCad_Cliente.Create(Self);
+  try
+    if FCad.ShowModal = mrOk then
+      CarregaDados;
+  finally
+    FreeAndNil(FCad);
+  end;
 end;
 
 procedure TFConsulta_Cliente.btnPesquisaClick(Sender: TObject);
@@ -99,12 +82,7 @@ begin
   DMFuncoesConsulta.PesquisaGenerica(TCliente,
                                      DMFuncoesConsulta.PegaNomeCampoCombo(cbbColuna, Grid),
                                      edtPesquisa.Text);
-  Grid.SetFocus;
-end;
-
-procedure TFConsulta_Cliente.btnSelecionarClick(Sender: TObject);
-begin
-  ModalResult := mrOk;
+  inherited;
 end;
 
 procedure TFConsulta_Cliente.CarregaDados;
@@ -119,19 +97,15 @@ end;
 
 procedure TFConsulta_Cliente.FormCreate(Sender: TObject);
 begin
-  DMFuncoesConsulta.CarregaComboBoxColuna(cbbColuna, Grid);
+  inherited;
+  OnCarregaDados := CarregaDados;
 end;
 
 procedure TFConsulta_Cliente.FormDestroy(Sender: TObject);
 begin
+  inherited;
   TCliente.Close;
   QCliente.Close;
 end;
 
-procedure TFConsulta_Cliente.FormShow(Sender: TObject);
-begin
-  CarregaDados;
-end;
-
 end.
-

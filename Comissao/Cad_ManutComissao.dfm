@@ -126,7 +126,6 @@ object FCad_ManutComissao: TFCad_ManutComissao
     Height = 41
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 258
     object btnGravar: TSpeedButton
       Left = 278
       Top = 10

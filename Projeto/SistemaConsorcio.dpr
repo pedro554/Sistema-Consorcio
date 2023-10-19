@@ -19,9 +19,7 @@ uses
   Cad_FaixaComissao in '..\Faixa Comissao\Cad_FaixaComissao.pas' {FCad_FaixaComissao},
   F_CRM in '..\CRM\F_CRM.pas' {FCRM},
   Cad_CRM in '..\CRM\Cad_CRM.pas' {FCad_CRM},
-  Consulta_Cliente in '..\Cliente\Consulta_Cliente.pas' {FConsulta_Cliente},
   DM_Funcoes.Consulta in '..\Comum\DM_Funcoes.Consulta.pas' {DMFuncoesConsulta: TDataModule},
-  Consulta_Funcionario in '..\P_Funcionario\Consulta_Funcionario.pas' {FConsulta_Funcionario},
   Cad_ConfgBanco in '..\Banco\Cad_ConfgBanco.pas' {FCad_ConfigBanco},
   DM_CRM in '..\CRM\DM_CRM.pas' {DMCRM: TDataModule},
   Constantes in '..\Comum\Constantes.pas',
@@ -30,7 +28,10 @@ uses
   Cad_ManutComissao in '..\Comissao\Cad_ManutComissao.pas' {FCad_ManutComissao},
   Cad_Empresa in '..\Empresa\Cad_Empresa.pas' {FCad_Empresa},
   DM_Atualizacao in '..\Atualizacao\DM_Atualizacao.pas' {DMAtualizacao: TDataModule},
-  DM_Consulta in '..\Comum\DM_Consulta.pas' {DMConsulta: TDataModule};
+  DM_Consulta in '..\Comum\DM_Consulta.pas' {DMConsulta: TDataModule},
+  FormularioBase.Consulta in '..\Comum\FormularioBase.Consulta.pas' {FormularioConsulta},
+  Consulta_Funcionario in '..\P_Funcionario\Consulta_Funcionario.pas' {FConsulta_Funcionario},
+  Consulta_Cliente in '..\Cliente\Consulta_Cliente.pas' {FConsulta_Cliente};
 
 {$R *.res}
 

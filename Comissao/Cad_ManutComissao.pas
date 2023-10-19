@@ -110,7 +110,7 @@ var
 implementation
 
 uses
-  Consulta_Funcionario, Funcoes, Consulta_Cliente;
+  DM_Consulta, Funcoes, Consulta_Cliente;
 
 {$R *.dfm}
 
@@ -241,29 +241,13 @@ begin
 end;
 
 procedure TFCad_ManutComissao.btnPsqClienteClick(Sender: TObject);
-var
-  FConsulta_Cliente: TFConsulta_Cliente;
 begin
-  FConsulta_Cliente := TFConsulta_Cliente.Create(Self);
-  try
-    if FConsulta_Cliente.ShowModal = mrOk then
-      CopiaRegistro(FConsulta_Cliente.TCliente, TFiltro, False);
-  finally
-    FreeAndNil(FConsulta_Cliente);
-  end;
+  DMConsulta.ConsultaClietne(TFiltro);
 end;
 
 procedure TFCad_ManutComissao.btnPsqFuncionarioClick(Sender: TObject);
-var
-  FConsulta_Funcionario: TFConsulta_Funcionario;
 begin
-  FConsulta_Funcionario := TFConsulta_Funcionario.Create(Self);
-  try
-    if FConsulta_Funcionario.ShowModal = mrOk then
-      CopiaRegistro(FConsulta_Funcionario.TFuncionario, TFiltro, False);
-  finally
-    FreeAndNil(FConsulta_Funcionario);
-  end;
+  DMConsulta.ConsultaFuncionario(TFiltro);
 end;
 
 procedure TFCad_ManutComissao.FormCreate(Sender: TObject);

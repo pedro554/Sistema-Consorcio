@@ -3,56 +3,33 @@ unit Consulta_Funcionario;
 interface
 
 uses
-  FormularioBase,
-  DM_Banco,
-  DM_Funcoes.Consulta,
-  Winapi.Windows,
-  Winapi.Messages,
-  System.SysUtils,
-  System.Variants,
-  System.Classes,
-  Vcl.Graphics,
-  Vcl.Controls,
-  Vcl.Forms,
-  Vcl.Dialogs, Data.DB, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, System.Actions,
-  Vcl.ActnList, JvMemoryDataset, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.ExtCtrls;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FormularioBase.Consulta, Data.DB,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Stan.Async, FireDAC.DApt, System.Actions, Vcl.ActnList,
+  JvMemoryDataset, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids,
+  Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, FireDAC.Phys.Intf, FireDAC.DApt.Intf;
 
 type
-  TFConsulta_Funcionario = class(TFormulario)
-    pnl1: TPanel;
-    lbl1: TLabel;
-    lbl2: TLabel;
-    edtPesquisa: TEdit;
-    cbbColuna: TComboBox;
-    pnl2: TPanel;
-    btnSelecionar: TSpeedButton;
-    btnCancelar: TSpeedButton;
-    Grid: TJvDBGrid;
+  TFConsulta_Funcionario = class(TFormularioConsulta)
     QFuncionario: TFDQuery;
-    TFuncionario: TJvMemoryData;
-    SFuncionario: TDataSource;
-    actlst: TActionList;
-    ACT_F8: TAction;
-    ACT_F6: TAction;
     QFuncionarioCD_FUNCIONARIO: TFDAutoIncField;
     QFuncionarioNM_FUNCIONARIO: TStringField;
     QFuncionarioDT_CADASTRO: TDateTimeField;
     QFuncionarioST_ATIVO: TStringField;
+    TFuncionario: TJvMemoryData;
     TFuncionarioNM_FUNCIONARIO: TStringField;
     TFuncionarioDT_CADASTRO: TDateTimeField;
     TFuncionarioST_ATIVO: TStringField;
     TFuncionarioCD_FUNCIONARIO: TIntegerField;
-    btnPesquisa: TButton;
-    procedure btnSelecionarClick(Sender: TObject);
-    procedure btnCancelarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
+    SFuncionario: TDataSource;
     procedure FormDestroy(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btnPesquisaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
   private
     procedure CarregaDados;
     { Private declarations }
@@ -64,13 +41,39 @@ var
   FConsulta_Funcionario: TFConsulta_Funcionario;
 
 implementation
-uses Funcoes;
+uses Funcoes, DM_Funcoes.Consulta, Cad_Funcionario;
 
 {$R *.dfm}
 
-procedure TFConsulta_Funcionario.btnCancelarClick(Sender: TObject);
+{ TFConsulta_Funcionario }
+
+procedure TFConsulta_Funcionario.btnEditarClick(Sender: TObject);
+var
+  FCad: TFCad_Funcionario;
 begin
-  ModalResult := mrCancel;
+  inherited;
+  FCad := TFCad_Funcionario.Create(Self);
+  try
+    CopiaRegistro(TFuncionario, FCad.TFuncionario);
+    if FCad.ShowModal = mrOk then
+      CarregaDados;
+  finally
+    FreeAndNil(FCad);
+  end;
+end;
+
+procedure TFConsulta_Funcionario.btnNovoClick(Sender: TObject);
+var
+  FCad: TFCad_Funcionario;
+begin
+  inherited;
+  FCad := TFCad_Funcionario.Create(Self);
+  try
+    if FCad.ShowModal = mrOk then
+      CarregaDados;
+  finally
+    FreeAndNil(FCad);
+  end;
 end;
 
 procedure TFConsulta_Funcionario.btnPesquisaClick(Sender: TObject);
@@ -78,12 +81,7 @@ begin
   DMFuncoesConsulta.PesquisaGenerica(TFuncionario,
                                      DMFuncoesConsulta.PegaNomeCampoCombo(cbbColuna, Grid),
                                      edtPesquisa.Text);
-  Grid.SetFocus;
-end;
-
-procedure TFConsulta_Funcionario.btnSelecionarClick(Sender: TObject);
-begin
-  ModalResult := mrOk;
+  inherited;
 end;
 
 procedure TFConsulta_Funcionario.CarregaDados;
@@ -98,19 +96,15 @@ end;
 
 procedure TFConsulta_Funcionario.FormCreate(Sender: TObject);
 begin
-  DMFuncoesConsulta.CarregaComboBoxColuna(cbbColuna, Grid);
+  inherited;
+  OnCarregaDados := CarregaDados;
 end;
 
 procedure TFConsulta_Funcionario.FormDestroy(Sender: TObject);
 begin
+  inherited;
   QFuncionario.Close;
   TFuncionario.Close;
 end;
 
-procedure TFConsulta_Funcionario.FormShow(Sender: TObject);
-begin
-  CarregaDados;
-end;
-
 end.
-

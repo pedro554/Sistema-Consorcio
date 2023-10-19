@@ -142,15 +142,9 @@
         <DCCReference Include="..\CRM\Cad_CRM.pas">
             <Form>FCad_CRM</Form>
         </DCCReference>
-        <DCCReference Include="..\Cliente\Consulta_Cliente.pas">
-            <Form>FConsulta_Cliente</Form>
-        </DCCReference>
         <DCCReference Include="..\Comum\DM_Funcoes.Consulta.pas">
             <Form>DMFuncoesConsulta</Form>
             <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\P_Funcionario\Consulta_Funcionario.pas">
-            <Form>FConsulta_Funcionario</Form>
         </DCCReference>
         <DCCReference Include="..\Banco\Cad_ConfgBanco.pas">
             <Form>FCad_ConfigBanco</Form>
@@ -187,6 +181,18 @@
             <Form>DMConsulta</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Comum\FormularioBase.Consulta.pas">
+            <Form>FormularioConsulta</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\P_Funcionario\Consulta_Funcionario.pas">
+            <Form>FConsulta_Funcionario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cliente\Consulta_Cliente.pas">
+            <Form>FConsulta_Cliente</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

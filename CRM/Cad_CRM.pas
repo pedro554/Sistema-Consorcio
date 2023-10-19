@@ -98,7 +98,7 @@ var
 implementation
 
 uses
-  Funcoes, Consulta_Cliente, Consulta_Funcionario;
+  Funcoes, Consulta_Cliente, Consulta_Funcionario, DM_Consulta;
 
 {$R *.dfm}
 
@@ -126,29 +126,13 @@ begin
 end;
 
 procedure TFCad_CRM.btnPsqClienteClick(Sender: TObject);
-var
-  FConsulta_Cliente: TFConsulta_Cliente;
 begin
-  FConsulta_Cliente := TFConsulta_Cliente.Create(Self);
-  try
-    if FConsulta_Cliente.ShowModal = mrOk then
-      CopiaRegistro(FConsulta_Cliente.TCliente, TCRM, False);
-  finally
-    FreeAndNil(FConsulta_Cliente);
-  end;
+  DMConsulta.ConsultaClietne(TCRM);
 end;
 
 procedure TFCad_CRM.btnPsqFuncionarioClick(Sender: TObject);
-var
-  FConsulta_Funcionario: TFConsulta_Funcionario;
 begin
-  FConsulta_Funcionario := TFConsulta_Funcionario.Create(Self);
-  try
-    if FConsulta_Funcionario.ShowModal = mrOk then
-      CopiaRegistro(FConsulta_Funcionario.TFuncionario, TCRM, False);
-  finally
-    FreeAndNil(FConsulta_Funcionario);
-  end;
+  DMConsulta.ConsultaFuncionario(TCRM);
 end;
 
 procedure TFCad_CRM.CarregaCRM(ACodCRM: Integer);

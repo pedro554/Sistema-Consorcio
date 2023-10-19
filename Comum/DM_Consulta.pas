@@ -14,6 +14,7 @@ type
     { Private declarations }
   public
     procedure ConsultaFuncionario(ADatasetDestino: TDataSet);
+    procedure ConsultaClietne(ADatasetDestino: TDataSet);
     { Public declarations }
   end;
 
@@ -21,13 +22,26 @@ var
   DMConsulta: TDMConsulta;
 
 implementation
-uses Consulta_Funcionario;
+uses Consulta_Funcionario, Cad_Funcionario, Consulta_Cliente, Cad_Cliente;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
 
 { TDataModule1 }
+
+procedure TDMConsulta.ConsultaClietne(ADatasetDestino: TDataSet);
+var
+  FConsulta_Cliente: TFConsulta_Cliente;
+begin
+  FConsulta_Cliente := TFConsulta_Cliente.Create(Self);
+  try
+    if FConsulta_Cliente.ShowModal = 1 then
+      CopiaRegistro(FConsulta_Cliente.TCliente, ADatasetDestino, False);
+  finally
+    FreeAndNil(FConsulta_Cliente);
+  end;
+end;
 
 procedure TDMConsulta.ConsultaFuncionario(ADatasetDestino: TDataSet);
 var
