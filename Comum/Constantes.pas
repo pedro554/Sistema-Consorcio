@@ -37,6 +37,8 @@ const
   C_DIRETORIOATUALIZACAO: String = '/AtualizacaoSistema/';
 
   C_ARQUIVOVERSAOINTERNA: String = 'versaointerna.siscon';
+  C_NOMEEXECUTAVEL: String = 'SisCon.exe';
+  C_NOMEEXECUTAVELOLD: String = 'SisConOLD.exe';
 
 
   C_NENHUM_REGISTRO: string = 'Nenhum registro encontrado!';

@@ -154,6 +154,9 @@ begin
     Abort;
   end;
 
+  if not QCRM.Locate('CD_CRM', TCRMCD_CRM.AsInteger, []) then
+    Exit;
+
   if MyMessage('Cliente: ' + TCRMNM_CLIENTE.AsString + #13#10 +
                'Fone: ' + TCRMNR_FONE.AsString + #13#10 +
                'Crédito: ' + FormatFloat('#,0.00', QCRMVL_CREDITO.AsFloat) + #13#10#13#10 +

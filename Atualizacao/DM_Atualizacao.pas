@@ -59,8 +59,8 @@ begin
     if MyMessage('Atualização do sistema encontrada. Deseja atualizar agora?', 4) <> 6 then
       Exit;
 
-    RenameFile(DiretorioSistema + '\SistemaConsorcio.exe', DiretorioSistema + '\SistemaConsorcioOLD.exe');
-    ftpAtualizacao.Get(C_DIRETORIOATUALIZACAO + 'SistemaConsorcio.exe', DiretorioSistema + '\SistemaConsorcio.exe', False);
+    RenameFile(DiretorioSistema + '\SistemaConsorcio.exe', DiretorioSistema + '\' + C_NOMEEXECUTAVELOLD);
+    ftpAtualizacao.Get(C_DIRETORIOATUALIZACAO + 'SistemaConsorcio.exe', DiretorioSistema + '\' + C_NOMEEXECUTAVEL, False);
     Result := True;
 
     ConsultaVersao;
@@ -116,8 +116,8 @@ end;
 
 procedure TDMAtualizacao.ExcluirExecutavelOLD;
 begin
-  if FileExists(DiretorioSistema + '\SistemaConsorcioOLD.exe') then
-    DeleteFile(DiretorioSistema + '\SistemaConsorcioOLD.exe');
+  if FileExists(DiretorioSistema + '\' + C_NOMEEXECUTAVELOLD) then
+    DeleteFile(DiretorioSistema + '\' + C_NOMEEXECUTAVELOLD);
 end;
 
 function TDMAtualizacao.VerificaTemAtualizacao: Boolean;
