@@ -4,6 +4,7 @@ object DMAtualizacao: TDMAtualizacao
   Height = 301
   Width = 355
   object ftpAtualizacao: TIdFTP
+    OnWork = ftpAtualizacaoWork
     Passive = True
     ConnectTimeout = 0
     TransferType = ftBinary

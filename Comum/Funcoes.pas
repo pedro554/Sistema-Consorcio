@@ -5,7 +5,7 @@ interface
 uses
   Data.DB, Vcl.Dialogs, Vcl.Forms, Variaveis_Sistema, Winapi.Windows,
   System.SysUtils, DateUtils, pcnAuxiliar, IpHlpApi, IpTypes, WinSock2, JvMemoryDataset,
-  System.Win.ComObj, tlHelp32;
+  System.Win.ComObj, tlHelp32, IdHTTP;
 
 procedure CopiaRegistro(AOrigem, ADestino: TDataSet; AAppend: Boolean = True; APost: Boolean = True);
 procedure CopiaTabela(AOrigem, ADestino: TDataSet);
@@ -27,9 +27,27 @@ function DelphiAberto: Boolean;
 function GetMacAddress: string;
 function TratarMsgErroBanco(AMsg: String): String;
 function IsVersaoInterna: Boolean;
+function VerificarExisteConexaoComInternet: boolean;
 
 implementation
 uses Constantes;
+
+function VerificarExisteConexaoComInternet: Boolean;
+var
+  HTTP: TIdHTTP;
+begin
+  HTTP := TIdHTTP.Create(nil);
+  try
+    try
+      HTTP.Head('http://www.google.com');
+      Result := True;
+    except
+      Result := False;
+    end;
+  finally
+    HTTP.Free;
+  end;
+end;
 
 function IsVersaoInterna: Boolean;
 begin

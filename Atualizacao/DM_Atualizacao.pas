@@ -3,6 +3,7 @@ unit DM_Atualizacao;
 interface
 
 uses
+  F_Processo,
   System.SysUtils, System.Classes, IdBaseComponent, IdComponent,
   IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase, IdFTP, Vcl.ComCtrls,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
@@ -17,11 +18,15 @@ type
     QVersao: TFDQuery;
     QVersaoNR_VERSAOSISTEMA: TIntegerField;
     procedure DataModuleDestroy(Sender: TObject);
+    procedure ftpAtualizacaoWork(ASender: TObject; AWorkMode: TWorkMode;
+      AWorkCount: Int64);
   private
+    FProcesso: TFProcesso;
     function ConectarServidorFTP(out AMsgErro: String): Boolean;
     procedure DesconectarFTP;
     function VerificaTemAtualizacao: Boolean;
     procedure ConsultaVersao;
+    procedure AtualizaSistema;
     { Private declarations }
   public
     function BaixarAtualizacao: Boolean;
@@ -41,6 +46,34 @@ uses Constantes, Funcoes, DM_Banco, Variaveis_Sistema;
 
 { TDMAtualizacao }
 
+procedure TDMAtualizacao.AtualizaSistema;
+begin
+  FProcesso.AtualizaDescricao('Renomeando arquivos...');
+  RenameFile(DiretorioSistema + '\' + C_NOMEEXECUTAVEL, DiretorioSistema + '\' + C_NOMEEXECUTAVELOLD);
+
+  FProcesso.AtualizaDescricao('Baixando atualização...');
+  FProcesso.ConfiguraProgressoPrincipal(ftpAtualizacao.Size(C_DIRETORIOATUALIZACAO + C_NOMEEXECUTAVEL) div 1024);
+  try
+    ftpAtualizacao.Get(C_DIRETORIOATUALIZACAO + C_NOMEEXECUTAVEL, DiretorioSistema + '\' + C_NOMEEXECUTAVEL, False);
+  except
+    on E: Exception do
+    begin
+      MyMessage('Erro ao baixar a atualização: ' + E.Message);
+      Abort;
+    end;
+  end;
+
+  FProcesso.AtualizaDescricao('Atualizando número da versão...');
+  ConsultaVersao;
+  if not (QVersao.State in [dsEdit, dsInsert]) then
+    QVersao.Edit;
+
+  QVersaoNR_VERSAOSISTEMA.AsInteger := QVerificaAtualizacao.FieldByName('NR_VERSAO').AsInteger;
+  QVersao.Post;
+
+  FProcesso.Finaliza;
+end;
+
 function TDMAtualizacao.BaixarAtualizacao: Boolean;
 var
   lvMsgErro: String;
@@ -52,6 +85,8 @@ begin
     Abort;
   end;
 
+  FProcesso := TFProcesso.Create(nil);
+
   try
     if not VerificaTemAtualizacao then
       Exit;
@@ -59,18 +94,14 @@ begin
     if MyMessage('Atualização do sistema encontrada. Deseja atualizar agora?', 4) <> 6 then
       Exit;
 
-    RenameFile(DiretorioSistema + '\SistemaConsorcio.exe', DiretorioSistema + '\' + C_NOMEEXECUTAVELOLD);
-    ftpAtualizacao.Get(C_DIRETORIOATUALIZACAO + 'SistemaConsorcio.exe', DiretorioSistema + '\' + C_NOMEEXECUTAVEL, False);
+    FProcesso.Titulo := 'Atualizando sistema';
+    FProcesso.OnExecutaProc := AtualizaSistema;
+    FProcesso.Inicializa;
+
     Result := True;
-
-    ConsultaVersao;
-    if not (QVersao.State in [dsEdit, dsInsert]) then
-      QVersao.Edit;
-
-    QVersaoNR_VERSAOSISTEMA.AsInteger := QVerificaAtualizacao.FieldByName('NR_VERSAO').AsInteger;
-    QVersao.Post;
   finally
     DesconectarFTP;
+    FreeAndNil(FProcesso);
   end;
 end;
 
@@ -118,6 +149,12 @@ procedure TDMAtualizacao.ExcluirExecutavelOLD;
 begin
   if FileExists(DiretorioSistema + '\' + C_NOMEEXECUTAVELOLD) then
     DeleteFile(DiretorioSistema + '\' + C_NOMEEXECUTAVELOLD);
+end;
+
+procedure TDMAtualizacao.ftpAtualizacaoWork(ASender: TObject;
+  AWorkMode: TWorkMode; AWorkCount: Int64);
+begin
+  FProcesso.IncrementaProgresso(AWorkCount div 1024);
 end;
 
 function TDMAtualizacao.VerificaTemAtualizacao: Boolean;

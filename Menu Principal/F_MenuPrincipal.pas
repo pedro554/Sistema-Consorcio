@@ -15,6 +15,7 @@ uses
   Vcl.Forms,
   Vcl.Dialogs,
   Vcl.ComCtrls,
+  ShellAPI,
   Vcl.Menus, IdBaseComponent, IdThreadComponent;
 
 type
@@ -33,7 +34,6 @@ type
     RelatriodePagamentodeComisso1: TMenuItem;
     Manuteno1: TMenuItem;
     ManutenodeComisses1: TMenuItem;
-    ThreadAtualizacao: TIdThreadComponent;
     procedure MVendedorFuncionarioClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure MFaixaComissaoClick(Sender: TObject);
@@ -42,7 +42,6 @@ type
     procedure RelatriodePagamentodeComisso1Click(Sender: TObject);
     procedure ManutenodeComisses1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure ThreadAtualizacaoRun(Sender: TIdThreadComponent);
   private
     { Private declarations }
   public
@@ -84,7 +83,12 @@ begin
   stat.Panels.Items[0].Text := 'Versão: ' + DMBanco.RetornaVersaoSistema;
   stat.Panels.Items[1].Text := 'CPF/CNPJ: ' + VAR_CPFCNPJ;
   stat.Panels.Items[2].Text := 'Validade: ' + VAR_VALIDADE;
-  ThreadAtualizacao.Start;
+  if DMAtualizacao.BaixarAtualizacao then
+  begin
+    MyMessage('Atualização finalizada com sucesso. O Sistema será reiniciado!');
+    ShellExecute(Handle, nil, PChar(Application.ExeName), '', nil, SW_SHOWNORMAL);
+    Application.Terminate;
+  end;
 end;
 
 procedure TFMenuPrincipal.ManutenodeComisses1Click(Sender: TObject);
@@ -114,21 +118,6 @@ var
   AForm: TFFaixaComissao;
 begin
   AbreForm(TFFiltroRelComissao, TObject(AForm));
-end;
-
-procedure TFMenuPrincipal.ThreadAtualizacaoRun(Sender: TIdThreadComponent);
-var
-  lvSucesso: Boolean;
-begin
-  lvSucesso := False;
-  try
-    if DMAtualizacao.BaixarAtualizacao then
-      lvSucesso := True;
-  finally
-    Sender.Terminate;
-    if lvSucesso then
-      MyMessage('Atualização finalizada com sucesso.');
-  end;
 end;
 
 end.

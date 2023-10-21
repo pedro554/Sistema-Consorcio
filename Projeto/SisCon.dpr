@@ -31,7 +31,8 @@ uses
   DM_Consulta in '..\Comum\DM_Consulta.pas' {DMConsulta: TDataModule},
   FormularioBase.Consulta in '..\Comum\FormularioBase.Consulta.pas' {FormularioConsulta},
   Consulta_Funcionario in '..\P_Funcionario\Consulta_Funcionario.pas' {FConsulta_Funcionario},
-  Consulta_Cliente in '..\Cliente\Consulta_Cliente.pas' {FConsulta_Cliente};
+  Consulta_Cliente in '..\Cliente\Consulta_Cliente.pas' {FConsulta_Cliente},
+  F_Processo in '..\Comum\F_Processo.pas' {FProcesso};
 
 {$R *.res}
 
@@ -41,6 +42,14 @@ var
 
 begin
   Application.Initialize;
+
+  if not VerificarExisteConexaoComInternet then
+  begin
+    MyMessage('É necessário estar conectado a internet para utilizar o sistema!');
+    Application.Terminate;
+    Exit;
+  end;
+
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFMenuPrincipal, FMenuPrincipal);
   Application.CreateForm(TDMBanco, DMBanco);
