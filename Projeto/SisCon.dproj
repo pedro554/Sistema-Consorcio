@@ -93,9 +93,9 @@
         <DCC_DcuOutput>D:\Projetos\Sistema-Consorcio\Projeto\dcu\</DCC_DcuOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>SisCon_Icon.ico</Icon_MainIcon>
-        <UWP_DelphiLogo44>D:\Programas\S8-Desk\s8-png.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>D:\Programas\S8-Desk\s8-png.png</UWP_DelphiLogo150>
+        <Icon_MainIcon>SisCon_Icon2.ico</Icon_MainIcon>
+        <UWP_DelphiLogo44>siscon2.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>siscon2.png</UWP_DelphiLogo150>
         <DCC_ExeOutput>C:\SisCon\</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -231,16 +231,16 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="C:\SisCon\SisCon.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>SisCon.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="D:\Programas\S8-Desk\s8-png.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                <DeployFile LocalName="siscon2.png" Configuration="Debug" Class="UWP_DelphiLogo44">
                     <Platform Name="Win32">
                         <RemoteDir>Assets\</RemoteDir>
                         <RemoteName>Logo44x44.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="C:\SisCon\SisCon.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>SisCon.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

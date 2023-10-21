@@ -8,11 +8,13 @@ object DMBanco: TDMBanco
       'Password=spsg91g8'
       'User_Name=root'
       'DriverID=MySQL')
+    Connected = True
     LoginPrompt = False
     Left = 56
     Top = 28
   end
   object driver: TFDPhysMySQLDriverLink
+    VendorLib = 'C:\SisCon\lib\libmysql.dll'
     Left = 56
     Top = 84
   end

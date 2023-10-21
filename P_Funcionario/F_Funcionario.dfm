@@ -176,6 +176,25 @@ object FFuncionario: TFFuncionario
       Origin = 'ST_ATIVO'
       Size = 3
     end
+    object QFuncionarioDT_CADASTRO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DT_CADASTRO'
+      Origin = 'DT_CADASTRO'
+    end
+    object QFuncionarioVL_SALARIO: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VL_SALARIO'
+      Origin = 'VL_SALARIO'
+      Precision = 10
+      Size = 2
+    end
+    object QFuncionarioVL_OUTRO: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VL_OUTRO'
+      Origin = 'VL_OUTRO'
+      Precision = 10
+      Size = 2
+    end
   end
   object TFuncionario: TJvMemoryData
     FieldDefs = <>
@@ -193,6 +212,12 @@ object FFuncionario: TFFuncionario
     end
     object TFuncionarioST_MARCADO: TBooleanField
       FieldName = 'ST_MARCADO'
+    end
+    object TFuncionarioVL_SALARIO: TFloatField
+      FieldName = 'VL_SALARIO'
+    end
+    object TFuncionarioVL_OUTRO: TFloatField
+      FieldName = 'VL_OUTRO'
     end
     object TFuncionarioST_ATIVO: TStringField
       FieldName = 'ST_ATIVO'

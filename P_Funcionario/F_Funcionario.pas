@@ -58,6 +58,11 @@ type
     QFuncionarioST_ATIVO: TStringField;
     TFuncionarioST_ATIVO: TStringField;
     btnPesquisa: TButton;
+    TFuncionarioVL_SALARIO: TFloatField;
+    TFuncionarioVL_OUTRO: TFloatField;
+    QFuncionarioDT_CADASTRO: TDateTimeField;
+    QFuncionarioVL_SALARIO: TBCDField;
+    QFuncionarioVL_OUTRO: TBCDField;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);

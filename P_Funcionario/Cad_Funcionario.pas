@@ -53,6 +53,15 @@ type
     chkST_ATIVO: TDBCheckBox;
     QFuncionarioST_ATIVO: TStringField;
     TFuncionarioST_ATIVO: TStringField;
+    TFuncionarioVL_SALARIO: TFloatField;
+    TFuncionarioVL_OUTRO: TFloatField;
+    Label1: TLabel;
+    edtVL_SALARIO: TDBEdit;
+    edtVL_OUTRO: TDBEdit;
+    Label2: TLabel;
+    QFuncionarioDT_CADASTRO: TDateTimeField;
+    QFuncionarioVL_SALARIO: TBCDField;
+    QFuncionarioVL_OUTRO: TBCDField;
     procedure btnGravarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
