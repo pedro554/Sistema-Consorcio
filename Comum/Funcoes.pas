@@ -5,7 +5,7 @@ interface
 uses
   Data.DB, Vcl.Dialogs, Vcl.Forms, Variaveis_Sistema, Winapi.Windows,
   System.SysUtils, DateUtils, pcnAuxiliar, IpHlpApi, IpTypes, WinSock2, JvMemoryDataset,
-  System.Win.ComObj, tlHelp32, IdHTTP;
+  System.Win.ComObj, tlHelp32, IdHTTP, RegularExpressions;
 
 procedure CopiaRegistro(AOrigem, ADestino: TDataSet; AAppend: Boolean = True; APost: Boolean = True);
 procedure CopiaTabela(AOrigem, ADestino: TDataSet);
@@ -28,9 +28,17 @@ function GetMacAddress: string;
 function TratarMsgErroBanco(AMsg: String): String;
 function IsVersaoInterna: Boolean;
 function VerificarExisteConexaoComInternet: boolean;
+function ValidaEmail(const AEmail: String): Boolean;
 
 implementation
 uses Constantes;
+
+function ValidaEmail(const AEmail: String): Boolean;
+const
+  EmailRegexPattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+begin
+  Result := TRegEx.IsMatch(AEmail, EmailRegexPattern);
+end;
 
 function VerificarExisteConexaoComInternet: Boolean;
 var

@@ -17,7 +17,7 @@ object FCad_Cliente: TFCad_Cliente
   TextHeight = 13
   object lbl1: TLabel
     Left = 135
-    Top = 43
+    Top = 36
     Width = 27
     Height = 13
     Alignment = taRightJustify
@@ -31,11 +31,25 @@ object FCad_Cliente: TFCad_Cliente
   end
   object lbl2: TLabel
     Left = 138
-    Top = 66
+    Top = 58
     Width = 24
     Height = 13
     Alignment = taRightJustify
     Caption = 'Fone'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 134
+    Top = 81
+    Width = 28
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'E-Mail'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -11
@@ -49,7 +63,7 @@ object FCad_Cliente: TFCad_Cliente
     Width = 635
     Height = 41
     Align = alBottom
-    TabOrder = 3
+    TabOrder = 4
     object btnGravar: TSpeedButton
       Left = 195
       Top = 10
@@ -69,7 +83,7 @@ object FCad_Cliente: TFCad_Cliente
   end
   object edtNM_CLIENTE: TDBEdit
     Left = 168
-    Top = 40
+    Top = 32
     Width = 300
     Height = 21
     DataField = 'NM_CLIENTE'
@@ -78,7 +92,7 @@ object FCad_Cliente: TFCad_Cliente
   end
   object edtNR_FONE: TDBEdit
     Left = 168
-    Top = 63
+    Top = 55
     Width = 125
     Height = 21
     DataField = 'NR_FONE'
@@ -87,15 +101,24 @@ object FCad_Cliente: TFCad_Cliente
   end
   object chkST_ATIVO: TDBCheckBox
     Left = 168
-    Top = 86
+    Top = 102
     Width = 62
     Height = 17
     Caption = 'Ativo'
     DataField = 'ST_ATIVO'
     DataSource = SCliente
-    TabOrder = 2
+    TabOrder = 3
     ValueChecked = 'SIM'
     ValueUnchecked = 'N'#195'O'
+  end
+  object edtDS_EMAIL: TDBEdit
+    Left = 168
+    Top = 78
+    Width = 300
+    Height = 21
+    DataField = 'DS_EMAIL'
+    DataSource = SCliente
+    TabOrder = 2
   end
   object QCliente: TFDQuery
     Connection = DMBanco.con
@@ -141,6 +164,12 @@ object FCad_Cliente: TFCad_Cliente
       Origin = 'ST_ATIVO'
       Size = 3
     end
+    object QClienteDS_EMAIL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DS_EMAIL'
+      Origin = 'DS_EMAIL'
+      Size = 50
+    end
   end
   object TCliente: TJvMemoryData
     FieldDefs = <>
@@ -164,6 +193,10 @@ object FCad_Cliente: TFCad_Cliente
     object TClienteST_ATIVO: TStringField
       FieldName = 'ST_ATIVO'
       Size = 3
+    end
+    object TClienteDS_EMAIL: TStringField
+      FieldName = 'DS_EMAIL'
+      Size = 50
     end
   end
   object SCliente: TDataSource

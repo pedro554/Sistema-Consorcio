@@ -34,6 +34,7 @@ type
     RelatriodePagamentodeComisso1: TMenuItem;
     Manuteno1: TMenuItem;
     ManutenodeComisses1: TMenuItem;
+    Sistema1: TMenuItem;
     procedure MVendedorFuncionarioClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure MFaixaComissaoClick(Sender: TObject);
@@ -42,6 +43,7 @@ type
     procedure RelatriodePagamentodeComisso1Click(Sender: TObject);
     procedure ManutenodeComisses1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Sistema1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,7 +55,7 @@ var
 
 implementation
 uses Funcoes, F_Funcionario, F_Cliente, F_FaixaComissao, F_CRM, Cad_ConfgBanco,
-F_FiltroRelComissao, Cad_ManutComissao, DM_Atualizacao, DM_Banco;
+F_FiltroRelComissao, Cad_ManutComissao, DM_Atualizacao, DM_Banco, Cad_ConfigSistema;
 
 {$R *.dfm}
 
@@ -118,6 +120,13 @@ var
   AForm: TFFaixaComissao;
 begin
   AbreForm(TFFiltroRelComissao, TObject(AForm));
+end;
+
+procedure TFMenuPrincipal.Sistema1Click(Sender: TObject);
+var
+  AForm: TFCad_ConfigSistema;
+begin
+  AbreForm(TFCad_ConfigSistema, TObject(AForm));
 end;
 
 end.

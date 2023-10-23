@@ -32,7 +32,9 @@ uses
   FormularioBase.Consulta in '..\Comum\FormularioBase.Consulta.pas' {FormularioConsulta},
   Consulta_Funcionario in '..\P_Funcionario\Consulta_Funcionario.pas' {FConsulta_Funcionario},
   Consulta_Cliente in '..\Cliente\Consulta_Cliente.pas' {FConsulta_Cliente},
-  F_Processo in '..\Comum\F_Processo.pas' {FProcesso};
+  F_Processo in '..\Comum\F_Processo.pas' {FProcesso},
+  Cad_ConfigSistema in '..\Config\Cad_ConfigSistema.pas' {FCad_ConfigSistema},
+  DM_ConfigSistema in '..\Config\DM_ConfigSistema.pas' {DMConfigSistema: TDataModule};
 
 {$R *.res}
 
@@ -42,6 +44,7 @@ var
 
 begin
   Application.Initialize;
+  Application.MainFormOnTaskbar := True;
 
   if not VerificarExisteConexaoComInternet then
   begin
@@ -50,10 +53,7 @@ begin
     Exit;
   end;
 
-  Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TFMenuPrincipal, FMenuPrincipal);
   Application.CreateForm(TDMBanco, DMBanco);
-  Application.CreateForm(TDMConsulta, DMConsulta);
   Ini := TIniFile.Create(DiretorioSistema + '\cfgbanco.ini');
   if not DMBanco.Conectar(
     Ini.ReadString('banco', 'usuario', 'root'),
@@ -83,6 +83,11 @@ begin
   Application.CreateForm(TDMAtualizacao, DMAtualizacao);
   DMAtualizacao.ExcluirExecutavelOLD;
 
+  Application.CreateForm(TDMConfigSistema, DMConfigSistema);
+  DMConfigSistema.CarregaConfigSistema;
+
+  Application.CreateForm(TFMenuPrincipal, FMenuPrincipal);
+  Application.CreateForm(TDMConsulta, DMConsulta);
   Application.CreateForm(TDMFuncoesConsulta, DMFuncoesConsulta);
   Application.Run;
 end.

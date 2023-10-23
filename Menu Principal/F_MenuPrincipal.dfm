@@ -81,6 +81,10 @@ object FMenuPrincipal: TFMenuPrincipal
         Caption = 'Banco de Dados'
         OnClick = BancodeDados1Click
       end
+      object Sistema1: TMenuItem
+        Caption = 'Sistema'
+        OnClick = Sistema1Click
+      end
     end
   end
 end

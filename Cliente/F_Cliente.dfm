@@ -198,6 +198,12 @@ object FCliente: TFCliente
       Origin = 'ST_ATIVO'
       Size = 3
     end
+    object QClienteDS_EMAIL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DS_EMAIL'
+      Origin = 'DS_EMAIL'
+      Size = 50
+    end
   end
   object TCliente: TJvMemoryData
     FieldDefs = <>
@@ -223,6 +229,10 @@ object FCliente: TFCliente
     object TClienteST_ATIVO: TStringField
       FieldName = 'ST_ATIVO'
       Size = 3
+    end
+    object TClienteDS_EMAIL: TStringField
+      FieldName = 'DS_EMAIL'
+      Size = 50
     end
   end
   object SCliente: TDataSource

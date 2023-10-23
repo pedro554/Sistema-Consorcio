@@ -64,6 +64,10 @@ type
     chkST_ATIVO: TDBCheckBox;
     QClienteST_ATIVO: TStringField;
     TClienteST_ATIVO: TStringField;
+    Label1: TLabel;
+    edtDS_EMAIL: TDBEdit;
+    QClienteDS_EMAIL: TStringField;
+    TClienteDS_EMAIL: TStringField;
     procedure TClienteAfterInsert(DataSet: TDataSet);
     procedure btnGravarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -96,6 +100,12 @@ begin
     TCliente.Post;
 
   ValidaCampo(TClienteNM_CLIENTE);
+  if TClienteDS_EMAIL.AsString <> EmptyStr then
+    if not ValidaEmail(TClienteDS_EMAIL.AsString) then
+    begin
+      MyMessage('E-Mail inválido');
+      Abort;
+    end;
   Transacao.StartTransaction;
   try
     QCliente.Close;

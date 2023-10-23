@@ -60,6 +60,8 @@ type
     TClienteST_ATIVO: TStringField;
     QClienteST_ATIVO: TStringField;
     btnPesquisa: TButton;
+    QClienteDS_EMAIL: TStringField;
+    TClienteDS_EMAIL: TStringField;
     procedure btnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
