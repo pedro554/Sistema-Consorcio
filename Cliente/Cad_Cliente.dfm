@@ -104,6 +104,7 @@ object FCad_Cliente: TFCad_Cliente
     Top = 102
     Width = 62
     Height = 17
+    TabStop = False
     Caption = 'Ativo'
     DataField = 'ST_ATIVO'
     DataSource = SCliente

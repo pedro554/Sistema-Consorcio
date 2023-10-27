@@ -44,6 +44,7 @@ implementation
 procedure TFProcesso.AtualizaDescricao(ADescricao: String);
 begin
   lblDescricao.Caption := ADescricao;
+  Application.ProcessMessages;
 end;
 
 procedure TFProcesso.ConfiguraProgressoPrincipal(AMax: Integer);
@@ -71,7 +72,8 @@ end;
 procedure TFProcesso.Inicializa;
 begin
   Self.Show;
-  OnExecutaProc;
+  if Assigned(OnExecutaProc) then
+    OnExecutaProc;
 end;
 
 procedure TFProcesso.ReiniciaProgresso;

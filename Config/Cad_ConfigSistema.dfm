@@ -22,9 +22,6 @@ object FCad_ConfigSistema: TFCad_ConfigSistema
     Height = 41
     Align = alBottom
     TabOrder = 1
-    ExplicitLeft = 232
-    ExplicitTop = 152
-    ExplicitWidth = 185
     object btnGravar: TSpeedButton
       Left = 195
       Top = 10
@@ -98,7 +95,7 @@ object FCad_ConfigSistema: TFCad_ConfigSistema
         Width = 300
         Height = 21
         DataField = 'DS_USERNAME'
-        DataSource = SConfigSistema
+        DataSource = SConfigEmail
         TabOrder = 0
       end
       object edtDS_SENHA: TDBEdit
@@ -107,7 +104,7 @@ object FCad_ConfigSistema: TFCad_ConfigSistema
         Width = 300
         Height = 21
         DataField = 'DS_SENHA'
-        DataSource = SConfigSistema
+        DataSource = SConfigEmail
         PasswordChar = '*'
         TabOrder = 1
       end
@@ -117,7 +114,7 @@ object FCad_ConfigSistema: TFCad_ConfigSistema
         Width = 300
         Height = 21
         DataField = 'DS_NOMEEMAIL'
-        DataSource = SConfigSistema
+        DataSource = SConfigEmail
         TabOrder = 2
       end
       object edtNR_PORTA: TDBEdit
@@ -126,7 +123,7 @@ object FCad_ConfigSistema: TFCad_ConfigSistema
         Width = 78
         Height = 21
         DataField = 'NR_PORTA'
-        DataSource = SConfigSistema
+        DataSource = SConfigEmail
         TabOrder = 4
       end
       object chkST_TLS: TDBCheckBox
@@ -136,7 +133,7 @@ object FCad_ConfigSistema: TFCad_ConfigSistema
         Height = 17
         Caption = 'TLS'
         DataField = 'ST_TLS'
-        DataSource = SConfigSistema
+        DataSource = SConfigEmail
         TabOrder = 5
         ValueChecked = 'SIM'
         ValueUnchecked = 'N'#195'O'
@@ -148,7 +145,7 @@ object FCad_ConfigSistema: TFCad_ConfigSistema
         Height = 17
         Caption = 'SSL'
         DataField = 'ST_SSL'
-        DataSource = SConfigSistema
+        DataSource = SConfigEmail
         TabOrder = 6
         ValueChecked = 'SIM'
         ValueUnchecked = 'N'#195'O'
@@ -159,13 +156,13 @@ object FCad_ConfigSistema: TFCad_ConfigSistema
         Width = 300
         Height = 21
         DataField = 'DS_HOSTEMAIL'
-        DataSource = SConfigSistema
+        DataSource = SConfigEmail
         TabOrder = 3
       end
     end
   end
-  object SConfigSistema: TDataSource
-    DataSet = DMConfigSistema.TConfigSistema
+  object SConfigEmail: TDataSource
+    DataSet = DMConfigSistema.TConfigEmail
     Left = 480
     Top = 96
   end

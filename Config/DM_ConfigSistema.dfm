@@ -2,100 +2,100 @@ object DMConfigSistema: TDMConfigSistema
   OldCreateOrder = False
   Height = 257
   Width = 387
-  object QConfigSistema: TFDQuery
+  object QConfigEmail: TFDQuery
     Connection = DMBanco.con
     SQL.Strings = (
       'SELECT'
-      'CONFIG_SISTEMA.*'
+      'CONFIG_email.*'
       ''
       'FROM'
-      'CONFIG_SISTEMA')
+      'CONFIG_email')
     Left = 123
     Top = 48
-    object QConfigSistemaDS_USERNAME: TStringField
+    object QConfigEmailDS_USERNAME: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DS_USERNAME'
       Origin = 'DS_USERNAME'
       Size = 50
     end
-    object QConfigSistemaDS_SENHA: TStringField
+    object QConfigEmailDS_SENHA: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DS_SENHA'
       Origin = 'DS_SENHA'
       Size = 50
     end
-    object QConfigSistemaDS_NOMEEMAIL: TStringField
+    object QConfigEmailDS_NOMEEMAIL: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DS_NOMEEMAIL'
       Origin = 'DS_NOMEEMAIL'
       Size = 50
     end
-    object QConfigSistemaDS_HOSTEMAIL: TStringField
+    object QConfigEmailDS_HOSTEMAIL: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DS_HOSTEMAIL'
       Origin = 'DS_HOSTEMAIL'
       Size = 50
     end
-    object QConfigSistemaNR_PORTA: TStringField
+    object QConfigEmailNR_PORTA: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'NR_PORTA'
       Origin = 'NR_PORTA'
       Size = 50
     end
-    object QConfigSistemaST_TLS: TStringField
+    object QConfigEmailST_TLS: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ST_TLS'
       Origin = 'ST_TLS'
       Size = 3
     end
-    object QConfigSistemaST_SSL: TStringField
+    object QConfigEmailST_SSL: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ST_SSL'
       Origin = 'ST_SSL'
       Size = 3
     end
   end
-  object TConfigSistema: TJvMemoryData
+  object TConfigEmail: TJvMemoryData
     FieldDefs = <>
     Left = 120
     Top = 96
-    object TConfigSistemaDS_USERNAME: TStringField
+    object TConfigEmailDS_USERNAME: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DS_USERNAME'
       Origin = 'DS_USERNAME'
       Size = 50
     end
-    object TConfigSistemaDS_SENHA: TStringField
+    object TConfigEmailDS_SENHA: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DS_SENHA'
       Origin = 'DS_SENHA'
       Size = 50
     end
-    object TConfigSistemaDS_NOMEEMAIL: TStringField
+    object TConfigEmailDS_NOMEEMAIL: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DS_NOMEEMAIL'
       Origin = 'DS_NOMEEMAIL'
       Size = 50
     end
-    object TConfigSistemaDS_HOSTEMAIL: TStringField
+    object TConfigEmailDS_HOSTEMAIL: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DS_HOSTEMAIL'
       Origin = 'DS_HOSTEMAIL'
       Size = 50
     end
-    object TConfigSistemaNR_PORTA: TStringField
+    object TConfigEmailNR_PORTA: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'NR_PORTA'
       Origin = 'NR_PORTA'
       Size = 50
     end
-    object TConfigSistemaST_TLS: TStringField
+    object TConfigEmailST_TLS: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ST_TLS'
       Origin = 'ST_TLS'
       Size = 3
     end
-    object TConfigSistemaST_SSL: TStringField
+    object TConfigEmailST_SSL: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ST_SSL'
       Origin = 'ST_SSL'

@@ -12,6 +12,7 @@ object FCad_CRM: TFCad_CRM
   Font.Style = []
   OldCreateOrder = False
   OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -123,6 +124,22 @@ object FCad_CRM: TFCad_CRM
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+  end
+  object btnHistorico: TSpeedButton
+    Left = 502
+    Top = 226
+    Width = 120
+    Height = 21
+    Caption = 'Hist'#243'rico'
+    OnClick = btnHistoricoClick
+  end
+  object btnEmail: TSpeedButton
+    Left = 502
+    Top = 203
+    Width = 120
+    Height = 21
+    Caption = 'E-Mail'
+    OnClick = btnEmailClick
   end
   object edtCD_CLIENTE: TDBEdit
     Left = 149
@@ -411,6 +428,12 @@ object FCad_CRM: TFCad_CRM
       ReadOnly = True
       Size = 50
     end
+    object QCRMDS_HISTORICO: TMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'DS_HISTORICO'
+      Origin = 'DS_HISTORICO'
+      BlobType = ftMemo
+    end
   end
   object SCRM: TDataSource
     DataSet = TCRM
@@ -479,6 +502,10 @@ object FCad_CRM: TFCad_CRM
     object TCRMTP_PARCELA: TStringField
       FieldName = 'TP_PARCELA'
       Size = 1
+    end
+    object TCRMDS_HISTORICO: TBlobField
+      FieldName = 'DS_HISTORICO'
+      Size = 1000
     end
   end
   object actlst: TActionList

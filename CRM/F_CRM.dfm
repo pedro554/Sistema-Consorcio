@@ -317,7 +317,10 @@ object FCRM: TFCRM
       'CRM '
       ''
       'SET '
-      'CRM.CD_STATUS = :CD_STATUS '
+      'CRM.CD_STATUS = :CD_STATUS,'
+      
+        'CRM.DS_HISTORICO = CONCAT_WS('#39#39', CRM.DS_HISTORICO, :DS_HISTORICO' +
+        ')'
       ''
       'WHERE '
       'CRM.CD_CRM = :CD_CRM')
@@ -326,6 +329,11 @@ object FCRM: TFCRM
     ParamData = <
       item
         Name = 'CD_STATUS'
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'DS_HISTORICO'
         ParamType = ptInput
       end
       item

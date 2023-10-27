@@ -34,7 +34,9 @@ uses
   Consulta_Cliente in '..\Cliente\Consulta_Cliente.pas' {FConsulta_Cliente},
   F_Processo in '..\Comum\F_Processo.pas' {FProcesso},
   Cad_ConfigSistema in '..\Config\Cad_ConfigSistema.pas' {FCad_ConfigSistema},
-  DM_ConfigSistema in '..\Config\DM_ConfigSistema.pas' {DMConfigSistema: TDataModule};
+  DM_ConfigSistema in '..\Config\DM_ConfigSistema.pas' {DMConfigSistema: TDataModule},
+  Cad_CRMHistorico in '..\CRM\Cad_CRMHistorico.pas' {FCad_CRMHistorico},
+  Cad_EnvioEmail in '..\EMail\Cad_EnvioEmail.pas' {FCad_EnvioEmail};
 
 {$R *.res}
 
@@ -53,6 +55,7 @@ begin
     Exit;
   end;
 
+  Application.CreateForm(TFMenuPrincipal, FMenuPrincipal);
   Application.CreateForm(TDMBanco, DMBanco);
   Ini := TIniFile.Create(DiretorioSistema + '\cfgbanco.ini');
   if not DMBanco.Conectar(
@@ -84,7 +87,6 @@ begin
   DMAtualizacao.ExcluirExecutavelOLD;
 
   Application.CreateForm(TDMConfigSistema, DMConfigSistema);
-  DMConfigSistema.CarregaConfigSistema;
 
   Application.CreateForm(TFMenuPrincipal, FMenuPrincipal);
   Application.CreateForm(TDMConsulta, DMConsulta);

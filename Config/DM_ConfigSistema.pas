@@ -10,26 +10,26 @@ uses
 
 type
   TDMConfigSistema = class(TDataModule)
-    QConfigSistema: TFDQuery;
-    QConfigSistemaDS_USERNAME: TStringField;
-    QConfigSistemaDS_SENHA: TStringField;
-    QConfigSistemaDS_NOMEEMAIL: TStringField;
-    QConfigSistemaDS_HOSTEMAIL: TStringField;
-    QConfigSistemaNR_PORTA: TStringField;
-    QConfigSistemaST_TLS: TStringField;
-    QConfigSistemaST_SSL: TStringField;
-    TConfigSistema: TJvMemoryData;
-    TConfigSistemaDS_USERNAME: TStringField;
-    TConfigSistemaDS_SENHA: TStringField;
-    TConfigSistemaDS_NOMEEMAIL: TStringField;
-    TConfigSistemaDS_HOSTEMAIL: TStringField;
-    TConfigSistemaNR_PORTA: TStringField;
-    TConfigSistemaST_TLS: TStringField;
-    TConfigSistemaST_SSL: TStringField;
+    QConfigEmail: TFDQuery;
+    QConfigEmailDS_USERNAME: TStringField;
+    QConfigEmailDS_SENHA: TStringField;
+    QConfigEmailDS_NOMEEMAIL: TStringField;
+    QConfigEmailDS_HOSTEMAIL: TStringField;
+    QConfigEmailNR_PORTA: TStringField;
+    QConfigEmailST_TLS: TStringField;
+    QConfigEmailST_SSL: TStringField;
+    TConfigEmail: TJvMemoryData;
+    TConfigEmailDS_USERNAME: TStringField;
+    TConfigEmailDS_SENHA: TStringField;
+    TConfigEmailDS_NOMEEMAIL: TStringField;
+    TConfigEmailDS_HOSTEMAIL: TStringField;
+    TConfigEmailNR_PORTA: TStringField;
+    TConfigEmailST_TLS: TStringField;
+    TConfigEmailST_SSL: TStringField;
   private
     { Private declarations }
   public
-    procedure CarregaConfigSistema;
+    procedure CarregaConfigEmail;
     procedure GravarConfiguracao;
     procedure CancelaAlteracao;
     { Public declarations }
@@ -47,33 +47,33 @@ uses Funcoes;
 
 procedure TDMConfigSistema.CancelaAlteracao;
 begin
-  CarregaConfigSistema;
+  CarregaConfigEmail;
 end;
 
-procedure TDMConfigSistema.CarregaConfigSistema;
+procedure TDMConfigSistema.CarregaConfigEmail;
 begin
-  QConfigSistema.Close;
-  QConfigSistema.Open;
+  QConfigEmail.Close;
+  QConfigEmail.Open;
 
-  TConfigSistema.Close;
-  TConfigSistema.Open;
+  TConfigEmail.Close;
+  TConfigEmail.Open;
 
-  CopiaRegistro(QConfigSistema, TConfigSistema);
+  CopiaRegistro(QConfigEmail, TConfigEmail);
 end;
 
 procedure TDMConfigSistema.GravarConfiguracao;
 begin
-  if TConfigSistema.State in [dsEdit, dsInsert] then
-    TConfigSistema.Post;
+  if TConfigEmail.State in [dsEdit, dsInsert] then
+    TConfigEmail.Post;
 
-  if TConfigSistemaDS_USERNAME.AsString <> EmptyStr then
-    if not ValidaEmail(TConfigSistemaDS_USERNAME.AsString) then
+  if TConfigEmailDS_USERNAME.AsString <> EmptyStr then
+    if not ValidaEmail(TConfigEmailDS_USERNAME.AsString) then
     begin
       MyMessage('E-Mail inválido');
       Abort;
     end;
 
-  CopiaRegistro(TConfigSistema, QConfigSistema, QConfigSistema.IsEmpty);
+  CopiaRegistro(TConfigEmail, QConfigEmail, QConfigEmail.IsEmpty);
 end;
 
 end.

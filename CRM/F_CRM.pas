@@ -105,6 +105,7 @@ type
     procedure AtualizaStatus(AStatus: Integer; ACodRM: String);
     procedure ValidaSelecaoGrid;
     function RetornaSQLCRM: String;
+    function RetornaNomeStatus(AStatus: Integer): String;
     { Private declarations }
   public
     { Public declarations }
@@ -271,6 +272,19 @@ begin
   pvCodCRM := AItem.DBKey;
 end;
 
+function TFCRM.RetornaNomeStatus(AStatus: Integer): String;
+begin
+  case AStatus of
+    0: Result := C_STRABERTO;
+    1: Result := C_STRAPRESENTACAO;
+    2: Result := C_STRNEGOCIACAO;
+    3: Result := C_STRAGUARDANDO;
+    4: Result := C_STRSEMINTERESSE;
+    5: Result := C_STRFECHADO;
+    99: Result := C_STRFINALIZADO;
+  end;
+end;
+
 function TFCRM.RetornaSQLCRM: String;
 begin
   Result := 'SELECT ' +
@@ -290,6 +304,9 @@ begin
   QAtualizaStatus.Close;
   QAtualizaStatus.ParamByName('CD_STATUS').AsInteger := AStatus;
   QAtualizaStatus.ParamByName('CD_CRM').AsString := ACodRM;
+  QAtualizaStatus.ParamByName('DS_HISTORICO').AsString := DateTimeToStr(Date) + ' - ' +
+                                                          'Status: ' + RetornaNomeStatus(AStatus) +
+                                                          #13#10#13#10;
   QAtualizaStatus.ExecSQL;
   TCRM.Locate('CD_CRM', pvCodCRM, []);
   TCRM.Edit;

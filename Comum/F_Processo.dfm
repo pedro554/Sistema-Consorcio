@@ -24,15 +24,11 @@ object FProcesso: TFProcesso
     object lblDescricao: TLabel
       Left = 0
       Top = 0
-      Width = 474
-      Height = 22
+      Width = 57
+      Height = 13
       Align = alClient
       Alignment = taCenter
       Caption = 'Carregando'
-      ExplicitLeft = 211
-      ExplicitTop = 10
-      ExplicitWidth = 57
-      ExplicitHeight = 13
     end
   end
   object progressPrincipal: TJvProgressBar

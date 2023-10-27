@@ -21,7 +21,7 @@ type
     pnl: TPanel;
     btnGravar: TSpeedButton;
     btnCancelar: TSpeedButton;
-    SConfigSistema: TDataSource;
+    SConfigEmail: TDataSource;
     pgc: TPageControl;
     tsEmail: TTabSheet;
     Label2: TLabel;
@@ -76,7 +76,7 @@ end;
 
 procedure TFCad_ConfigSistema.FormShow(Sender: TObject);
 begin
-  DMConfigSistema.CarregaConfigSistema;
+  DMConfigSistema.CarregaConfigEmail;
 end;
 
 end.

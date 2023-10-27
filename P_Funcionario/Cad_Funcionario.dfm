@@ -64,7 +64,6 @@ object FCad_Funcionario: TFCad_Funcionario
     Height = 41
     Align = alBottom
     TabOrder = 4
-    ExplicitTop = 118
     object btnGravar: TSpeedButton
       Left = 195
       Top = 10
@@ -96,6 +95,7 @@ object FCad_Funcionario: TFCad_Funcionario
     Top = 49
     Width = 46
     Height = 17
+    TabStop = False
     Caption = 'Ativo'
     DataField = 'ST_ATIVO'
     DataSource = SFuncionario

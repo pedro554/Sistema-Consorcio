@@ -76,6 +76,10 @@ type
     TCRMTP_PARCELA: TStringField;
     chkTP_PARCELA: TDBCheckBox;
     QCRMNM_FUNCIONARIO: TStringField;
+    btnHistorico: TSpeedButton;
+    QCRMDS_HISTORICO: TMemoField;
+    TCRMDS_HISTORICO: TBlobField;
+    btnEmail: TSpeedButton;
     procedure FormDestroy(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -83,6 +87,9 @@ type
     procedure btnPsqFuncionarioClick(Sender: TObject);
     procedure TCRMVL_CREDITOChange(Sender: TField);
     procedure TCRMAfterInsert(DataSet: TDataSet);
+    procedure btnHistoricoClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnEmailClick(Sender: TObject);
   private
     procedure CarregaCRM(ACodCRM: Integer);
     procedure ValidaFaixaComissao;
@@ -98,7 +105,7 @@ var
 implementation
 
 uses
-  Funcoes, Consulta_Cliente, Consulta_Funcionario, DM_Consulta;
+  Funcoes, Consulta_Cliente, Consulta_Funcionario, DM_Consulta, Cad_CRMHistorico, Cad_EnvioEmail;
 
 {$R *.dfm}
 
@@ -107,6 +114,18 @@ uses
 procedure TFCad_CRM.btnCancelarClick(Sender: TObject);
 begin
   ModalResult := mrCancel;
+end;
+
+procedure TFCad_CRM.btnEmailClick(Sender: TObject);
+var
+  AForm: TFCad_EnvioEmail;
+begin
+  AForm := TFCad_EnvioEmail.Create(Self);
+  try
+    AForm.Inicializa(TCRMCD_CLIENTE.AsInteger, TCRMCD_CRM.AsInteger);
+  finally
+    AForm.Free;
+  end;
 end;
 
 procedure TFCad_CRM.btnGravarClick(Sender: TObject);
@@ -123,6 +142,19 @@ begin
   CopiaRegistro(TCRM, QCRM, QCRM.IsEmpty);
 
   ModalResult := mrOk;
+end;
+
+procedure TFCad_CRM.btnHistoricoClick(Sender: TObject);
+var
+  AForm: TFCad_CRMHistorico;
+begin
+  AForm := TFCad_CRMHistorico.Create(Self);
+  try
+    AForm.Parametros.DatasetCRM := TCRM;
+    AForm.ShowModal;
+  finally
+    AForm.Free;
+  end;
 end;
 
 procedure TFCad_CRM.btnPsqClienteClick(Sender: TObject);
@@ -147,6 +179,13 @@ begin
   QCRM.Close;
   TCRM.Close;
   QFaixaComissao.Close;
+end;
+
+procedure TFCad_CRM.FormShow(Sender: TObject);
+begin
+  inherited;
+  CD_STATUS.Enabled := not TCRMCD_CRM.IsNull;
+  btnEmail.Enabled := not TCRMCD_CRM.IsNull;
 end;
 
 procedure TFCad_CRM.Inicializa(ACodCRM: Integer);

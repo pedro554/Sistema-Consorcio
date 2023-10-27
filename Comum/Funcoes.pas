@@ -5,7 +5,7 @@ interface
 uses
   Data.DB, Vcl.Dialogs, Vcl.Forms, Variaveis_Sistema, Winapi.Windows,
   System.SysUtils, DateUtils, pcnAuxiliar, IpHlpApi, IpTypes, WinSock2, JvMemoryDataset,
-  System.Win.ComObj, tlHelp32, IdHTTP, RegularExpressions;
+  System.Win.ComObj, tlHelp32, IdHTTP, RegularExpressions, System.IOUtils;
 
 procedure CopiaRegistro(AOrigem, ADestino: TDataSet; AAppend: Boolean = True; APost: Boolean = True);
 procedure CopiaTabela(AOrigem, ADestino: TDataSet);
@@ -29,9 +29,34 @@ function TratarMsgErroBanco(AMsg: String): String;
 function IsVersaoInterna: Boolean;
 function VerificarExisteConexaoComInternet: boolean;
 function ValidaEmail(const AEmail: String): Boolean;
+procedure CopiarArquivo(const origem, destino: string);
+function GeraGUID: String;
+function RetornaExtensaoArquivo(const FileName: string): string;
 
 implementation
 uses Constantes;
+
+function RetornaExtensaoArquivo(const FileName: string): string;
+begin
+  Result := TPath.GetExtension(FileName);
+end;
+
+function GeraGUID: String;
+begin
+  Result := TGUID.NewGuid.ToString;
+end;
+
+procedure CopiarArquivo(const origem, destino: string);
+begin
+  try
+    TFile.Copy(origem, destino);
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro ao copiar arquivo: ' + E.Message);
+    end;
+  end;
+end;
 
 function ValidaEmail(const AEmail: String): Boolean;
 const
