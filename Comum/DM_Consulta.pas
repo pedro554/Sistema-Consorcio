@@ -15,6 +15,7 @@ type
   public
     procedure ConsultaFuncionario(ADatasetDestino: TDataSet);
     procedure ConsultaClietne(ADatasetDestino: TDataSet);
+    procedure ConsultaFaixaComissao(ADatasetDestino: TDataSet; ASQLWhere: String = '');
     { Public declarations }
   end;
 
@@ -22,7 +23,8 @@ var
   DMConsulta: TDMConsulta;
 
 implementation
-uses Consulta_Funcionario, Cad_Funcionario, Consulta_Cliente, Cad_Cliente;
+uses Consulta_Funcionario, Cad_Funcionario, Consulta_Cliente, Cad_Cliente,
+Consulta_FaixaComissao;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -40,6 +42,21 @@ begin
       CopiaRegistro(FConsulta_Cliente.TCliente, ADatasetDestino, False);
   finally
     FreeAndNil(FConsulta_Cliente);
+  end;
+end;
+
+procedure TDMConsulta.ConsultaFaixaComissao(ADatasetDestino: TDataSet; ASQLWhere: String = '');
+var
+  FConsulta_FaixaComissao: TFConsulta_FaixaComissao;
+begin
+  FConsulta_FaixaComissao := TFConsulta_FaixaComissao.Create(Self);
+  try
+    FConsulta_FaixaComissao.SQLWhere := ASQLWhere;
+
+    if FConsulta_FaixaComissao.ShowModal = 1 then
+      CopiaRegistro(FConsulta_FaixaComissao.TFaixaComissao, ADatasetDestino, False);
+  finally
+    FreeAndNil(FConsulta_FaixaComissao);
   end;
 end;
 

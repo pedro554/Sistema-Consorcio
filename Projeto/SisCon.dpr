@@ -36,7 +36,8 @@ uses
   Cad_ConfigSistema in '..\Config\Cad_ConfigSistema.pas' {FCad_ConfigSistema},
   DM_ConfigSistema in '..\Config\DM_ConfigSistema.pas' {DMConfigSistema: TDataModule},
   Cad_CRMHistorico in '..\CRM\Cad_CRMHistorico.pas' {FCad_CRMHistorico},
-  Cad_EnvioEmail in '..\EMail\Cad_EnvioEmail.pas' {FCad_EnvioEmail};
+  Cad_EnvioEmail in '..\EMail\Cad_EnvioEmail.pas' {FCad_EnvioEmail},
+  Consulta_FaixaComissao in '..\Faixa Comissao\Consulta_FaixaComissao.pas' {FConsulta_FaixaComissao};
 
 {$R *.res}
 

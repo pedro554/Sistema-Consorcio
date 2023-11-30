@@ -7,8 +7,8 @@ object DMBanco: TDMBanco
       'Database=sistema'
       'Password=spsg91g8'
       'User_Name=root'
+      'Server=LOCALHOST'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Left = 56
     Top = 28
