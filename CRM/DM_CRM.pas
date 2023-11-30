@@ -49,6 +49,7 @@ type
     procedure FinalizaMovimento(const ACodMovimento: Integer);
     function MontaTitle(ATexto: String): String;
     function MontaDescricao(ATexto: String): String;
+    procedure CadastrarEFinalizarMov;
     { Public declarations }
   end;
 
@@ -58,13 +59,30 @@ var
 implementation
 
 uses
-  DM_Banco, Funcoes, Constantes;
+  DM_Banco, Funcoes, Constantes, Cad_CRM;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
 
 { TDMCRM }
+
+procedure TDMCRM.CadastrarEFinalizarMov;
+var
+  AForm: TFCad_CRM;
+begin
+  AForm := TFCad_CRM.Create(nil);
+  try
+    AForm.Inicializa(0);
+    AForm.CD_STATUS.Items.Add('FINALIZADO');
+    AForm.CD_STATUS.Values.Add('99');
+    AForm.TCRMCD_STATUS.AsInteger := 99;
+    if AForm.ShowModal = 1 then
+      FinalizaMovimento(DMBanco.SequenciaTabela('CRM')-1); // item ja gravado no banco de dados;
+  finally
+    FreeAndNil(AForm);
+  end;
+end;
 
 function TDMCRM.CalcularComissao(const porcentagemComissao, valorVenda: Double): Double;
 begin

@@ -65,6 +65,13 @@ object FMenuPrincipal: TFMenuPrincipal
         OnClick = ManutenodeComisses1Click
       end
     end
+    object Movimentaes1: TMenuItem
+      Caption = 'Movimenta'#231#245'es'
+      object CadastroeFinalizaodeMovimentao1: TMenuItem
+        Caption = 'Cadastro e Finaliza'#231#227'o de Movimenta'#231#227'o'
+        OnClick = CadastroeFinalizaodeMovimentao1Click
+      end
+    end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios'
       object Comisso1: TMenuItem
