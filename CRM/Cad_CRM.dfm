@@ -141,6 +141,14 @@ object FCad_CRM: TFCad_CRM
     Caption = 'E-Mail'
     OnClick = btnEmailClick
   end
+  object btnPsqFaixaComissao: TSpeedButton
+    Left = 492
+    Top = 116
+    Width = 23
+    Height = 21
+    Caption = '...'
+    OnClick = btnPsqFaixaComissaoClick
+  end
   object edtCD_CLIENTE: TDBEdit
     Left = 149
     Top = 24

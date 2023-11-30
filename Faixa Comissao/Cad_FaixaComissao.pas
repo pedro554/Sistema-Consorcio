@@ -262,7 +262,8 @@ begin
   QValorMinMax.Open;
   if QValorMinMax.Fields.Fields[0].AsInteger > 0 then
   begin
-    MyMessage('Valor mínimo e máximo convergem com outra faixa de comissão. Verifique!');
+    if MyMessage('Valor mínimo e máximo convergem com outra faixa de comissão.' + sLineBreak +
+              'Deseja continuar mesmo assim?', 4) <> mrYes then
     Abort;
   end;
 end;

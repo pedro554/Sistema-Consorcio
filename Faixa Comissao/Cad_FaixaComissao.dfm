@@ -269,8 +269,8 @@ object FCad_FaixaComissao: TFCad_FaixaComissao
       ''
       'WHERE'
       'FAIXACOMISSAO.CD_FAIXACOMISSAO = :CD_FAIXACOMISSAO')
-    Left = 8
-    Top = 8
+    Left = 48
+    Top = 32
     ParamData = <
       item
         Name = 'CD_FAIXACOMISSAO'
@@ -313,8 +313,8 @@ object FCad_FaixaComissao: TFCad_FaixaComissao
   object TFaixaComissao: TJvMemoryData
     FieldDefs = <>
     AfterInsert = TFaixaComissaoAfterInsert
-    Left = 40
-    Top = 8
+    Left = 520
+    Top = 184
     object TFaixaComissaoCD_FAIXACOMISSAO: TIntegerField
       FieldName = 'CD_FAIXACOMISSAO'
     end
@@ -340,8 +340,8 @@ object FCad_FaixaComissao: TFCad_FaixaComissao
   end
   object SFaixaComissao: TDataSource
     DataSet = TFaixaComissao
-    Left = 72
-    Top = 8
+    Left = 320
+    Top = 48
   end
   object QFaixaComissaoParcela: TFDQuery
     Connection = DMBanco.con
@@ -354,8 +354,8 @@ object FCad_FaixaComissao: TFCad_FaixaComissao
       ''
       'WHERE'
       'FAIXACOMISSAOPARCELA.CD_FAIXACOMISSAO = :CD_FAIXACOMISSAO')
-    Left = 8
-    Top = 44
+    Left = 96
+    Top = 116
     ParamData = <
       item
         Name = 'CD_FAIXACOMISSAO'
@@ -397,8 +397,8 @@ object FCad_FaixaComissao: TFCad_FaixaComissao
   end
   object TFaixaComissaoParcelaMeia: TJvMemoryData
     FieldDefs = <>
-    Left = 40
-    Top = 44
+    Left = 512
+    Top = 124
     object TFaixaComissaoParcelaMeiaNR_PARCELA: TIntegerField
       FieldName = 'NR_PARCELA'
     end
@@ -422,13 +422,13 @@ object FCad_FaixaComissao: TFCad_FaixaComissao
   end
   object SFaixaComissaoParcelaMeia: TDataSource
     DataSet = TFaixaComissaoParcelaMeia
-    Left = 72
-    Top = 44
+    Left = 448
+    Top = 52
   end
   object TFaixaComissaoParcelaNormal: TJvMemoryData
     FieldDefs = <>
-    Left = 40
-    Top = 76
+    Left = 64
+    Top = 180
     object TFaixaComissaoParcelaNormalCD_FAIXACOMISSAO: TIntegerField
       FieldName = 'CD_FAIXACOMISSAO'
     end
@@ -452,8 +452,8 @@ object FCad_FaixaComissao: TFCad_FaixaComissao
   end
   object SFaixaComissaoParcelaNormal: TDataSource
     DataSet = TFaixaComissaoParcelaNormal
-    Left = 72
-    Top = 76
+    Left = 104
+    Top = 244
   end
   object QValorMinMax: TFDQuery
     Connection = DMBanco.con

@@ -80,6 +80,7 @@ type
     QCRMDS_HISTORICO: TMemoField;
     TCRMDS_HISTORICO: TBlobField;
     btnEmail: TSpeedButton;
+    btnPsqFaixaComissao: TSpeedButton;
     procedure FormDestroy(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -90,6 +91,7 @@ type
     procedure btnHistoricoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnEmailClick(Sender: TObject);
+    procedure btnPsqFaixaComissaoClick(Sender: TObject);
   private
     procedure CarregaCRM(ACodCRM: Integer);
     procedure ValidaFaixaComissao;
@@ -160,6 +162,16 @@ end;
 procedure TFCad_CRM.btnPsqClienteClick(Sender: TObject);
 begin
   DMConsulta.ConsultaClietne(TCRM);
+end;
+
+procedure TFCad_CRM.btnPsqFaixaComissaoClick(Sender: TObject);
+var
+  lvWhere: string;
+begin
+  lvWhere := 'WHERE FAIXACOMISSAO.VL_MINIMO <= ' + FormatFloat('#0.00', TCRMVL_CREDITO.AsFloat) +
+             ' AND FAIXACOMISSAO.VL_MAXIMO >= ' + FormatFloat('#0.00', TCRMVL_CREDITO.AsFloat);
+  lvWhere := StringReplace(lvWhere, ',', '.', [rfReplaceAll]);
+  DMConsulta.ConsultaFaixaComissao(TCRM, lvWhere);
 end;
 
 procedure TFCad_CRM.btnPsqFuncionarioClick(Sender: TObject);
