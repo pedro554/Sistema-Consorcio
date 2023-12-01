@@ -81,6 +81,14 @@ type
     TCRMDS_HISTORICO: TBlobField;
     btnEmail: TSpeedButton;
     btnPsqFaixaComissao: TSpeedButton;
+    QCRMCD_GRUPO: TStringField;
+    QCRMCD_COTA: TStringField;
+    TCRMCD_GRUPO: TStringField;
+    TCRMCD_COTA: TStringField;
+    Label1: TLabel;
+    CD_GRUPO: TDBEdit;
+    Label2: TLabel;
+    CD_COTA: TDBEdit;
     procedure FormDestroy(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);

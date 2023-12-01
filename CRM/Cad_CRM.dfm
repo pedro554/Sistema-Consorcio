@@ -2,7 +2,7 @@ object FCad_CRM: TFCad_CRM
   Left = 0
   Top = 0
   Caption = 'Cadastro de Movimenta'#231#227'o'
-  ClientHeight = 296
+  ClientHeight = 318
   ClientWidth = 635
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -31,7 +31,7 @@ object FCad_CRM: TFCad_CRM
   end
   object lbl2: TLabel
     Left = 102
-    Top = 161
+    Top = 184
     Width = 41
     Height = 13
     Alignment = taRightJustify
@@ -127,7 +127,7 @@ object FCad_CRM: TFCad_CRM
   end
   object btnHistorico: TSpeedButton
     Left = 502
-    Top = 226
+    Top = 249
     Width = 120
     Height = 21
     Caption = 'Hist'#243'rico'
@@ -135,7 +135,7 @@ object FCad_CRM: TFCad_CRM
   end
   object btnEmail: TSpeedButton
     Left = 502
-    Top = 203
+    Top = 226
     Width = 120
     Height = 21
     Caption = 'E-Mail'
@@ -148,6 +148,34 @@ object FCad_CRM: TFCad_CRM
     Height = 21
     Caption = '...'
     OnClick = btnPsqFaixaComissaoClick
+  end
+  object Label1: TLabel
+    Left = 114
+    Top = 143
+    Width = 29
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Grupo'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 349
+    Top = 143
+    Width = 23
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Cota'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
   end
   object edtCD_CLIENTE: TDBEdit
     Left = 149
@@ -173,7 +201,7 @@ object FCad_CRM: TFCad_CRM
   end
   object edtDS_OBS: TDBMemo
     Left = 149
-    Top = 158
+    Top = 181
     Width = 337
     Height = 89
     DataField = 'DS_OBS'
@@ -182,11 +210,12 @@ object FCad_CRM: TFCad_CRM
   end
   object pnl1: TPanel
     Left = 0
-    Top = 255
+    Top = 277
     Width = 635
     Height = 41
     Align = alBottom
     TabOrder = 12
+    ExplicitTop = 255
     object btnGravar: TSpeedButton
       Left = 195
       Top = 10
@@ -309,7 +338,7 @@ object FCad_CRM: TFCad_CRM
   end
   object chkTP_PARCELA: TDBCheckBox
     Left = 149
-    Top = 139
+    Top = 162
     Width = 97
     Height = 17
     Caption = 'Meia Parcela'
@@ -324,6 +353,24 @@ object FCad_CRM: TFCad_CRM
     TabOrder = 10
     ValueChecked = 'M'
     ValueUnchecked = 'N'
+  end
+  object CD_GRUPO: TDBEdit
+    Left = 149
+    Top = 139
+    Width = 108
+    Height = 21
+    DataField = 'CD_GRUPO'
+    DataSource = SCRM
+    TabOrder = 13
+  end
+  object CD_COTA: TDBEdit
+    Left = 378
+    Top = 139
+    Width = 108
+    Height = 21
+    DataField = 'CD_COTA'
+    DataSource = SCRM
+    TabOrder = 14
   end
   object QCRM: TFDQuery
     Connection = DMBanco.con
@@ -442,6 +489,18 @@ object FCad_CRM: TFCad_CRM
       Origin = 'DS_HISTORICO'
       BlobType = ftMemo
     end
+    object QCRMCD_GRUPO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_GRUPO'
+      Origin = 'CD_GRUPO'
+      Size = 6
+    end
+    object QCRMCD_COTA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_COTA'
+      Origin = 'CD_COTA'
+      Size = 4
+    end
   end
   object SCRM: TDataSource
     DataSet = TCRM
@@ -514,6 +573,18 @@ object FCad_CRM: TFCad_CRM
     object TCRMDS_HISTORICO: TBlobField
       FieldName = 'DS_HISTORICO'
       Size = 1000
+    end
+    object TCRMCD_COTA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_COTA'
+      Origin = 'CD_COTA'
+      Size = 4
+    end
+    object TCRMCD_GRUPO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CD_GRUPO'
+      Origin = 'CD_GRUPO'
+      Size = 6
     end
   end
   object actlst: TActionList

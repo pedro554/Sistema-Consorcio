@@ -46,6 +46,10 @@ type
     QComissaoST_ESTORNO: TStringField;
     TComissaoST_ESTORNO: TStringField;
     TComissaoVL_PAGAR: TFloatField;
+    TComissaoCD_GRUPO: TStringField;
+    TComissaoCD_COTA: TStringField;
+    QComissaoCD_GRUPO: TStringField;
+    QComissaoCD_COTA: TStringField;
     procedure DataModuleDestroy(Sender: TObject);
   private
     Param: TParametros;
@@ -109,6 +113,8 @@ begin
       TComissaoVL_PAGAR.AsFloat := 0
     else
       TComissaoVL_PAGAR.AsFloat := TComissaoVL_COMISSAO.AsFloat;
+    TComissaoCD_GRUPO.AsString := QComissaoCD_GRUPO.AsString;
+    TComissaoCD_COTA.AsString := QComissaoCD_COTA.AsString;
     TComissao.Post;
     QComissao.Next;
   end;
@@ -135,11 +141,15 @@ function TDMRelComissaoPagar.RetornaSQL: String;
 begin
   Result := 'SELECT ' +
             'COMISSAOPARCELA.*, ' +
-            'FUNCIONARIO.NM_FUNCIONARIO ' +
+            'FUNCIONARIO.NM_FUNCIONARIO, ' +
+            'CRM.CD_GRUPO, ' +
+            'CRM.CD_COTA ' +
             'FROM ' +
             'COMISSAOPARCELA ' +
             'LEFT JOIN FUNCIONARIO ON ' +
             'FUNCIONARIO.CD_FUNCIONARIO = COMISSAOPARCELA.CD_FUNCIONARIO ' +
+            'LEFT JOIN CRM ON ' +
+            'CRM.CD_CRM = COMISSAOPARCELA.CD_CRM ' +
             'WHERE ' +
             'COMISSAOPARCELA.DT_PAGAMENTO BETWEEN :DT_INICIO AND :DT_FIM ';
 
